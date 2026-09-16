@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>شاعري جا قسم — اَحساسَن جو ويسُ ڪَويتا</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans Arabic", "Noto Sans", Arial, sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #f7e7c6);
+      color: #3b2415;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6b1f1f, #9b4b2f);
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.7;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 17px;
+      direction: ltr;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 18px 50px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .intro p {
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .category {
+      position: relative;
+      background: rgba(255,255,255,0.9);
+      border: 2px solid #d4a85c;
+      border-radius: 18px;
+      padding: 28px 18px;
+      text-align: center;
+      text-decoration: none;
+      color: #4b2817;
+      box-shadow: 0 6px 16px rgba(75,40,23,0.12);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .category::before {
+      content: "✦";
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      color: #c28a32;
+      font-size: 18px;
+    }
+
+    .category::after {
+      content: "✦";
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      color: #c28a32;
+      font-size: 18px;
+    }
+
+    .category:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(75,40,23,0.2);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .sindhi {
+      display: block;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .english {
+      display: block;
+      direction: ltr;
+      font-size: 16px;
+      color: #76523b;
+    }
+
+    .back {
+      display: block;
+      width: fit-content;
+      margin: 35px auto 0;
+      padding: 12px 24px;
+      border-radius: 25px;
+      background: #6b1f1f;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.25s;
+    }
+
+    .back:hover {
+      background: #9b4b2f;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: #3b2415;
+      color: #f7dfb1;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 27px;
+      }
+
+      .intro h2 {
+        font-size: 23px;
+      }
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .category {
+        padding: 24px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
+    <p>Poetry — The Language of Feelings</p>
+  </header>
+
+  <main class="container">
+
+    <section class="intro">
+      <h2>شاعري جا قسم</h2>
+      <p>
+        احساسن، خيالن ۽ جذبن کي مختلف شاعراڻين صورتن ۾ پڙهڻ لاءِ
+        پنهنجي پسند جو قسم چونڊيو.
+      </p>
+    </section>
+
+    <section class="categories">
+
+      <a class="category" href="#">
+        <div class="icon">🌹</div>
+        <span class="sindhi">غزل</span>
+        <span class="english">Ghazal</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🎵</div>
+        <span class="sindhi">گيت</span>
+        <span class="english">Geet</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">📜</div>
+        <span class="sindhi">نظم</span>
+        <span class="english">Nazam</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🌿</div>
+        <span class="sindhi">بيت</span>
+        <span class="english">Bet</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🌈</div>
+        <span class="sindhi">سترنگو</span>
+        <span class="english">Satrango</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🎶</div>
+        <span class="sindhi">وائي</span>
+        <span class="english">Waai</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🖋️</div>
+        <span class="sindhi">نثري نظم</span>
+        <span class="english">Prose Poetry</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🌀</div>
+        <span class="sindhi">تجريدي نظم</span>
+        <span class="english">Abstract Poetry</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">🍃</div>
+        <span class="sindhi">هائيڪو</span>
+        <span class="english">Haiku</span>
+      </a>
+
+      <a class="category" href="#">
+        <div class="icon">✨</div>
+        <span class="sindhi">ٻيا</span>
+        <span class="english">Other</span>
+      </a>
+
+    </section>
+
+    <a class="back" href="index.html">
+      ← واپس هوم پيج تي
+    </a>
+
+  </main>
+
+  <footer>
+    اَحساسَن جو ويسُ — ڪَويتا<br>
+    Poetry — The Language of Feelings
+  </footer>
+
+</body>
+</html>
