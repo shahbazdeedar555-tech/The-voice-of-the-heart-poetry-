@@ -1,26 +1,35 @@
 
 <!DOCTYPE html>
-<html lang="sd">
+<html lang="sd" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>شاعري لکو — ڪَويتا</title>
+  <title>ڪَويتا — شاعري</title>
 
   <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fffaf0;
-      color: #3b2414;
-      direction: rtl;
+      font-family: "Noto Sans Arabic", "Segoe UI", sans-serif;
+      background:
+        linear-gradient(135deg, #fff8e7, #f1dfb8);
+      color: #3b2415;
     }
 
     header {
-      background: linear-gradient(135deg, #6b2d2d, #a0522d);
-      color: white;
       text-align: center;
-      padding: 28px 15px;
+      padding: 30px 15px;
+      background:
+        linear-gradient(135deg, #741d1d, #b8860b);
+      color: white;
+      border-radius: 0 0 35px 35px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.2);
     }
 
     header h1 {
@@ -29,361 +38,372 @@
     }
 
     header p {
+      direction: ltr;
       margin: 8px 0 0;
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .container {
-      max-width: 750px;
-      margin: auto;
-      padding: 25px 15px 40px;
+      width: 94%;
+      max-width: 850px;
+      margin: 25px auto;
     }
 
-    .box {
-      background: white;
+    .poet-card {
+      background: rgba(255,255,255,.97);
+      border: 2px solid #d6b46a;
+      border-radius: 24px;
       padding: 25px;
-      border-radius: 16px;
-      border: 1px solid #e2c9a5;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+      box-shadow: 0 5px 20px rgba(70,40,10,.15);
     }
 
-    h2 {
+    .poet-name {
       text-align: center;
-      color: #6b2d2d;
-      margin-top: 0;
+      color: #741d1d;
+      font-size: 30px;
+      margin: 0;
     }
 
-    label {
-      display: block;
-      margin-top: 18px;
-      margin-bottom: 7px;
+    .pen-name {
+      text-align: center;
+      color: #9b6b18;
+      font-size: 18px;
+      margin-top: 8px;
+    }
+
+    .type {
+      text-align: center;
+      margin: 15px auto;
+      padding: 9px 16px;
+      background: #fff2cc;
+      border-radius: 20px;
+      width: fit-content;
+      color: #741d1d;
       font-weight: bold;
-      color: #5b321c;
     }
 
-    input,
-    select,
-    textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 12px;
-      border: 1px solid #c9a77a;
-      border-radius: 9px;
-      background: #fffdf8;
-      font-size: 17px;
+    .poem {
+      position: relative;
+      margin-top: 28px;
+      padding: 28px 25px;
+      background: #fffdf7;
+      border: 1px solid #d7bb7b;
+      border-radius: 18px;
+      box-shadow: 0 3px 10px rgba(80,50,20,.08);
     }
 
-    textarea {
-      min-height: 350px;
-      resize: vertical;
-      line-height: 2.1;
-      font-family: Arial, sans-serif;
-      direction: rtl;
+    .poem::before {
+      content: "❝";
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      font-size: 42px;
+      color: #c29a4c;
+    }
+
+    .poem-title {
+      text-align: center;
+      color: #741d1d;
+      font-size: 24px;
+      margin: 5px 0 20px;
+    }
+
+    .poem-text {
+      white-space: pre-line;
+      line-height: 2.2;
+      font-size: 19px;
       text-align: right;
     }
 
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: #8b4513;
-    }
-
-    .poet-info {
-      background: #fff7df;
-      border-right: 5px solid #d4a373;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 20px;
-      line-height: 1.9;
-    }
-
-    .save-btn {
-      width: 100%;
-      margin-top: 25px;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: #6b2d2d;
-      color: white;
+    .empty {
+      text-align: center;
+      padding: 40px 15px;
+      color: #765333;
       font-size: 18px;
-      cursor: pointer;
     }
 
-    .save-btn:hover {
-      background: #8b4513;
-    }
-
-    .back-btn {
+    .back {
       display: block;
+      width: 100%;
+      max-width: 350px;
+      margin: 30px auto 5px;
+      padding: 14px;
       text-align: center;
-      margin-top: 22px;
-      color: #6b2d2d;
       text-decoration: none;
-      font-size: 17px;
-    }
-
-    .message {
-      display: none;
-      margin-top: 18px;
-      padding: 12px;
-      background: #edf7ed;
-      border-radius: 8px;
-      text-align: center;
-      color: #285b28;
+      background: #ead8ad;
+      color: #5b3218;
+      border-radius: 14px;
       font-weight: bold;
     }
 
     footer {
-      background: #3b2414;
-      color: white;
       text-align: center;
-      padding: 18px;
-      font-size: 15px;
+      padding: 25px 10px;
+      color: #765333;
+      font-size: 14px;
     }
+
+    @media(max-width:600px) {
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      .poet-card {
+        padding: 18px;
+      }
+
+      .poet-name {
+        font-size: 25px;
+      }
+
+      .poem {
+        padding: 25px 18px;
+      }
+
+      .poem-text {
+        font-size: 18px;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-  <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
-  <p>Poetry — The Language of Feelings</p>
+
+  <h1>
+    اَحساسَن جو ويسُ — ڪَويتا
+  </h1>
+
+  <p>
+    Poetry — The Language of Feelings
+  </p>
+
 </header>
 
-<div class="container">
 
-  <div class="box">
 
-    <h2>شاعري لکو</h2>
+<main class="container">
 
-    <div class="poet-info">
-      <strong>شاعر:</strong>
-      <span id="poetName">—</span>
-      <br>
+  <section class="poet-card">
 
-      <strong>تخلص:</strong>
-      <span id="penName">—</span>
-      <br>
-
-      <strong>شاعري جو قسم:</strong>
-      <span id="poetryType">—</span>
-    </div>
-
-    <form id="poetryForm">
-
-      <label for="title">
-        شاعريءَ جو عنوان
-      </label>
-
-      <input
-        type="text"
-        id="title"
-        placeholder="مثال: منهنجي سنڌ"
-        required
-      >
-
-      <label for="type">
-        شاعريءَ جو قسم
-      </label>
-
-      <select id="type" required>
-
-        <option value="">
-          چونڊيو
-        </option>
-
-        <option value="غزل — Ghazal">
-          غزل — Ghazal
-        </option>
-
-        <option value="گيت — Geet">
-          گيت — Geet
-        </option>
-
-        <option value="نظم — Nazam">
-          نظم — Nazam
-        </option>
-
-        <option value="بيت — Bet">
-          بيت — Bet
-        </option>
-
-        <option value="سترنگو — Satrango">
-          سترنگو — Satrango
-        </option>
-
-        <option value="وائي — Waai">
-          وائي — Waai
-        </option>
-
-        <option value="نثري نظم — Nasri Nazam">
-          نثري نظم — Nasri Nazam
-        </option>
-
-        <option value="تجريدي نظم — Tajredi Nazam">
-          تجريدي نظم — Tajredi Nazam
-        </option>
-
-        <option value="هائيڪو — Haiku">
-          هائيڪو — Haiku
-        </option>
-
-        <option value="ٻيا — Other">
-          ٻيا — Other
-        </option>
-
-      </select>
-
-      <label for="poem">
-        پنهنجي شاعري لکو
-      </label>
-
-      <textarea
-        id="poem"
-        placeholder="هتي پنهنجي شاعري لکو..."
-        required
-      ></textarea>
-
-      <button
-        type="submit"
-        class="save-btn">
-        💾 شاعري محفوظ ڪريو
-      </button>
-
-    </form>
+    <h2
+      id="poetName"
+      class="poet-name">
+      شاعر
+    </h2>
 
     <div
-      id="message"
-      class="message">
-      🌹 شاعري ڪاميابي سان محفوظ ٿي وئي!
+      id="penName"
+      class="pen-name">
     </div>
+
+    <div
+      id="poetryType"
+      class="type">
+    </div>
+
+
+    <div id="poetryContainer">
+
+      <!-- شاعري هتي ظاهر ٿيندي -->
+
+    </div>
+
 
     <a
       href="poets.html"
-      class="back-btn">
+      class="back">
       ← شاعرن ڏانهن واپس
     </a>
 
-  </div>
+  </section>
 
-</div>
+</main>
+
+
 
 <footer>
+
   © 2026 ڪَويتا — Poetry App
+
 </footer>
 
+
+
 <script>
+
+  /*
+    شاعر جي ID URL مان وٺون ٿا
+
+    مثال:
+    poetry.html?id=123456
+  */
 
   const params =
     new URLSearchParams(window.location.search);
 
-  const poetIndex =
-    params.get("poet");
+  const poetId =
+    params.get("id");
+
+
+  /*
+    محفوظ ٿيل شاعر
+  */
 
   const poets =
     JSON.parse(
-      localStorage.getItem("poets") || "[]"
+      localStorage.getItem("kavitaNewPoets")
+    ) || [];
+
+
+  /*
+    ID مطابق شاعر ڳوليو
+  */
+
+  const poet =
+    poets.find(
+      p => String(p.id) === String(poetId)
     );
 
-  let poet = null;
 
-  if (
-    poetIndex !== null &&
-    poets[poetIndex]
-  ) {
-    poet = poets[poetIndex];
+  /*
+    جيڪڏهن شاعر نه ملي
+  */
+
+  if (!poet) {
+
+    document.getElementById("poetName")
+      .textContent =
+      "شاعر نه مليو";
+
+    document.getElementById("poetryType")
+      .style.display = "none";
+
+    document.getElementById("penName")
+      .style.display = "none";
+
+    document.getElementById("poetryContainer")
+      .innerHTML = `
+
+        <div class="empty">
+
+          هي شاعر اڃا موجود ناهي.
+
+        </div>
+
+      `;
+
   }
 
-  if (poet) {
 
-    document.getElementById("poetName").textContent =
-      poet.name || "—";
+  /*
+    شاعر جي معلومات
+  */
 
-    document.getElementById("penName").textContent =
-      poet.penName || "—";
+  else {
 
-    document.getElementById("poetryType").textContent =
-      poet.poetryType || "—";
+    document.getElementById("poetName")
+      .textContent =
+      poet.name || "شاعر";
 
-    document.getElementById("type").value =
-      poet.poetryType || "";
 
-  }
+    if (poet.penName) {
 
-  const form =
-    document.getElementById("poetryForm");
+      document.getElementById("penName")
+        .textContent =
+        "تخلص: " + poet.penName;
 
-  form.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const title =
-      document.getElementById("title").value.trim();
-
-    const type =
-      document.getElementById("type").value;
-
-    const poem =
-      document.getElementById("poem").value.trim();
-
-    if (!poet) {
-      alert("شاعر جي معلومات موجود ناهي.");
-      return;
     }
 
-    const allPoetry =
-      JSON.parse(
-        localStorage.getItem("poetry") || "[]"
+    else {
+
+      document.getElementById("penName")
+        .style.display = "none";
+
+    }
+
+
+    document.getElementById("poetryType")
+      .textContent =
+      poet.poetryType || "شاعري";
+
+
+    /*
+      شاعري ڏيکاريو
+    */
+
+    const container =
+      document.getElementById("poetryContainer");
+
+
+    if (!poet.poems || poet.poems.length === 0) {
+
+      container.innerHTML = `
+
+        <div class="empty">
+
+          هن شاعر جي شاعري اڃا شامل نه ڪئي وئي آهي. 🌹
+
+        </div>
+
+      `;
+
+    }
+
+
+    else {
+
+      poet.poems.forEach(
+        function(poem) {
+
+          const poemBox =
+            document.createElement("article");
+
+          poemBox.className = "poem";
+
+
+          const title =
+            document.createElement("h3");
+
+          title.className =
+            "poem-title";
+
+          title.textContent =
+            poem.title || "بي عنوان شاعري";
+
+
+          const text =
+            document.createElement("div");
+
+          text.className =
+            "poem-text";
+
+          text.textContent =
+            poem.text || "";
+
+
+          poemBox.appendChild(title);
+
+          poemBox.appendChild(text);
+
+          container.appendChild(poemBox);
+
+        }
       );
 
-    const newPoetry = {
+    }
 
-      poetIndex: Number(poetIndex),
-
-      poetName:
-        poet.name || "",
-
-      penName:
-        poet.penName || "",
-
-      title:
-        title,
-
-      type:
-        type,
-
-      poem:
-        poem,
-
-      createdAt:
-        new Date().toISOString()
-
-    };
-
-    allPoetry.push(newPoetry);
-
-    localStorage.setItem(
-      "poetry",
-      JSON.stringify(allPoetry)
-    );
-
-    document.getElementById("message").style.display =
-      "block";
-
-    form.reset();
-
-    document.getElementById("type").value =
-      poet.poetryType || "";
-
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
-
-  });
+  }
 
 </script>
+
 
 </body>
 </html>
