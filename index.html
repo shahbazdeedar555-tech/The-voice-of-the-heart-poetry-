@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>اَحساسَن جو ويسُ — ڪَويتا</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", serif;
+      background: #f7f0df;
+      color: #3d2b1f;
+      line-height: 1.8;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #315c4b, #173b31);
+      color: white;
+      text-align: center;
+      padding: 35px 20px 30px;
+      border-bottom: 6px solid #c79a3b;
+    }
+
+    header h1 {
+      font-size: 34px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    header p {
+      direction: ltr;
+      font-family: Georgia, serif;
+      font-size: 17px;
+      color: #f4dfaa;
+      letter-spacing: 0.5px;
+    }
+
+    /* Intro */
+    .intro {
+      text-align: center;
+      padding: 35px 20px 20px;
+    }
+
+    .intro h2 {
+      color: #315c4b;
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .intro p {
+      font-size: 17px;
+      color: #6a5545;
+    }
+
+    /* Categories */
+    .categories {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 10px 20px 40px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      background: #fffaf0;
+      border: 2px solid #d6bd82;
+      border-radius: 14px;
+      padding: 20px 15px;
+      text-align: center;
+      text-decoration: none;
+      color: #3d2b1f;
+
+      box-shadow: 0 4px 10px rgba(60, 40, 20, 0.10);
+
+      transition: 0.25s;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      background: #fff5dc;
+      border-color: #b58a32;
+    }
+
+    .category .icon {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    .category h3 {
+      font-size: 21px;
+      color: #315c4b;
+    }
+
+    .category span {
+      direction: ltr;
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      color: #8a6d42;
+    }
+
+    /* Poets */
+    .poets {
+      background: #315c4b;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .poets h2 {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .poets p {
+      color: #e8d9b4;
+      margin-bottom: 22px;
+    }
+
+    .poet-button {
+      display: inline-block;
+      background: #c79a3b;
+      color: white;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 25px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .poet-button:hover {
+      background: #a97d28;
+    }
+
+    /* Footer */
+    footer {
+      background: #173b31;
+      color: #d9cda9;
+      text-align: center;
+      padding: 22px 15px;
+      font-size: 14px;
+    }
+
+    footer strong {
+      color: #f0d48d;
+    }
+
+    /* Desktop */
+    @media (min-width: 700px) {
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      header h1 {
+        font-size: 43px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
+    <p>Poetry — The Language of Feelings</p>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <h2>ڪَويتا جي دنيا ۾ ڀليڪار</h2>
+    <p>
+      لفظن ۾ احساس، احساسن ۾ زندگي، ۽ زندگيءَ ۾ ڪَويتا.
+    </p>
+  </section>
+
+  <!-- POETRY CATEGORIES -->
+  <section class="categories">
+
+    <a class="category" href="#">
+      <div class="icon">🌹</div>
+      <h3>غزل</h3>
+      <span>Ghazal</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">🎵</div>
+      <h3>گيت</h3>
+      <span>Geet</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">📜</div>
+      <h3>نظم</h3>
+      <span>Nazam</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">🪶</div>
+      <h3>بيت</h3>
+      <span>Bet</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">🌈</div>
+      <h3>سترنگو</h3>
+      <span>Satrango</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">🎶</div>
+      <h3>وائي</h3>
+      <span>Waai</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">📖</div>
+      <h3>نثري نظم</h3>
+      <span>Prose Poetry</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">🌀</div>
+      <h3>تجريدي نظم</h3>
+      <span>Abstract Poetry</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">🍃</div>
+      <h3>هائيڪو</h3>
+      <span>Haiku</span>
+    </a>
+
+    <a class="category" href="#">
+      <div class="icon">✨</div>
+      <h3>ٻيا</h3>
+      <span>Other</span>
+    </a>
+
+  </section>
+
+  <!-- POETS SECTION -->
+  <section class="poets">
+
+    <h2>شاعرن جي دنيا</h2>
+
+    <p>
+      سنڌ جي مختلف شاعرن ۽ ليکڪن جي شاعري هڪ ئي جاءِ تي.
+    </p>
+
+    <a href="#" class="poet-button">
+      ✒️ شاعر ڏسو
+    </a>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      <strong>اَحساسَن جو ويسُ — ڪَويتا</strong>
+    </p>
+
+    <p>
+      سنڌي شاعريءَ لاءِ هڪ خوبصورت ادبي جاءِ
+    </p>
+
+    <p>
+      © 2026 Poetry Collection
+    </p>
+  </footer>
+
+</body>
+</html>
