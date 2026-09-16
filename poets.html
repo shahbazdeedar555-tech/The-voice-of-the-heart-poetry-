@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sd">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,11 @@
   <title>شاعر — اَحساسَن جو ويسُ ڪَويتا</title>
 
   <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -30,6 +36,7 @@
     header p {
       margin: 8px 0 0;
       font-size: 19px;
+      direction: ltr;
     }
 
     .container {
@@ -62,7 +69,10 @@
 
     #poetsList {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(260px, 1fr)
+      );
       gap: 20px;
     }
 
@@ -107,6 +117,16 @@
       margin-bottom: 12px;
     }
 
+    .poet-type {
+      display: inline-block;
+      background: #fff0cf;
+      color: #6b2d2d;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
     .poet-bio {
       line-height: 1.9;
       font-size: 16px;
@@ -116,11 +136,15 @@
     .poetry-btn {
       display: inline-block;
       margin-top: 15px;
-      padding: 9px 18px;
+      padding: 10px 20px;
       background: #6b2d2d;
       color: white;
       text-decoration: none;
       border-radius: 8px;
+    }
+
+    .poetry-btn:hover {
+      background: #8b4513;
     }
 
     .empty {
@@ -150,131 +174,305 @@
       padding: 18px;
       font-size: 15px;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-  <h1>شاعر</h1>
-  <p>Poets — ڪَويتا</p>
+
+  <h1>
+    اَحساسَن جو ويسُ — ڪَويتا
+  </h1>
+
+  <p>
+    Poets — Poetry — The Language of Feelings
+  </p>
+
 </header>
+
+
 
 <div class="container">
 
-  <a class="add-btn"
-     href="add-poet.html">
+
+  <a
+    class="add-btn"
+    href="add-poet.html">
+
     ＋ نئون شاعر شامل ڪريو
+
   </a>
 
-  <h2>نوان شاعر</h2>
+
+  <h2>
+    نوان شاعر
+  </h2>
+
 
   <div id="poetsList"></div>
 
-  <a class="home-btn"
-     href="index.html">
+
+  <a
+    class="home-btn"
+    href="index.html">
+
     ← ڪَويتا جي هوم پيج ڏانهن
+
   </a>
+
 
 </div>
 
+
+
 <footer>
+
   © 2026 اَحساسَن جو ويسُ — ڪَويتا
+
 </footer>
+
+
 
 <script>
 
-  const poetsList = document.getElementById("poetsList");
+
+  const poetsList =
+    document.getElementById("poetsList");
+
 
   function loadPoets() {
 
-    const poets = JSON.parse(
-      localStorage.getItem("poets") || "[]"
-    );
+
+    /*
+      add-poet.html
+      نون شاعرن کي هتي save ڪري ٿو
+    */
+
+    const poets =
+      JSON.parse(
+        localStorage.getItem(
+          "kavitaNewPoets"
+        ) || "[]"
+      );
+
 
     poetsList.innerHTML = "";
+
 
     if (poets.length === 0) {
 
       poetsList.innerHTML = `
+
         <div class="empty">
+
           اڃا تائين ڪو نئون شاعر شامل ناهي ٿيو. 🌹
+
           <br>
+
           مٿي ڏنل
-          <strong>نئون شاعر شامل ڪريو</strong>
+
+          <strong>
+            نئون شاعر شامل ڪريو
+          </strong>
+
           بٽڻ استعمال ڪريو.
+
         </div>
+
       `;
 
       return;
+
     }
 
-    poets.forEach((poet, index) => {
 
-      const card = document.createElement("div");
-      card.className = "poet-card";
+    poets.forEach((poet) => {
+
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "poet-card";
+
+
+      /*
+        تصوير
+      */
 
       let photoHTML = `
-        <div class="poet-icon">🪶</div>
+
+        <div class="poet-icon">
+          🪶
+        </div>
+
       `;
 
+
+      /*
+        جيڪڏهن مستقبل ۾
+        photo data موجود هجي
+      */
+
       if (poet.photo) {
+
         photoHTML = `
+
           <img
             src="${poet.photo}"
             class="poet-photo"
             alt="${poet.name || "شاعر"}"
           >
+
         `;
+
       }
 
+
+      /*
+        شاعر جي جاءِ
+      */
+
+      let placeHTML = "";
+
+      if (poet.city) {
+
+        placeHTML = `
+
+          <div class="poet-place">
+
+            📍 ${poet.city}
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        تخلص
+      */
+
+      let penHTML = "";
+
+      if (poet.penName) {
+
+        penHTML = `
+
+          <div class="poet-pen">
+
+            تخلص:
+            ${poet.penName}
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        شاعريءَ جو قسم
+      */
+
+      let typeHTML = "";
+
+      if (poet.poetryType) {
+
+        typeHTML = `
+
+          <div class="poet-type">
+
+            ${poet.poetryType}
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        تعارف
+      */
+
+      let bioHTML = "";
+
+      if (poet.bio) {
+
+        bioHTML = `
+
+          <div class="poet-bio">
+
+            ${poet.bio}
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        شاعري ڏسڻ وارو لنڪ
+
+        ID سان poetry.html کوليندو
+      */
+
       card.innerHTML = `
+
         ${photoHTML}
 
         <div class="poet-name">
-          ${poet.name || ""}
+
+          ${poet.name || "بغير نالي جو شاعر"}
+
         </div>
 
-        ${
-          poet.penName
-          ? `<div class="poet-pen">
-               تخلص: ${poet.penName}
-             </div>`
-          : ""
-        }
+        ${penHTML}
 
-        ${
-          poet.place
-          ? `<div class="poet-place">
-               📍 ${poet.place}
-             </div>`
-          : ""
-        }
+        ${typeHTML}
 
-        ${
-          poet.bio
-          ? `<div class="poet-bio">
-               ${poet.bio}
-             </div>`
-          : ""
-        }
+        ${placeHTML}
+
+        ${bioHTML}
+
 
         <a
           class="poetry-btn"
-          href="poetry.html?poet=${index}">
-          شاعري ڏسو
+          href="poetry.html?id=${poet.id}">
+
+          📖 شاعري ڏسو
+
         </a>
+
       `;
 
+
       poetsList.appendChild(card);
+
 
     });
 
   }
 
+
+  /*
+    شاعر load ڪريو
+  */
+
   loadPoets();
+
 
 </script>
 
+
 </body>
+
 </html>
