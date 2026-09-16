@@ -1,165 +1,198 @@
 
 <!DOCTYPE html>
-<html lang="sd" dir="rtl">
-
+<html lang="sd">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>شاعرن جي دنيا — اَحساسَن جو ويسُ</title>
+  <title>شاعر — ڪَويتا</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", serif;
-      background: #f7f0df;
-      color: #3d2b1f;
-      line-height: 1.8;
+      margin: 0;
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #f3e5c8);
+      color: #3b2415;
+      direction: rtl;
     }
 
     header {
-      background: linear-gradient(135deg, #315c4b, #173b31);
+      background: linear-gradient(135deg, #6b3e1e, #9b5a2e);
       color: white;
       text-align: center;
-      padding: 40px 20px 32px;
-      border-bottom: 6px solid #c79a3b;
+      padding: 35px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     header h1 {
-      font-size: 35px;
-      margin-bottom: 5px;
+      margin: 0;
+      font-size: 32px;
     }
 
     header p {
+      margin: 10px 0 0;
+      font-size: 18px;
       direction: ltr;
-      font-family: Georgia, serif;
-      font-size: 17px;
-      color: #f4dfaa;
     }
 
-    .back {
-      display: inline-block;
-      margin-top: 18px;
-      color: white;
-      text-decoration: none;
-      border: 1px solid #d6bd82;
-      padding: 6px 20px;
-      border-radius: 22px;
-      font-size: 15px;
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 15px;
     }
 
-    .intro {
+    .top-buttons {
       text-align: center;
-      padding: 40px 20px 25px;
-    }
-
-    .intro h2 {
-      color: #315c4b;
-      font-size: 29px;
-      margin-bottom: 8px;
-    }
-
-    .intro p {
-      color: #6a5545;
-      font-size: 17px;
-    }
-
-    .poets {
-      max-width: 950px;
-      margin: auto;
-      padding: 15px 20px 45px;
-
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .poet {
-      background: #fffaf0;
-      border: 2px solid #d6bd82;
-      border-radius: 16px;
-      padding: 25px 15px;
-      text-align: center;
-      color: #3d2b1f;
-
-      box-shadow: 0 4px 12px rgba(60, 40, 20, 0.10);
-    }
-
-    .poet .symbol {
-      font-size: 34px;
-      margin-bottom: 6px;
-    }
-
-    .poet h3 {
-      color: #315c4b;
-      font-size: 21px;
-    }
-
-    .poet p {
-      color: #8a6d42;
-      font-size: 14px;
-      margin-top: 3px;
-    }
-
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 25px;
-      color: #765e45;
-    }
-
-    .add {
-      background: #315c4b;
-      color: white;
-      text-align: center;
-      padding: 45px 20px;
-    }
-
-    .add h2 {
-      font-size: 27px;
-      margin-bottom: 10px;
-    }
-
-    .add p {
-      color: #e8d9b4;
-      margin-bottom: 23px;
+      margin-bottom: 30px;
     }
 
     .add-button {
       display: inline-block;
-      background: #c79a3b;
+      padding: 13px 25px;
+      background: #7a421f;
       color: white;
       text-decoration: none;
-      padding: 12px 30px;
-      border-radius: 28px;
+      border-radius: 12px;
+      font-weight: bold;
       font-size: 17px;
+    }
+
+    .add-button:hover {
+      background: #5d3016;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 35px 0 20px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: #7a421f;
+      font-size: 27px;
+    }
+
+    .section-title p {
+      margin-top: 8px;
+      direction: ltr;
+      color: #6d5848;
+    }
+
+    .poets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .poet-card {
+      background: rgba(255,255,255,0.96);
+      border: 2px solid #e2c79d;
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 7px 18px rgba(80,45,20,0.12);
+    }
+
+    .poet-icon {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #ead8b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .poet-card h3 {
+      margin: 8px 0;
+      color: #6b3e1e;
+      font-size: 23px;
+    }
+
+    .english-name {
+      direction: ltr;
+      color: #80634b;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .category {
+      display: inline-block;
+      background: #f2e2c5;
+      color: #6b3e1e;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .bio {
+      line-height: 1.8;
+      color: #5b4636;
+      font-size: 15px;
+    }
+
+    .details {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #765c43;
+    }
+
+    .details div {
+      margin: 5px 0;
+    }
+
+    .social {
+      display: inline-block;
+      margin-top: 12px;
+      color: #7a421f;
+      text-decoration: none;
+      font-weight: bold;
+      direction: ltr;
+    }
+
+    .empty {
+      text-align: center;
+      background: #fffaf0;
+      border: 2px dashed #c8a878;
+      border-radius: 15px;
+      padding: 25px;
+      color: #765c43;
+      font-size: 17px;
+    }
+
+    .home-button {
+      display: block;
+      width: fit-content;
+      margin: 35px auto 10px;
+      padding: 12px 25px;
+      background: #ead8b8;
+      color: #4b2c18;
+      text-decoration: none;
+      border-radius: 12px;
       font-weight: bold;
     }
 
     footer {
-      background: #173b31;
-      color: #d9cda9;
       text-align: center;
-      padding: 23px 15px;
+      padding: 30px 10px;
+      color: #74563e;
       font-size: 14px;
     }
 
-    footer strong {
-      color: #f0d48d;
-    }
-
-    @media (min-width: 700px) {
-      .poets {
-        grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 27px;
       }
 
-      header h1 {
-        font-size: 43px;
+      .container {
+        padding: 10px;
       }
     }
   </style>
@@ -167,92 +200,243 @@
 
 <body>
 
-  <!-- HEADER -->
-
   <header>
-
-    <h1>شاعرن جي دنيا</h1>
-
-    <p>World of New Poets</p>
-
-    <a href="index.html" class="back">
-      ← واپس Homepage
-    </a>
-
+    <h1>شاعر</h1>
+    <p>Poets — ڪَويتا</p>
   </header>
 
+  <div class="container">
 
-  <!-- INTRO -->
-
-  <section class="intro">
-
-    <h2>نوان شاعر، نوان آواز</h2>
-
-    <p>
-      هتي انهن شاعرن جي شاعري گڏ ٿيندي،
-      جيڪي پنهنجي لفظن سان نئين دنيا تخليق ڪن ٿا.
-    </p>
-
-  </section>
+    <div class="top-buttons">
+      <a href="add-poet.html" class="add-button">
+        ＋ نئون شاعر شامل ڪريو
+      </a>
+    </div>
 
 
-  <!-- POETS -->
+    <!-- EXISTING POETS -->
 
-  <section class="poets">
+    <div class="section-title">
+      <h2>سنڌ جا ناميارا شاعر</h2>
+      <p>Great Poets of Sindh</p>
+    </div>
 
-    <div class="empty">
+    <div class="poets-grid">
 
-      <div style="font-size:45px;">🪶</div>
+      <div class="poet-card">
+        <div class="poet-icon">📜</div>
 
-      <h3>
-        شاعريءَ جو هي ڪتاب اڃا لکجي رهيو آهي
-      </h3>
+        <h3>شاهه عبداللطيف ڀٽائي</h3>
 
-      <p>
-        پنهنجو نالو ۽ پنهنجي شاعري شامل ڪرڻ لاءِ
-        هيٺ ڏنل بٽڻ استعمال ڪريو.
-      </p>
+        <div class="english-name">
+          Shah Abdul Latif Bhittai
+        </div>
+
+        <div class="category">
+          بيت — Bet
+        </div>
+
+        <div class="bio">
+          سنڌ جي عظيم صوفي شاعر، جنهن جي شاعري
+          سنڌي ادب ۽ روحاني فڪر ۾ خاص مقام رکي ٿي.
+        </div>
+
+      </div>
+
+
+      <div class="poet-card">
+        <div class="poet-icon">🪶</div>
+
+        <h3>شيخ اياز</h3>
+
+        <div class="english-name">
+          Shaikh Ayaz
+        </div>
+
+        <div class="category">
+          نظم — Nazam
+        </div>
+
+        <div class="bio">
+          جديد سنڌي شاعريءَ جي اهم شاعرن مان هڪ،
+          جنهن سنڌي ادب ۾ نوان فڪري ۽ ادبي رنگ آندا.
+        </div>
+
+      </div>
 
     </div>
 
-  </section>
 
+    <!-- NEW POETS -->
 
-  <!-- ADD NEW POET -->
+    <div class="section-title">
+      <h2>نوان شاعر</h2>
+      <p>New Poets</p>
+    </div>
 
-  <section class="add">
+    <div id="newPoets" class="poets-grid"></div>
 
-    <h2>پنهنجي شاعري شامل ڪريو</h2>
-
-    <p>
-      ڇا توهان شاعر آهيو؟
-      پنهنجي شاعري هن ادبي مجموعي جو حصو بڻايو.
-    </p>
-
-    <a href="#" class="add-button">
-      ✒️ نئون شاعر شامل ڪريو
+    <a href="index.html" class="home-button">
+      ← ڪَويتا جي هوم پيج ڏانهن
     </a>
 
-  </section>
+  </div>
 
-
-  <!-- FOOTER -->
 
   <footer>
-
-    <p>
-      <strong>اَحساسَن جو ويسُ — ڪَويتا</strong>
-    </p>
-
-    <p>
-      نون شاعرن ۽ نون احساسن لاءِ هڪ ادبي جاءِ
-    </p>
-
-    <p>
-      © 2026 Poetry Collection
-    </p>
-
+    © 2026 اَحساسَن جو ويسُ — ڪَويتا
   </footer>
+
+
+  <script>
+
+    function getCategoryName(category) {
+
+      const categories = {
+        "Ghazal": "غزل — Ghazal",
+        "Geet": "گيت — Geet",
+        "Nazam": "نظم — Nazam",
+        "Bet": "بيت — Bet",
+        "Satrango": "سترنگو — Satrango",
+        "Waai": "وائي — Waai",
+        "Nasri Nazam": "نثري نظم — Nasri Nazam",
+        "Tajredi Nazam": "تجريدي نظم — Tajredi Nazam",
+        "Haiku": "هائيڪو — Haiku",
+        "Other": "ٻيا — Other"
+      };
+
+      return categories[category] || category || "شاعري";
+
+    }
+
+
+    function loadNewPoets() {
+
+      const container = document.getElementById("newPoets");
+
+      const poets =
+        JSON.parse(localStorage.getItem("newPoets")) || [];
+
+
+      if (poets.length === 0) {
+
+        container.innerHTML = `
+          <div class="empty">
+            اڃا تائين ڪو نئون شاعر شامل ناهي ٿيو. 🌹
+            <br><br>
+            مٿي ڏنل
+            <strong>نئون شاعر شامل ڪريو</strong>
+            بٽڻ استعمال ڪريو.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML = "";
+
+
+      poets.forEach(function(poet) {
+
+        const card = document.createElement("div");
+
+        card.className = "poet-card";
+
+
+        card.innerHTML = `
+
+          <div class="poet-icon">
+            🪶
+          </div>
+
+          <h3>
+            ${escapeHTML(poet.name)}
+          </h3>
+
+          ${
+            poet.englishName
+            ? `<div class="english-name">
+                 ${escapeHTML(poet.englishName)}
+               </div>`
+            : ""
+          }
+
+          <div class="category">
+            ${escapeHTML(getCategoryName(poet.category))}
+          </div>
+
+          ${
+            poet.bio
+            ? `<div class="bio">
+                 ${escapeHTML(poet.bio)}
+               </div>`
+            : ""
+          }
+
+          <div class="details">
+
+            ${
+              poet.birth
+              ? `<div>📅 ${escapeHTML(poet.birth)}</div>`
+              : ""
+            }
+
+            ${
+              poet.city
+              ? `<div>📍 ${escapeHTML(poet.city)}</div>`
+              : ""
+            }
+
+          </div>
+
+          ${
+            poet.facebook
+            ? `<a
+                 class="social"
+                 href="${escapeAttribute(poet.facebook)}"
+                 target="_blank"
+                 rel="noopener">
+                 Social / Facebook
+               </a>`
+            : ""
+          }
+
+        `;
+
+
+        container.appendChild(card);
+
+      });
+
+    }
+
+
+    function escapeHTML(text) {
+
+      const div = document.createElement("div");
+
+      div.textContent = text || "";
+
+      return div.innerHTML;
+
+    }
+
+
+    function escapeAttribute(text) {
+
+      return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    }
+
+
+    loadNewPoets();
+
+  </script>
 
 </body>
 </html>
