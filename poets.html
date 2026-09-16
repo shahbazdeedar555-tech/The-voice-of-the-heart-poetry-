@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>شاعرن جي دنيا — اَحساسَن جو ويسُ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", serif;
+      background: #f7f0df;
+      color: #3d2b1f;
+      line-height: 1.8;
+    }
+
+    header {
+      background: linear-gradient(135deg, #315c4b, #173b31);
+      color: white;
+      text-align: center;
+      padding: 35px 20px 30px;
+      border-bottom: 6px solid #c79a3b;
+    }
+
+    header h1 {
+      font-size: 34px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      direction: ltr;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      color: #f4dfaa;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 18px;
+      color: white;
+      text-decoration: none;
+      border: 1px solid #d6bd82;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 15px;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 35px 20px 20px;
+    }
+
+    .intro h2 {
+      color: #315c4b;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .intro p {
+      color: #6a5545;
+      font-size: 17px;
+    }
+
+    .poets {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px 20px 45px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .poet {
+      background: #fffaf0;
+      border: 2px solid #d6bd82;
+      border-radius: 15px;
+      padding: 22px 15px;
+      text-align: center;
+      text-decoration: none;
+      color: #3d2b1f;
+      box-shadow: 0 4px 10px rgba(60, 40, 20, 0.10);
+      transition: 0.25s;
+    }
+
+    .poet:hover {
+      transform: translateY(-4px);
+      border-color: #b58a32;
+      background: #fff5dc;
+    }
+
+    .poet .symbol {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    .poet h3 {
+      color: #315c4b;
+      font-size: 21px;
+    }
+
+    .poet span {
+      direction: ltr;
+      display: block;
+      font-family: Georgia, serif;
+      color: #8a6d42;
+      font-size: 14px;
+    }
+
+    .add {
+      background: #315c4b;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .add h2 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .add p {
+      color: #e8d9b4;
+      margin-bottom: 20px;
+    }
+
+    .add-button {
+      display: inline-block;
+      background: #c79a3b;
+      color: white;
+      text-decoration: none;
+      padding: 11px 28px;
+      border-radius: 25px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #173b31;
+      color: #d9cda9;
+      text-align: center;
+      padding: 22px 15px;
+      font-size: 14px;
+    }
+
+    footer strong {
+      color: #f0d48d;
+    }
+
+    @media (min-width: 700px) {
+      .poets {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      header h1 {
+        font-size: 43px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>شاعرن جي دنيا</h1>
+    <p>World of Poets</p>
+
+    <a href="index.html" class="back">
+      ← واپس Homepage
+    </a>
+  </header>
+
+  <section class="intro">
+    <h2>سنڌ جا شاعر</h2>
+
+    <p>
+      مختلف شاعرن جي شاعري، سندن لفظن ۽ احساسن سان گڏ.
+    </p>
+  </section>
+
+  <section class="poets">
+
+    <a href="#" class="poet">
+      <div class="symbol">🪶</div>
+      <h3>شاهه عبداللطيف ڀٽائي</h3>
+      <span>Shah Abdul Latif Bhittai</span>
+    </a>
+
+    <a href="#" class="poet">
+      <div class="symbol">🪶</div>
+      <h3>شيخ اياز</h3>
+      <span>Shaikh Ayaz</span>
+    </a>
+
+    <a href="#" class="poet">
+      <div class="symbol">🪶</div>
+      <h3>نارائڻ شيام</h3>
+      <span>Narayan Shyam</span>
+    </a>
+
+    <a href="#" class="poet">
+      <div class="symbol">🪶</div>
+      <h3>تنوير عباسي</h3>
+      <span>Tanveer Abbasi</span>
+    </a>
+
+    <a href="#" class="poet">
+      <div class="symbol">🪶</div>
+      <h3>امداد حسيني</h3>
+      <span>Imdad Hussaini</span>
+    </a>
+
+    <a href="#" class="poet">
+      <div class="symbol">🪶</div>
+      <h3>ٻيا شاعر</h3>
+      <span>Other Poets</span>
+    </a>
+
+  </section>
+
+  <section class="add">
+
+    <h2>نئون شاعر شامل ڪريو</h2>
+
+    <p>
+      سنڌي ادب جي وڌيڪ شاعرن کي هن مجموعي جو حصو بڻايو.
+    </p>
+
+    <a href="#" class="add-button">
+      ✒️ شاعر شامل ڪريو
+    </a>
+
+  </section>
+
+  <footer>
+
+    <p>
+      <strong>اَحساسَن جو ويسُ — ڪَويتا</strong>
+    </p>
+
+    <p>
+      سنڌي شاعريءَ لاءِ هڪ خوبصورت ادبي جاءِ
+    </p>
+
+    <p>
+      © 2026 Poetry Collection
+    </p>
+
+  </footer>
+
+</body>
+</html>
+
