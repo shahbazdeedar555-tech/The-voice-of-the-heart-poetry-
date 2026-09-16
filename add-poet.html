@@ -1,13 +1,19 @@
 
 <!DOCTYPE html>
 <html lang="sd">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>نئون شاعر شامل ڪريو — ڪَويتا</title>
 
   <style>
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -17,7 +23,12 @@
     }
 
     header {
-      background: linear-gradient(135deg, #6b2d2d, #a0522d);
+      background: linear-gradient(
+        135deg,
+        #6b2d2d,
+        #a0522d
+      );
+
       color: white;
       text-align: center;
       padding: 28px 15px;
@@ -43,7 +54,9 @@
       background: white;
       border-radius: 16px;
       padding: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.10);
+
       border: 1px solid #e2c9a5;
     }
 
@@ -51,6 +64,12 @@
       text-align: center;
       color: #6b2d2d;
       margin-top: 0;
+    }
+
+    .english-title {
+      text-align: center;
+      color: #8b4513;
+      margin-bottom: 25px;
     }
 
     label {
@@ -64,90 +83,151 @@
     input,
     select,
     textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 12px;
-      border: 1px solid #c9a77a;
-      border-radius: 9px;
-      font-size: 16px;
-      background: #fffdf8;
-    }
 
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-      line-height: 1.8;
+      width: 100%;
+
+      box-sizing: border-box;
+
+      padding: 12px;
+
+      border:
+        1px solid #c9a77a;
+
+      border-radius: 9px;
+
+      font-size: 16px;
+
+      background: #fffdf8;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
+
       outline: none;
+
       border-color: #8b4513;
     }
 
+    textarea {
+
+      min-height: 130px;
+
+      resize: vertical;
+
+      line-height: 1.9;
+    }
+
     .save-btn {
+
       width: 100%;
-      margin-top: 25px;
+
+      margin-top: 28px;
+
       padding: 14px;
+
       border: none;
+
       border-radius: 10px;
+
       background: #6b2d2d;
+
       color: white;
+
       font-size: 18px;
+
       cursor: pointer;
     }
 
     .save-btn:hover {
+
       background: #8b4513;
     }
 
     .back-btn {
+
       display: block;
+
       text-align: center;
+
       margin-top: 22px;
+
       color: #6b2d2d;
+
       text-decoration: none;
+
       font-size: 17px;
     }
 
     .note {
+
       margin-top: 22px;
+
       padding: 15px;
+
       background: #fff7df;
-      border-right: 5px solid #d4a373;
+
+      border-right:
+        5px solid #d4a373;
+
       border-radius: 8px;
+
       line-height: 1.9;
+
       font-size: 15px;
     }
 
     footer {
+
       background: #3b2414;
+
       color: white;
+
       text-align: center;
+
       padding: 18px;
+
       font-size: 15px;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-  <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
-  <p>Poetry — The Language of Feelings</p>
+
+  <h1>
+    اَحساسَن جو ويسُ — ڪَويتا
+  </h1>
+
+  <p>
+    Poetry — The Language of Feelings
+  </p>
+
 </header>
+
 
 <div class="container">
 
   <div class="box">
 
-    <h2>نئون شاعر شامل ڪريو</h2>
-    <p style="text-align:center;">
+    <h2>
+      نئون شاعر شامل ڪريو
+    </h2>
+
+    <div class="english-title">
       Add New Poet
-    </p>
+    </div>
+
 
     <form id="poetForm">
+
+
+      <!-- شاعر جو نالو -->
 
       <label for="name">
         شاعر جو نالو
@@ -157,8 +237,10 @@
         type="text"
         id="name"
         placeholder="مثال: عبدالڪريم"
-        required
-      >
+        required>
+
+
+      <!-- English Name -->
 
       <label for="englishName">
         Poet Name in English
@@ -167,8 +249,10 @@
       <input
         type="text"
         id="englishName"
-        placeholder="Example: Abdul Karim"
-      >
+        placeholder="Example: Abdul Karim">
+
+
+      <!-- تخلص -->
 
       <label for="penName">
         تخلص
@@ -177,14 +261,18 @@
       <input
         type="text"
         id="penName"
-        placeholder="مثال: ديـدار"
-      >
+        placeholder="مثال: ديـدار">
+
+
+      <!-- شاعري جو قسم -->
 
       <label for="poetryType">
-        شاعري جو قسم
+        شاعريءَ جو قسم
       </label>
 
-      <select id="poetryType" required>
+      <select
+        id="poetryType"
+        required>
 
         <option value="">
           چونڊيو
@@ -232,14 +320,20 @@
 
       </select>
 
+
+      <!-- تعارف -->
+
       <label for="bio">
         شاعر بابت مختصر تعارف
       </label>
 
       <textarea
         id="bio"
-        placeholder="شاعر بابت مختصر تعارف لکو..."
-      ></textarea>
+        placeholder="شاعر بابت مختصر تعارف لکو...">
+      </textarea>
+
+
+      <!-- ڄمڻ -->
 
       <label for="birth">
         ڄمڻ جي تاريخ / سال
@@ -248,8 +342,10 @@
       <input
         type="text"
         id="birth"
-        placeholder="مثال: 1985 يا 12-05-1985"
-      >
+        placeholder="مثال: 1985 يا 12-05-1985">
+
+
+      <!-- شهر -->
 
       <label for="place">
         شهر / ڳوٺ
@@ -258,8 +354,10 @@
       <input
         type="text"
         id="place"
-        placeholder="مثال: شاهپور چاڪر"
-      >
+        placeholder="مثال: شاهپور چاڪر">
+
+
+      <!-- تصوير -->
 
       <label for="photo">
         شاعر جي تصوير
@@ -268,8 +366,10 @@
       <input
         type="file"
         id="photo"
-        accept="image/*"
-      >
+        accept="image/*">
+
+
+      <!-- Social -->
 
       <label for="social">
         Facebook / Social Link
@@ -278,138 +378,270 @@
       <input
         type="url"
         id="social"
-        placeholder="https://..."
-      >
+        placeholder="https://...">
+
+
+      <!-- Save -->
 
       <button
         type="submit"
         class="save-btn">
+
         💾 شاعر محفوظ ڪريو
+
       </button>
+
 
     </form>
 
+
+    <!-- واپس -->
+
     <a
-      class="back-btn"
-      href="poets.html">
+      href="poets.html"
+      class="back-btn">
+
       ← شاعرن ڏانهن واپس
+
     </a>
 
+
+    <!-- نوٽ -->
+
     <div class="note">
+
       <strong>نوٽ:</strong>
+
       هي صفحو صرف نون شاعرن کي شامل ڪرڻ لاءِ آهي.
-      شيخ اياز ۽ شاهه لطيف جهڙن اڳ ۾ موجود شاعرن جي صفحن کي
-      هتان تبديل نه ڪيو ويندو.
+
+      شيخ اياز ۽ شاهه لطيف جهڙن اڳ ۾ موجود شاعرن
+      جي صفحن کي هتان تبديل نه ڪيو ويندو.
+
     </div>
+
 
   </div>
 
 </div>
 
+
 <footer>
+
   © 2026 ڪَويتا — Poetry App
+
 </footer>
+
+
 
 <script>
 
-  const form = document.getElementById("poetForm");
 
-  form.addEventListener("submit", function(event) {
+  const form =
+    document.getElementById("poetForm");
 
-    event.preventDefault();
 
-    const name =
-      document.getElementById("name").value.trim();
+  form.addEventListener(
+    "submit",
+    function(event) {
 
-    const englishName =
-      document.getElementById("englishName").value.trim();
+      event.preventDefault();
 
-    const penName =
-      document.getElementById("penName").value.trim();
 
-    const poetryType =
-      document.getElementById("poetryType").value;
+      /* شاعر جي معلومات */
 
-    const bio =
-      document.getElementById("bio").value.trim();
+      const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
 
-    const birth =
-      document.getElementById("birth").value.trim();
 
-    const place =
-      document.getElementById("place").value.trim();
+      const englishName =
+        document
+        .getElementById("englishName")
+        .value
+        .trim();
 
-    const social =
-      document.getElementById("social").value.trim();
 
-    const photoFile =
-      document.getElementById("photo").files[0];
+      const penName =
+        document
+        .getElementById("penName")
+        .value
+        .trim();
 
-    function savePoet(photoData) {
 
-      const poets =
-        JSON.parse(
-          localStorage.getItem("poets") || "[]"
+      const poetryType =
+        document
+        .getElementById("poetryType")
+        .value;
+
+
+      const bio =
+        document
+        .getElementById("bio")
+        .value
+        .trim();
+
+
+      const birth =
+        document
+        .getElementById("birth")
+        .value
+        .trim();
+
+
+      const place =
+        document
+        .getElementById("place")
+        .value
+        .trim();
+
+
+      const social =
+        document
+        .getElementById("social")
+        .value
+        .trim();
+
+
+      const photoFile =
+        document
+        .getElementById("photo")
+        .files[0];
+
+
+
+      /*
+       * شاعر محفوظ ڪرڻ
+       */
+
+      function savePoet(photoData) {
+
+
+        const poets =
+          JSON.parse(
+            localStorage.getItem("poets")
+            || "[]"
+          );
+
+
+        const newPoet = {
+
+          name: name,
+
+          englishName:
+            englishName,
+
+          penName:
+            penName,
+
+          poetryType:
+            poetryType,
+
+          bio:
+            bio,
+
+          birth:
+            birth,
+
+          place:
+            place,
+
+          photo:
+            photoData || "",
+
+          social:
+            social,
+
+          createdAt:
+            new Date().toISOString()
+
+        };
+
+
+        /*
+         * نئون شاعر شامل ڪريو
+         */
+
+        poets.push(newPoet);
+
+
+        /*
+         * محفوظ ڪريو
+         */
+
+        localStorage.setItem(
+          "poets",
+          JSON.stringify(poets)
         );
 
-      const newPoet = {
 
-        name: name,
+        /*
+         * نئين شاعر جو نمبر
+         */
 
-        englishName: englishName,
+        const poetIndex =
+          poets.length - 1;
 
-        penName: penName,
 
-        poetryType: poetryType,
+        /*
+         * شاعري لکڻ واري پيج ڏانهن وڃو
+         */
 
-        bio: bio,
+        window.location.href =
+          "write-poetry.html?poet="
+          + poetIndex;
 
-        birth: birth,
+      }
 
-        place: place,
 
-        photo: photoData || "",
 
-        social: social,
+      /*
+       * تصوير موجود هجي
+       */
 
-        createdAt:
-          new Date().toISOString()
+      if (photoFile) {
 
-      };
 
-      poets.push(newPoet);
+        const reader =
+          new FileReader();
 
-      localStorage.setItem(
-        "poets",
-        JSON.stringify(poets)
-      );
 
-      alert("🌹 شاعر ڪاميابي سان محفوظ ٿي ويو!");
+        reader.onload =
+          function() {
 
-      window.location.href = "poets.html";
+            savePoet(
+              reader.result
+            );
+
+          };
+
+
+        reader.readAsDataURL(
+          photoFile
+        );
+
+
+      }
+
+
+      /*
+       * تصوير موجود نه هجي
+       */
+
+      else {
+
+        savePoet("");
+
+      }
+
     }
 
-    if (photoFile) {
-
-      const reader = new FileReader();
-
-      reader.onload = function() {
-
-        savePoet(reader.result);
-
-      };
-
-      reader.readAsDataURL(photoFile);
-
-    } else {
-
-      savePoet("");
-
-    }
-
-  });
+  );
 
 </script>
 
+
 </body>
+
 </html>
