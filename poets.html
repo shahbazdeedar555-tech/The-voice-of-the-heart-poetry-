@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="sd">
+<html lang="sd" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
@@ -15,7 +16,7 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
       background: #fffaf0;
       color: #3b2414;
       direction: rtl;
@@ -131,6 +132,7 @@
       line-height: 1.9;
       font-size: 16px;
       color: #444;
+      margin-top: 8px;
     }
 
     .poetry-btn {
@@ -175,6 +177,22 @@
       font-size: 15px;
     }
 
+    @media (max-width: 600px) {
+
+      header h1 {
+        font-size: 25px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 18px 12px;
+      }
+
+    }
+
   </style>
 
 </head>
@@ -194,7 +212,6 @@
   </p>
 
 </header>
-
 
 
 <div class="container">
@@ -229,13 +246,11 @@
 </div>
 
 
-
 <footer>
 
   © 2026 اَحساسَن جو ويسُ — ڪَويتا
 
 </footer>
-
 
 
 <script>
@@ -250,14 +265,13 @@
 
     /*
       add-poet.html
-      نون شاعرن کي هتي save ڪري ٿو
+      نون شاعرن کي "newPoets" نالي
+      LocalStorage ۾ محفوظ ڪري ٿو.
     */
 
     const poets =
       JSON.parse(
-        localStorage.getItem(
-          "kavitaNewPoets"
-        ) || "[]"
+        localStorage.getItem("newPoets") || "[]"
       );
 
 
@@ -287,11 +301,10 @@
       `;
 
       return;
-
     }
 
 
-    poets.forEach((poet) => {
+    poets.forEach(function(poet) {
 
 
       const card =
@@ -302,10 +315,14 @@
 
 
       /*
-        تصوير
+        شاعر جي تصوير
+
+        في الحال add-poet.html صرف
+        photoName محفوظ ڪري ٿو،
+        تنهنڪري هتي icon ڏيکارينداسين.
       */
 
-      let photoHTML = `
+      const photoHTML = `
 
         <div class="poet-icon">
           🪶
@@ -315,44 +332,15 @@
 
 
       /*
-        جيڪڏهن مستقبل ۾
-        photo data موجود هجي
+        شاعر جو نالو
+
+        add-poet.html ۾ field:
+        poetName
       */
 
-      if (poet.photo) {
-
-        photoHTML = `
-
-          <img
-            src="${poet.photo}"
-            class="poet-photo"
-            alt="${poet.name || "شاعر"}"
-          >
-
-        `;
-
-      }
-
-
-      /*
-        شاعر جي جاءِ
-      */
-
-      let placeHTML = "";
-
-      if (poet.city) {
-
-        placeHTML = `
-
-          <div class="poet-place">
-
-            📍 ${poet.city}
-
-          </div>
-
-        `;
-
-      }
+      const name =
+        poet.poetName ||
+        "بغير نالي جو شاعر";
 
 
       /*
@@ -368,7 +356,7 @@
           <div class="poet-pen">
 
             تخلص:
-            ${poet.penName}
+            ${escapeHTML(poet.penName)}
 
           </div>
 
@@ -389,7 +377,28 @@
 
           <div class="poet-type">
 
-            ${poet.poetryType}
+            ${escapeHTML(poet.poetryType)}
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        شهر / ڳوٺ
+      */
+
+      let placeHTML = "";
+
+      if (poet.city) {
+
+        placeHTML = `
+
+          <div class="poet-place">
+
+            📍 ${escapeHTML(poet.city)}
 
           </div>
 
@@ -410,7 +419,7 @@
 
           <div class="poet-bio">
 
-            ${poet.bio}
+            ${escapeHTML(poet.bio)}
 
           </div>
 
@@ -420,9 +429,7 @@
 
 
       /*
-        شاعري ڏسڻ وارو لنڪ
-
-        ID سان poetry.html کوليندو
+        شاعر جي معلومات واري card
       */
 
       card.innerHTML = `
@@ -431,7 +438,7 @@
 
         <div class="poet-name">
 
-          ${poet.name || "بغير نالي جو شاعر"}
+          ${escapeHTML(name)}
 
         </div>
 
@@ -446,7 +453,7 @@
 
         <a
           class="poetry-btn"
-          href="poetry.html?id=${poet.id}">
+          href="poetry.html?id=${encodeURIComponent(poet.id)}">
 
           📖 شاعري ڏسو
 
@@ -457,8 +464,23 @@
 
       poetsList.appendChild(card);
 
-
     });
+
+  }
+
+
+  /*
+    HTML محفوظ رکڻ لاءِ
+  */
+
+  function escapeHTML(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
   }
 
