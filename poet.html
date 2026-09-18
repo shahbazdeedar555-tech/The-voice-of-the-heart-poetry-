@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -6,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>غزل — اَحساسَن جو ويسُ ڪَويتا</title>
+  <title>شاعريءَ جا قسم — اَحساسَن جو ويسُ ڪَويتا</title>
 
   <style>
     * {
@@ -18,7 +17,7 @@
       font-family: Arial, sans-serif;
       background: #f5eedc;
       color: #173f32;
-      line-height: 1.9;
+      line-height: 1.8;
     }
 
     header {
@@ -40,111 +39,72 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
-      padding: 20px 15px 40px;
+      padding: 25px 15px 40px;
+    }
+
+    .back {
+      display: inline-block;
+      text-decoration: none;
+      color: #173f32;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
 
     .section-title {
       text-align: center;
       color: #8b6a1d;
-      margin: 10px 0 15px;
-      font-size: 25px;
+      font-size: 26px;
       font-weight: bold;
+      margin: 10px 0 5px;
     }
 
-    .add-poem-area {
+    .section-subtitle {
       text-align: center;
-      margin: 20px 0 25px;
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 25px;
     }
 
-    .add-btn {
-      background: #173f32;
-      color: white;
-      border: 2px solid #c9a646;
-      border-radius: 25px;
-      padding: 11px 22px;
-      font-size: 16px;
-      cursor: pointer;
-      font-weight: bold;
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .add-btn:hover {
-      opacity: 0.9;
-    }
-
-    .poetry-card {
+    .category {
+      display: block;
+      text-decoration: none;
       background: #fffaf0;
       border: 1px solid #d7bd76;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      border-radius: 18px;
+      padding: 25px 15px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      transition: 0.2s;
     }
 
-    .poetry-card h3 {
+    .category:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.10);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .category h2 {
       margin: 0;
       color: #173f32;
-      font-size: 22px;
-      text-align: center;
+      font-size: 23px;
     }
 
-    .english {
+    .category p {
+      margin: 3px 0 0;
       color: #8b6a1d;
       font-size: 15px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .poem-text {
-      white-space: pre-line;
-      font-size: 18px;
-      min-height: 80px;
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    .poem-text.editing {
-      border: 2px dashed #c9a646;
-      background: #fffdf7;
-      outline: none;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      border-radius: 20px;
-      padding: 9px 17px;
-      font-size: 15px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .edit-btn {
-      background: #173f32;
-      color: white;
-    }
-
-    .save-btn {
-      background: #c9a646;
-      color: #173f32;
-    }
-
-    .delete-btn {
-      background: #a83232;
-      color: white;
-    }
-
-    .save-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
 
     footer {
@@ -158,359 +118,205 @@
     footer p {
       margin: 3px 0;
     }
+
+    @media (max-width: 600px) {
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-size: 23px;
+      }
+
+    }
   </style>
 </head>
 
 <body>
 
   <header>
+
     <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
+
     <p>Poetry — The Language of Feelings</p>
+
   </header>
+
 
   <div class="container">
 
+    <a class="back" href="index.html">
+      ← هوم پيج ڏانهن واپس
+    </a>
+
+
     <div class="section-title">
-      🌹 غزل — Ghazal
+      🌹 شاعري جا قسم
     </div>
 
-    <div class="add-poem-area">
-
-      <button class="add-btn" onclick="addNewPoem()">
-        ＋ نئون غزل شامل ڪريو
-      </button>
-
+    <div class="section-subtitle">
+      Poetry Categories
     </div>
 
-    <div id="poetryContainer"></div>
+
+    <div class="categories">
+
+
+      <!-- Ghazal -->
+
+      <a class="category" href="poet.html">
+
+        <div class="icon">
+          🌹
+        </div>
+
+        <h2>
+          غزل
+        </h2>
+
+        <p>
+          Ghazal
+        </p>
+
+      </a>
+
+
+      <!-- Geet -->
+
+      <a class="category" href="geet.html">
+
+        <div class="icon">
+          🎵
+        </div>
+
+        <h2>
+          گيت
+        </h2>
+
+        <p>
+          Geet
+        </p>
+
+      </a>
+
+
+      <!-- Nazam -->
+
+      <a class="category" href="nazam.html">
+
+        <div class="icon">
+          📜
+        </div>
+
+        <h2>
+          نظم
+        </h2>
+
+        <p>
+          Nazam
+        </p>
+
+      </a>
+
+
+      <!-- Bet -->
+
+      <a class="category" href="bet.html">
+
+        <div class="icon">
+          🪶
+        </div>
+
+        <h2>
+          بيت
+        </h2>
+
+        <p>
+          Bet
+        </p>
+
+      </a>
+
+
+      <!-- Satrango -->
+
+      <a class="category" href="satrango.html">
+
+        <div class="icon">
+          🌈
+        </div>
+
+        <h2>
+          سترنگو
+        </h2>
+
+        <p>
+          Satrango
+        </p>
+
+      </a>
+
+
+      <!-- Waai -->
+
+      <a class="category" href="waai.html">
+
+        <div class="icon">
+          🎶
+        </div>
+
+        <h2>
+          وائي
+        </h2>
+
+        <p>
+          Waai
+        </p>
+
+      </a>
+
+
+      <!-- Other -->
+
+      <a class="category" href="other.html">
+
+        <div class="icon">
+          📖
+        </div>
+
+        <h2>
+          ٻيون
+        </h2>
+
+        <p>
+          Other
+        </p>
+
+      </a>
+
+
+    </div>
 
   </div>
 
+
   <footer>
-    <p>اَحساسَن جو ويسُ — ڪَويتا</p>
-    <p>Poetry — The Language of Feelings</p>
+
+    <p>
+      اَحساسَن جو ويسُ — ڪَويتا
+    </p>
+
+    <p>
+      Poetry — The Language of Feelings
+    </p>
+
   </footer>
 
-
-  <script>
-
-    /* =========================
-       شروعاتي غزل
-    ========================= */
-
-    const defaultPoems = [
-
-      {
-        id: "poem1",
-        title: "غزل",
-        text:
-`هتي شاعر جي غزل لکبي.
-
-لفظن ۾ احساس،
-احساسن ۾ زندگي،
-۽ زندگيءَ ۾ ڪَويتا.`
-      }
-
-    ];
-
-
-    /* =========================
-       غزل پڙهڻ
-    ========================= */
-
-    function getPoems() {
-
-      const saved =
-        localStorage.getItem("my_poems");
-
-      if (saved) {
-
-        try {
-          return JSON.parse(saved);
-        }
-
-        catch (error) {
-          return defaultPoems;
-        }
-
-      }
-
-      return defaultPoems;
-
-    }
-
-
-    /* =========================
-       سڀ غزل محفوظ ڪرڻ
-    ========================= */
-
-    function saveAllPoems(poems) {
-
-      localStorage.setItem(
-        "my_poems",
-        JSON.stringify(poems)
-      );
-
-    }
-
-
-    /* =========================
-       غزل ڏيکارڻ
-    ========================= */
-
-    function renderPoems() {
-
-      const container =
-        document.getElementById("poetryContainer");
-
-      container.innerHTML = "";
-
-      const poems = getPoems();
-
-      poems.forEach(function(poem) {
-
-        const card =
-          document.createElement("div");
-
-        card.className = "poetry-card";
-
-        card.innerHTML = `
-
-          <h3>${escapeHTML(poem.title)}</h3>
-
-          <div class="english">
-            Ghazal
-          </div>
-
-          <div
-            id="${poem.id}"
-            class="poem-text"
-            contenteditable="false"
-          >${escapeHTML(poem.text)}</div>
-
-          <div class="buttons">
-
-            <button
-              class="edit-btn"
-              onclick="editPoem('${poem.id}')">
-              ✏️ Edit
-            </button>
-
-            <button
-              class="save-btn"
-              id="save-${poem.id}"
-              onclick="savePoem('${poem.id}')"
-              disabled>
-              💾 Save
-            </button>
-
-            <button
-              class="delete-btn"
-              onclick="deletePoem('${poem.id}')">
-              🗑️ Delete
-            </button>
-
-          </div>
-
-        `;
-
-        container.appendChild(card);
-
-      });
-
-    }
-
-
-    /* =========================
-       Edit
-    ========================= */
-
-    function editPoem(poemId) {
-
-      const poem =
-        document.getElementById(poemId);
-
-      const saveButton =
-        document.getElementById(
-          "save-" + poemId
-        );
-
-      if (!poem) return;
-
-      poem.contentEditable = "true";
-
-      poem.classList.add("editing");
-
-      poem.focus();
-
-      saveButton.disabled = false;
-
-    }
-
-
-    /* =========================
-       Save
-    ========================= */
-
-    function savePoem(poemId) {
-
-      const poemElement =
-        document.getElementById(poemId);
-
-      if (!poemElement) return;
-
-      const poems = getPoems();
-
-      const poemIndex =
-        poems.findIndex(function(item) {
-
-          return item.id === poemId;
-
-        });
-
-      if (poemIndex === -1) return;
-
-      poems[poemIndex].text =
-        poemElement.innerText.trim();
-
-      saveAllPoems(poems);
-
-      poemElement.contentEditable = "false";
-
-      poemElement.classList.remove("editing");
-
-      const saveButton =
-        document.getElementById(
-          "save-" + poemId
-        );
-
-      saveButton.disabled = true;
-
-      alert("غزل محفوظ ٿي وئي. ✓");
-
-    }
-
-
-    /* =========================
-       نئون غزل
-    ========================= */
-
-    function addNewPoem() {
-
-      const poems = getPoems();
-
-      const newId =
-        "poem_" + Date.now();
-
-      const newNumber =
-        poems.length + 1;
-
-      const newPoem = {
-
-        id: newId,
-
-        title:
-          "غزل — " + newNumber,
-
-        text:
-          "هتي نئون غزل لکو..."
-
-      };
-
-      poems.push(newPoem);
-
-      saveAllPoems(poems);
-
-      renderPoems();
-
-      setTimeout(function() {
-
-        editPoem(newId);
-
-        const poem =
-          document.getElementById(newId);
-
-        if (poem) {
-
-          poem.innerText = "";
-
-          poem.focus();
-
-        }
-
-      }, 100);
-
-    }
-
-
-    /* =========================
-       Delete
-    ========================= */
-
-    function deletePoem(poemId) {
-
-      const poems = getPoems();
-
-      const poem =
-        poems.find(function(item) {
-
-          return item.id === poemId;
-
-        });
-
-      if (!poem) return;
-
-      const confirmDelete =
-        confirm(
-          "ڇا توهان واقعي هي غزل Delete ڪرڻ چاهيو ٿا؟"
-        );
-
-      if (!confirmDelete) return;
-
-      const remainingPoems =
-        poems.filter(function(item) {
-
-          return item.id !== poemId;
-
-        });
-
-      saveAllPoems(remainingPoems);
-
-      renderPoems();
-
-      alert("غزل Delete ٿي وئي. ✓");
-
-    }
-
-
-    /* =========================
-       HTML محفوظ رکڻ
-    ========================= */
-
-    function escapeHTML(text) {
-
-      return String(text)
-
-        .replace(/&/g, "&amp;")
-
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =========================
-       Page شروع
-    ========================= */
-
-    renderPoems();
-
-  </script>
-
 </body>
+
 </html>
