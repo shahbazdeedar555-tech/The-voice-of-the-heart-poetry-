@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>شاعر جو پروفائيل — ڪَويتا</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#e8dfc9;
+    color:#183d2d;
+    font-family:"Noto Nastaliq Urdu","Noto Sans Arabic","Segoe UI",sans-serif;
+}
+
+.app{
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    background:#f8f1df;
+    padding-bottom:90px;
+    box-shadow:0 0 30px rgba(0,0,0,.15);
+}
+
+/* HEADER */
+
+.header{
+    background:#173f2d;
+    color:#f1d37a;
+    text-align:center;
+    padding:22px 15px;
+    border-bottom:4px solid #c7a34b;
+}
+
+.header h1{
+    font-size:28px;
+}
+
+.header p{
+    direction:ltr;
+    font-family:Georgia,serif;
+    color:#f6eed8;
+    font-size:13px;
+}
+
+/* ORNAMENT */
+
+.ornament{
+    text-align:center;
+    color:#b48e3c;
+    font-size:20px;
+    padding:10px;
+}
+
+/* PROFILE */
+
+.profile{
+    margin:10px 14px;
+    background:#fffaf0;
+    border:2px solid #c7a34b;
+    border-radius:20px;
+    padding:25px 15px;
+    text-align:center;
+    box-shadow:0 6px 15px rgba(60,50,30,.12);
+}
+
+.profile-photo{
+    width:115px;
+    height:115px;
+    margin:auto;
+    border-radius:50%;
+    background:#173f2d;
+    border:4px solid #c7a34b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#e5c769;
+    font-size:48px;
+}
+
+.profile h2{
+    font-size:28px;
+    margin-top:12px;
+}
+
+.pen-name{
+    color:#9a7935;
+    font-size:17px;
+}
+
+.city{
+    margin-top:8px;
+    color:#6f6348;
+    font-size:14px;
+}
+
+/* BIO */
+
+.bio{
+    margin-top:15px;
+    padding:13px;
+    background:#f0e6cc;
+    border-radius:12px;
+    line-height:2;
+    font-size:16px;
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:7px;
+    margin-top:15px;
+}
+
+.tag{
+    background:#173f2d;
+    color:#f1d37a;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+/* SECTION */
+
+.section{
+    padding:0 14px;
+}
+
+.heading{
+    margin:20px 0 12px;
+    padding:8px 12px;
+    border-right:5px solid #c7a34b;
+    background:#f0e6cc;
+}
+
+.heading h2{
+    font-size:22px;
+}
+
+.heading small{
+    direction:ltr;
+    display:block;
+    font-family:Georgia,serif;
+    color:#8d7541;
+}
+
+/* POEM CARD */
+
+.poem{
+    background:#fffaf0;
+    border:1px solid #d5c18a;
+    border-radius:17px;
+    margin-bottom:14px;
+    padding:18px 15px;
+    box-shadow:0 4px 10px rgba(60,50,30,.08);
+}
+
+.poem-number{
+    color:#9a7935;
+    font-size:12px;
+}
+
+.poem h3{
+    font-size:21px;
+    margin:4px 0 12px;
+    color:#173f2d;
+}
+
+.poem-text{
+    white-space:pre-line;
+    line-height:2.2;
+    font-size:17px;
+    color:#294936;
+}
+
+.read{
+    display:block;
+    text-align:center;
+    margin-top:13px;
+    padding:8px;
+    border-top:1px solid #dfd2af;
+    color:#9a7935;
+    text-decoration:none;
+}
+
+/* SOCIAL */
+
+.social{
+    display:block;
+    margin:15px 14px;
+    padding:12px;
+    text-align:center;
+    border:1px solid #c7a34b;
+    border-radius:12px;
+    color:#173f2d;
+    text-decoration:none;
+    background:#f0e6cc;
+}
+
+/* BACK */
+
+.back{
+    display:block;
+    margin:15px 14px;
+    text-align:center;
+    padding:12px;
+    background:#173f2d;
+    color:#f1d37a;
+    border-radius:13px;
+    text-decoration:none;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    color:#806d45;
+    font-size:12px;
+    padding:10px 15px;
+}
+
+/* NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:78px;
+    background:#173f2d;
+    border-top:3px solid #c7a34b;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    z-index:100;
+}
+
+.nav-item{
+    text-decoration:none;
+    color:#d8c58d;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    gap:2px;
+}
+
+.nav-icon{
+    font-size:21px;
+}
+
+.nav-item.active{
+    color:#f1d37a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <header class="header">
+        <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
+        <p>Poetry — The Language of Feelings</p>
+    </header>
+
+    <div class="ornament">⌁ ─── ✦ ─── ⌁</div>
+
+    <!-- POET PROFILE -->
+
+    <section class="profile">
+
+        <div class="profile-photo">
+            ✒️
+        </div>
+
+        <h2>شاهباز</h2>
+
+        <div class="pen-name">
+            تخلص: ديدار
+        </div>
+
+        <div class="city">
+            📍 شهر / ڳوٺ: ڪرم خان نظاماڻي
+        </div>
+
+        <div class="bio">
+            شاعريءَ سان محبت ڪندڙ شاعر، جيڪو
+            پنهنجي احساسن، خيالن ۽ جذبن کي
+            لفظن جي خوبصورت صورت ۾ پيش ڪري ٿو.
+        </div>
+
+        <div class="categories">
+            <span class="tag">غزل</span>
+            <span class="tag">نظم</span>
+            <span class="tag">نثري نظم</span>
+        </div>
+
+    </section>
+
+
+    <!-- POETRY -->
+
+    <section class="section">
+
+        <div class="heading">
+            <h2>شاعر جي شاعري</h2>
+            <small>Poetry by this Poet</small>
+        </div>
+
+
+        <!-- POEM 1 -->
+
+        <article class="poem">
+
+            <div class="poem-number">
+                شاعري نمبر 1
+            </div>
+
+            <h3>
+                محبت
+            </h3>
+
+            <div class="poem-text">
+محبت دل جي اها صدا آهي،
+جيڪا لفظن کان اڳ محسوس ٿئي ٿي.
+
+اکين ۾ خواب بڻجي اچي ٿي،
+۽ دل ۾ شاعري بڻجي رهي ٿي.
+            </div>
+
+            <a href="#" class="read">
+                مڪمل شاعري پڙهو ←
+            </a>
+
+        </article>
+
+
+        <!-- POEM 2 -->
+
+        <article class="poem">
+
+            <div class="poem-number">
+                شاعري نمبر 2
+            </div>
+
+            <h3>
+                احساس
+            </h3>
+
+            <div class="poem-text">
+لفظ ننڍڙا هوندا آهن،
+پر انهن ۾ دنيا سمايل هوندي آهي.
+
+هڪ سچو احساس،
+هزار لفظن کان وڌيڪ چوي ٿو.
+            </div>
+
+            <a href="#" class="read">
+                مڪمل شاعري پڙهو ←
+            </a>
+
+        </article>
+
+    </section>
+
+
+    <!-- SOCIAL -->
+
+    <a href="#" class="social">
+        🔗 شاعر جو Facebook / Social Link
+    </a>
+
+
+    <!-- BACK -->
+
+    <a href="poets.html" class="back">
+        ← شاعرن ڏانهن واپس
+    </a>
+
+
+    <div class="ornament">
+        ⌁ ─── ✦ ─── ⌁
+    </div>
+
+    <footer class="footer">
+        اَحساسَن جو ويسُ — ڪَويتا<br>
+        Poetry — The Language of Feelings
+    </footer>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <a href="index.html" class="nav-item">
+        <span class="nav-icon">🏠</span>
+        گهر
+    </a>
+
+    <a href="poetry.html" class="nav-item">
+        <span class="nav-icon">📚</span>
+        شاعري
+    </a>
+
+    <a href="poets.html" class="nav-item active">
+        <span class="nav-icon">✒️</span>
+        شاعر
+    </a>
+
+    <a href="add-poet.html" class="nav-item">
+        <span class="nav-icon">➕</span>
+        نئون شاعر
+    </a>
+
+    <a href="about.html" class="nav-item">
+        <span class="nav-icon">ℹ️</span>
+        بابت
+    </a>
+
+</nav>
+
+</body>
+</html>
