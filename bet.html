@@ -16,217 +16,171 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4ead5;
-      color: #183b2b;
+      background: linear-gradient(135deg, #fff8e7, #f8e8c8, #fffdf5);
+      color: #4b2e1f;
     }
 
     header {
-      background: #183b2b;
-      color: #f4d58d;
       text-align: center;
-      padding: 25px 15px;
-      border-bottom: 4px solid #c9a44c;
+      padding: 25px 15px 15px;
     }
 
-    header h1 {
+    h1 {
+      color: #7b1e1e;
       margin: 0;
-      font-size: 28px;
+      font-size: 30px;
     }
 
-    header p {
-      margin: 8px 0 0;
-      color: #fff4d6;
-      font-size: 16px;
+    .subtitle {
+      margin-top: 8px;
+      color: #6d4c41;
+      font-size: 18px;
+    }
+
+    .back {
+      display: inline-block;
+      margin: 15px auto;
+      padding: 10px 20px;
+      background: #7b1e1e;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
-      padding: 20px 15px 100px;
+      padding: 15px;
     }
 
-    .top-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .top-buttons a {
-      text-decoration: none;
-      background: #183b2b;
-      color: #f4d58d;
-      padding: 10px 18px;
-      border-radius: 25px;
-      border: 1px solid #c9a44c;
-      font-weight: bold;
-    }
-
-    .intro {
-      text-align: center;
-      background: #fff8e8;
-      padding: 22px;
-      border-radius: 18px;
-      border: 1px solid #d5b96b;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      margin-bottom: 25px;
-    }
-
-    .intro .symbol {
-      font-size: 38px;
-    }
-
-    .intro h2 {
-      margin: 8px 0;
-      color: #183b2b;
-    }
-
-    .intro p {
-      line-height: 1.9;
-      margin-bottom: 0;
-    }
-
-    .poetry-card {
-      background: #fffdf5;
-      border: 2px solid #c9a44c;
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #d7b889;
       border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 25px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    }
-
-    .poet-info {
-      text-align: center;
-      border-bottom: 1px solid #d8c78f;
-      padding-bottom: 15px;
-      margin-bottom: 18px;
-    }
-
-    .poet-info h3 {
-      margin: 5px 0;
-      font-size: 24px;
-      color: #183b2b;
-    }
-
-    .poet-info p {
-      margin: 6px 0;
-      color: #5d5138;
-    }
-
-    .category {
-      display: inline-block;
-      background: #183b2b;
-      color: #f4d58d;
-      padding: 6px 15px;
-      border-radius: 20px;
-      margin-top: 8px;
-    }
-
-    .poem {
-      background: #f8efd9;
-      border-right: 5px solid #c9a44c;
-      border-radius: 12px;
       padding: 20px;
-      font-size: 20px;
-      line-height: 2.2;
-      white-space: pre-line;
-      text-align: right;
-      min-height: 120px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(80, 40, 10, 0.12);
     }
 
-    .edit-area {
-      display: none;
-      margin-top: 15px;
+    .card h2 {
+      color: #7b1e1e;
+      margin-top: 0;
+      text-align: center;
     }
 
-    .edit-area textarea {
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #6d3b27;
+    }
+
+    input,
+    textarea {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #c9a44c;
-      border-radius: 10px;
+      padding: 13px;
+      border: 1px solid #c9a46a;
+      border-radius: 12px;
       font-family: Arial, sans-serif;
       font-size: 17px;
-      background: #fffdf5;
-      min-height: 220px;
+      background: #fffdf8;
+    }
+
+    textarea {
+      min-height: 280px;
+      line-height: 2;
       resize: vertical;
-      line-height: 1.8;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 15px;
-    }
-
-    button {
-      border: none;
-      border-radius: 25px;
-      padding: 10px 22px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .edit-btn {
-      background: #183b2b;
-      color: #f4d58d;
     }
 
     .save-btn {
-      background: #c9a44c;
-      color: #183b2b;
-      display: none;
-    }
-
-    .delete-btn {
-      background: #8b2e2e;
+      display: block;
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      background: #7b1e1e;
       color: white;
+      font-size: 18px;
+      cursor: pointer;
     }
 
-    .message {
-      text-align: center;
-      color: #183b2b;
-      font-weight: bold;
-      margin-top: 12px;
-      display: none;
+    .save-btn:hover {
+      background: #9b2929;
     }
 
-    .empty-message {
-      text-align: center;
-      background: #fff8e8;
-      border: 1px solid #d5b96b;
+    .poetry-item {
+      background: #fffdf5;
+      border: 1px solid #d7b889;
       border-radius: 18px;
-      padding: 25px;
-      color: #5d5138;
+      padding: 20px;
+      margin-top: 18px;
     }
 
-    footer {
-      background: #183b2b;
-      color: #f4d58d;
-      text-align: center;
-      padding: 18px 10px;
-      border-top: 3px solid #c9a44c;
+    .poetry-item h3 {
+      color: #7b1e1e;
+      margin-top: 0;
+    }
+
+    .poet-name {
+      color: #8b4513;
+      font-weight: bold;
       line-height: 1.8;
     }
 
-    @media (max-width: 600px) {
+    .poem-text {
+      white-space: pre-wrap;
+      line-height: 2;
+      font-size: 18px;
+      margin-top: 15px;
+    }
 
-      header h1 {
-        font-size: 23px;
-      }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
 
-      .poem {
-        font-size: 18px;
-        line-height: 2;
-      }
+    .actions button {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-      .poetry-card {
-        padding: 16px;
-      }
+    .edit-btn {
+      background: #b98242;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #8b1e1e;
+      color: white;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 20px;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 20px;
+      text-align: center;
+      background: #6d3b27;
+      color: white;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
     }
   </style>
 </head>
@@ -234,248 +188,378 @@
 <body>
 
   <header>
-    <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
-    <p>Poetry — The Language of Feelings</p>
-  </header>
 
-  <div class="container">
+    <h1>📜 بيت</h1>
 
-    <div class="top-buttons">
-      <a href="index.html">⌂ گهر</a>
-      <a href="categories.html">شاعري جا قسم</a>
-      <a href="poets.html">شاعر</a>
+    <div class="subtitle">
+      Bet — اَحساسَن جو ويسُ ڪَويتا
     </div>
 
-    <section class="intro">
-      <div class="symbol">🌹</div>
+    <div>
+      <a href="index.html" class="back">
+        ← Homepage ڏانهن واپس
+      </a>
+    </div>
 
-      <h2>بيت — Bet</h2>
-
-      <p>
-        سنڌي شاعريءَ جو خوبصورت انداز،
-        جتي لفظن ۾ احساس ۽ خيال سمايل هوندا آهن.
-      </p>
-    </section>
+  </header>
 
 
-    <!-- =========================
-         بيت نمبر 1
-    ========================== -->
+  <main class="container">
 
-    <section class="poetry-card" id="bet1">
+    <section class="card">
 
-      <div class="poet-info">
+      <h2>✍️ نئون بيت لکو</h2>
 
-        <h3>🪶 ديدار علي</h3>
+      <label for="poetName">
+        نالو
+      </label>
 
-        <p>تخلص: شاهباز</p>
-
-        <p>📍 Post Office Karam Khan Nizamani</p>
-
-        <span class="category">بيت — Bet</span>
-
-      </div>
-
-      <div class="poem" id="poemText1">
-سنڌ جي مٽيءَ ۾،
-محبت جا رنگ هزار،
-دل ۾ جي احساس هجي،
-ته هر لفظ ٿئي پيار.
-      </div>
-
-      <div class="edit-area" id="editArea1">
-
-        <textarea id="poemInput1">سنڌ جي مٽيءَ ۾،
-محبت جا رنگ هزار،
-دل ۾ جي احساس هجي،
-ته هر لفظ ٿئي پيار.</textarea>
-
-      </div>
-
-      <div class="buttons">
-
-        <button
-          class="edit-btn"
-          onclick="editPoetry(1)">
-          ✏️ Edit
-        </button>
-
-        <button
-          class="save-btn"
-          id="saveBtn1"
-          onclick="savePoetry(1)">
-          💾 Save
-        </button>
-
-        <button
-          class="delete-btn"
-          onclick="deletePoetry(1)">
-          🗑️ Delete
-        </button>
-
-      </div>
-
-      <div
-        class="message"
-        id="message1">
-        شاعري محفوظ ٿي وئي آهي. 🌹
-      </div>
-
-    </section>
+      <input
+        type="text"
+        id="poetName"
+        placeholder="شاعر جو نالو"
+      >
 
 
-    <!-- =========================
-         بيت نمبر 2
-    ========================== -->
+      <label for="penName">
+        تخلص
+      </label>
 
-    <section class="poetry-card" id="bet2">
+      <input
+        type="text"
+        id="penName"
+        placeholder="تخلص"
+      >
 
-      <div class="poet-info">
 
-        <h3>🪶 ديدار علي</h3>
+      <label for="category">
+        صنف
+      </label>
 
-        <p>تخلص: شاهباز</p>
+      <input
+        type="text"
+        id="category"
+        value="بيت"
+        readonly
+      >
 
-        <p>📍 Post Office Karam Khan Nizamani</p>
 
-        <span class="category">بيت — Bet</span>
+      <label for="poemTitle">
+        بيت جو عنوان
+      </label>
 
-      </div>
+      <input
+        type="text"
+        id="poemTitle"
+        placeholder="بيت جو عنوان لکو"
+      >
 
-      <div class="poem" id="poemText2">
-کُليَل دل سان،
-ڌرتيءَ کي پيار ڪيان،
-سنڌ جي سونهن ڏسي،
-هر پل سرشار رهان.
-      </div>
 
-      <div class="edit-area" id="editArea2">
+      <label for="poemText">
+        بيت
+      </label>
 
-        <textarea id="poemInput2">کُليَل دل سان،
-ڌرتيءَ کي پيار ڪيان،
-سنڌ جي سونهن ڏسي،
-هر پل سرشار رهان.</textarea>
+      <textarea
+        id="poemText"
+        placeholder="هتي پنهنجو بيت لکو..."
+      ></textarea>
 
-      </div>
 
-      <div class="buttons">
-
-        <button
-          class="edit-btn"
-          onclick="editPoetry(2)">
-          ✏️ Edit
-        </button>
-
-        <button
-          class="save-btn"
-          id="saveBtn2"
-          onclick="savePoetry(2)">
-          💾 Save
-        </button>
-
-        <button
-          class="delete-btn"
-          onclick="deletePoetry(2)">
-          🗑️ Delete
-        </button>
-
-      </div>
-
-      <div
-        class="message"
-        id="message2">
-        شاعري محفوظ ٿي وئي آهي. 🌹
-      </div>
+      <button
+        class="save-btn"
+        onclick="savePoetry()"
+      >
+        💾 بيت محفوظ ڪريو
+      </button>
 
     </section>
 
 
-  </div>
+    <section class="card">
+
+      <h2>📖 محفوظ ٿيل بيت</h2>
+
+      <div id="poetryList"></div>
+
+    </section>
+
+  </main>
 
 
   <footer>
 
-    اَحساسَن جو ويسُ — ڪَويتا<br>
+    <div>
+      <a href="index.html">🏠 گهر</a>
+      <a href="categories.html">📚 صنفون</a>
+      <a href="poets.html">✒️ شاعر</a>
+    </div>
 
-    Poetry — The Language of Feelings<br>
-
-    © 2026 ايجاد ديدار شھباز
+    <p>
+      اَحساسَن جو ويسُ — ڪَويتا
+    </p>
 
   </footer>
 
 
   <script>
 
-    function editPoetry(id) {
+    let editingIndex = -1;
 
-      document.getElementById(
-        "editArea" + id
-      ).style.display = "block";
 
-      document.getElementById(
-        "saveBtn" + id
-      ).style.display = "inline-block";
+    function getPoetry() {
 
-      document.querySelector(
-        "#bet" + id + " .edit-btn"
-      ).style.display = "none";
+      return JSON.parse(
+        localStorage.getItem("betPoetry") || "[]"
+      );
 
-      document.getElementById(
-        "message" + id
-      ).style.display = "none";
     }
 
 
-    function savePoetry(id) {
+    function savePoetry() {
 
-      const poem =
-        document.getElementById(
-          "poemInput" + id
-        ).value.trim();
+      const poetName =
+        document.getElementById("poetName").value.trim();
 
-      if (!poem) {
+      const penName =
+        document.getElementById("penName").value.trim();
 
-        alert("مهرباني ڪري بيت مڪمل لکو.");
+      const category =
+        document.getElementById("category").value.trim();
+
+      const poemTitle =
+        document.getElementById("poemTitle").value.trim();
+
+      const poemText =
+        document.getElementById("poemText").value.trim();
+
+
+      if (!poetName || !poemText) {
+
+        alert("مهرباني ڪري نالو ۽ بيت ضرور لکو.");
 
         return;
+
       }
 
-      document.getElementById(
-        "poemText" + id
-      ).textContent = poem;
 
-      document.getElementById(
-        "editArea" + id
-      ).style.display = "none";
+      let poetry = getPoetry();
 
-      document.getElementById(
-        "saveBtn" + id
-      ).style.display = "none";
 
-      document.querySelector(
-        "#bet" + id + " .edit-btn"
-      ).style.display = "inline-block";
+      const poem = {
 
-      document.getElementById(
-        "message" + id
-      ).style.display = "block";
+        poetName: poetName,
+
+        penName: penName,
+
+        category: category,
+
+        title: poemTitle || "بغير عنوان جو بيت",
+
+        text: poemText
+
+      };
+
+
+      if (editingIndex === -1) {
+
+        poetry.push(poem);
+
+      } else {
+
+        poetry[editingIndex] = poem;
+
+        editingIndex = -1;
+
+      }
+
+
+      localStorage.setItem(
+        "betPoetry",
+        JSON.stringify(poetry)
+      );
+
+
+      clearForm();
+
+      displayPoetry();
+
     }
 
 
-    function deletePoetry(id) {
+    function displayPoetry() {
 
-      const confirmDelete =
-        confirm("ڇا توهان هي بيت حذف ڪرڻ چاهيو ٿا؟");
+      const list =
+        document.getElementById("poetryList");
 
-      if (!confirmDelete) {
+      const poetry = getPoetry();
+
+
+      if (poetry.length === 0) {
+
+        list.innerHTML =
+          '<div class="empty">اڃا تائين ڪو بيت محفوظ ناهي.</div>';
+
         return;
+
       }
 
-      document.getElementById(
-        "bet" + id
-      ).remove();
+
+      list.innerHTML = "";
+
+
+      poetry.forEach(function(poem, index) {
+
+        const item =
+          document.createElement("div");
+
+        item.className = "poetry-item";
+
+
+        item.innerHTML = `
+
+          <h3>
+            ${escapeHTML(poem.title)}
+          </h3>
+
+          <div class="poet-name">
+
+            نالو:
+            ${escapeHTML(poem.poetName)}
+
+            ${
+              poem.penName
+              ? "<br>تخلص: " + escapeHTML(poem.penName)
+              : ""
+            }
+
+            <br>
+
+            صنف:
+            ${escapeHTML(poem.category)}
+
+          </div>
+
+          <div class="poem-text">
+            ${escapeHTML(poem.text)}
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="edit-btn"
+              onclick="editPoetry(${index})"
+            >
+              ✏️ Edit
+            </button>
+
+            <button
+              class="delete-btn"
+              onclick="deletePoetry(${index})"
+            >
+              🗑️ Delete
+            </button>
+
+          </div>
+
+        `;
+
+
+        list.appendChild(item);
+
+      });
 
     }
+
+
+    function editPoetry(index) {
+
+      const poetry = getPoetry();
+
+      const poem = poetry[index];
+
+
+      document.getElementById("poetName").value =
+        poem.poetName;
+
+      document.getElementById("penName").value =
+        poem.penName;
+
+      document.getElementById("category").value =
+        poem.category;
+
+      document.getElementById("poemTitle").value =
+        poem.title;
+
+      document.getElementById("poemText").value =
+        poem.text;
+
+
+      editingIndex = index;
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function deletePoetry(index) {
+
+      if (
+        !confirm("ڇا توهان واقعي هي بيت Delete ڪرڻ چاهيو ٿا؟")
+      ) {
+
+        return;
+
+      }
+
+
+      const poetry = getPoetry();
+
+      poetry.splice(index, 1);
+
+
+      localStorage.setItem(
+        "betPoetry",
+        JSON.stringify(poetry)
+      );
+
+
+      displayPoetry();
+
+    }
+
+
+    function clearForm() {
+
+      document.getElementById("poetName").value = "";
+
+      document.getElementById("penName").value = "";
+
+      document.getElementById("category").value = "بيت";
+
+      document.getElementById("poemTitle").value = "";
+
+      document.getElementById("poemText").value = "";
+
+    }
+
+
+    function escapeHTML(text) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+
+    }
+
+
+    displayPoetry();
 
   </script>
 
