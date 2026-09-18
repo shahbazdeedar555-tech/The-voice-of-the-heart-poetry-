@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -16,203 +15,207 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fff8e7, #f8e8c8, #fffdf5);
-      color: #4b2e1f;
-      text-align: center;
+      background: #f4ead5;
+      color: #183b2b;
     }
 
     header {
-      padding: 25px 15px 15px;
+      background: #183b2b;
+      color: #f4d58d;
+      text-align: center;
+      padding: 22px 15px;
+      border-bottom: 3px solid #c9a44c;
     }
 
-    h1 {
+    header h1 {
       margin: 0;
-      color: #7b1e1e;
-      font-size: 30px;
+      font-size: 28px;
     }
 
-    .subtitle {
-      font-size: 18px;
-      color: #6d4c41;
-      margin-top: 8px;
+    header p {
+      margin: 8px 0 0;
+      color: #fff4d6;
+      font-size: 16px;
     }
 
-    .divider {
-      margin: 18px auto;
-      color: #a66a2c;
-      font-size: 22px;
+    .hero {
+      text-align: center;
+      padding: 35px 18px;
+      background:
+        linear-gradient(rgba(244,234,213,0.88), rgba(244,234,213,0.88));
+      border-bottom: 1px solid #c9a44c;
     }
 
-    .welcome {
-      max-width: 850px;
-      margin: auto;
-      padding: 20px;
+    .hero .flower {
+      font-size: 48px;
     }
 
-    .welcome h2 {
-      color: #8b4513;
-      margin-bottom: 8px;
+    .hero h2 {
+      margin: 10px 0;
+      font-size: 27px;
+      color: #183b2b;
     }
 
-    .welcome p {
-      font-size: 19px;
+    .hero .sindhi {
+      font-size: 20px;
       line-height: 1.9;
-      margin: 3px 0;
+      font-weight: bold;
+    }
+
+    .hero .english {
+      font-size: 17px;
+      direction: ltr;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px 15px 40px;
+    }
+
+    .main-buttons {
+      text-align: center;
+      margin: 5px 0 25px;
+    }
+
+    .main-buttons a {
+      display: inline-block;
+      text-decoration: none;
+      background: #183b2b;
+      color: #f4d58d;
+      border: 1px solid #c9a44c;
+      padding: 11px 18px;
+      margin: 5px;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    .main-buttons a:hover {
+      background: #24543d;
     }
 
     .section-title {
-      margin: 25px 10px 15px;
-      color: #7b1e1e;
+      text-align: center;
+      margin: 28px 0 20px;
+      font-size: 25px;
     }
 
     .categories {
-      max-width: 1000px;
-      margin: auto;
-      padding: 10px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 15px;
     }
 
-    .category {
-      text-decoration: none;
-      color: #4b2e1f;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid #d7b889;
-      border-radius: 18px;
-      padding: 18px 8px;
-      box-shadow: 0 4px 12px rgba(100,60,20,0.12);
-      transition: 0.2s;
+    .category-card {
+      background: #fffaf0;
+      border: 2px solid #c9a44c;
+      border-radius: 15px;
+      padding: 20px 12px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(24, 59, 43, 0.12);
     }
 
-    .category:hover {
-      transform: translateY(-3px);
-      background: #fff3d7;
+    .category-icon {
+      font-size: 35px;
     }
 
-    .category .icon {
-      font-size: 30px;
-      display: block;
-      margin-bottom: 8px;
+    .category-card h3 {
+      margin: 8px 0 3px;
+      font-size: 21px;
     }
 
-    .category strong {
-      display: block;
-      font-size: 19px;
-      color: #7b1e1e;
-    }
-
-    .category span {
-      display: block;
-      font-size: 14px;
-      margin-top: 5px;
-    }
-
-    .poets {
-      max-width: 950px;
-      margin: auto;
-      padding: 10px;
-    }
-
-    .new-poet-card {
-      display: block;
-      max-width: 360px;
-      margin: 15px auto;
-      padding: 22px;
-      text-decoration: none;
-      color: #4b2e1f;
-      background: #fff;
-      border: 2px dashed #b98242;
-      border-radius: 20px;
-      box-shadow: 0 5px 15px rgba(80,40,10,0.12);
-    }
-
-    .new-poet-card:hover {
-      background: #fff4dc;
-    }
-
-    .new-poet-icon {
-      font-size: 38px;
-    }
-
-    .new-poet-card h3 {
-      margin: 8px 0;
-      color: #7b1e1e;
-      font-size: 22px;
-    }
-
-    .new-poet-card p {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .add-poet-btn {
-      display: inline-block;
-      margin: 12px auto 25px;
-      padding: 13px 25px;
-      background: #7b1e1e;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-size: 18px;
-      box-shadow: 0 4px 10px rgba(80,20,20,0.2);
-    }
-
-    .add-poet-btn:hover {
-      background: #9b2929;
-    }
-
-    .quote {
-      max-width: 850px;
-      margin: 25px auto;
-      padding: 22px;
-      font-size: 19px;
-      line-height: 1.9;
-      color: #654321;
-    }
-
-    .english {
+    .category-card p {
+      margin: 4px 0 14px;
       direction: ltr;
-      font-family: Georgia, serif;
-      margin-top: 8px;
+      color: #555;
+    }
+
+    .category-card a {
+      display: inline-block;
+      text-decoration: none;
+      background: #183b2b;
+      color: #f4d58d;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 1px solid #c9a44c;
+      font-weight: bold;
+    }
+
+    .category-card a:hover {
+      background: #24543d;
+    }
+
+    .poets-section {
+      margin-top: 35px;
+      background: #fffaf0;
+      border: 2px solid #c9a44c;
+      border-radius: 15px;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    .poets-section h2 {
+      margin-top: 0;
+    }
+
+    .poets-section p {
+      line-height: 1.8;
+    }
+
+    .poets-button {
+      display: inline-block;
+      background: #183b2b;
+      color: #f4d58d;
+      text-decoration: none;
+      padding: 11px 25px;
+      border-radius: 9px;
+      border: 1px solid #c9a44c;
+      font-weight: bold;
     }
 
     footer {
-      margin-top: 30px;
+      background: #183b2b;
+      color: #f4d58d;
+      text-align: center;
       padding: 20px 10px;
-      background: #6d3b27;
-      color: white;
+      border-top: 3px solid #c9a44c;
     }
 
-    .footer-nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
-      margin-bottom: 15px;
-    }
-
-    .footer-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    .footer-nav a:hover {
-      text-decoration: underline;
+    footer p {
+      margin: 5px 0;
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 25px;
+      header h1 {
+        font-size: 24px;
       }
 
-      .welcome p {
-        font-size: 17px;
+      .hero h2 {
+        font-size: 23px;
+      }
+
+      .hero .sindhi {
+        font-size: 18px;
       }
 
       .categories {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .category-card {
+        padding: 16px 8px;
+      }
+
+      .category-card h3 {
+        font-size: 19px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .categories {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -221,210 +224,132 @@
 <body>
 
   <header>
-
     <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
-
-    <div class="subtitle">
-      Poetry — The Language of Feelings
-    </div>
-
-    <div class="divider">
-      ⌁ ─── ✦ ─── ⌁
-    </div>
-
-    <div class="welcome">
-
-      <div style="font-size:35px;">🌹</div>
-
-      <h2>ڪَويتا جي دنيا ۾ ڀليڪار</h2>
-
-      <p>لفظن ۾ احساس،</p>
-      <p>احساسن ۾ زندگي،</p>
-      <p>۽ زندگيءَ ۾ ڪَويتا.</p>
-
-      <p class="english">
-        Welcome to the world of poetry
-      </p>
-
-    </div>
-
+    <p>Poetry — The Language of Feelings</p>
   </header>
 
+  <section class="hero">
 
-  <h2 class="section-title">
-    شاعري جا قسم<br>
-    <small>Poetry Categories</small>
-  </h2>
+    <div class="flower">🌹</div>
 
+    <h2>ڪَويتا جي دنيا ۾ ڀليڪار</h2>
 
-  <!-- سڀ صنفون هاڻي موجود categories.html ڏانهن وڃن ٿيون -->
-
-  <section class="categories">
-
-    <a class="category" href="categories.html">
-      <span class="icon">🌹</span>
-      <strong>غزل</strong>
-      <span>Ghazal</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">🎵</span>
-      <strong>گيت</strong>
-      <span>Geet</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">📜</span>
-      <strong>نظم</strong>
-      <span>Nazam</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">🎶</span>
-      <strong>بيت</strong>
-      <span>Bet</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">🌈</span>
-      <strong>ست رنگو</strong>
-      <span>Satrango</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">🍃</span>
-      <strong>وائي</strong>
-      <span>Waai</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">✒️</span>
-      <strong>ٻي شاعري</strong>
-      <span>Other</span>
-    </a>
-
-    <a class="category" href="categories.html">
-      <span class="icon">📖</span>
-      <strong>سڀ شاعري</strong>
-      <span>All Poetry</span>
-    </a>
-
-  </section>
-
-
-  <h2 class="section-title">
-    نوان شاعر<br>
-    <small>New Poets</small>
-  </h2>
-
-
-  <section class="poets">
-
-    <a href="poet.html" class="new-poet-card">
-
-      <div class="new-poet-icon">✒️</div>
-
-      <h3>نئون شاعر</h3>
-
-      <p>
-        شاعريءَ جي نئين آواز لاءِ
-      </p>
-
-    </a>
-
-
-    <a href="poet.html" class="new-poet-card">
-
-      <div class="new-poet-icon">📖</div>
-
-      <h3>نئون شاعر</h3>
-
-      <p>
-        لفظن جي نئين دنيا
-      </p>
-
-    </a>
-
-
-    <a href="poet.html" class="new-poet-card">
-
-      <div class="new-poet-icon">🌿</div>
-
-      <h3>نئون شاعر</h3>
-
-      <p>
-        احساسن جي نئين خوشبو
-      </p>
-
-    </a>
-
-
-    <a href="poet.html" class="add-poet-btn">
-      ✚ نئون شاعر شامل ڪريو
-    </a>
-
-  </section>
-
-
-  <div class="quote">
-
-    ❝<br>
-
-    ڪَويتا اُهو احساس آهي،
-    جيڪو لفظن جي صورت ۾
-    دل کان دل تائين پهچي ٿو.
-
-    <div class="english">
-      Poetry is the feeling that travels
-      from heart to heart through words.
+    <div class="sindhi">
+      لفظن ۾ احساس،<br>
+      احساسن ۾ زندگي،<br>
+      ۽ زندگيءَ ۾ ڪَويتا.
     </div>
 
-    ❞
+    <div class="english">
+      Welcome to the world of poetry
+    </div>
 
-  </div>
+  </section>
 
+  <main class="container">
 
-  <div class="divider">
-    ⌁ ─── ✦ ─── ⌁
-  </div>
+    <div class="main-buttons">
+      <a href="categories.html">📖 شاعريءَ جا قسم</a>
+      <a href="poets.html">🪶 نوان شاعر</a>
+    </div>
 
+    <h2 class="section-title">✦ شاعري جا قسم ✦</h2>
+
+    <section class="categories">
+
+      <!-- Ghazal -->
+      <div class="category-card">
+        <div class="category-icon">🌹</div>
+        <h3>غزل</h3>
+        <p>Ghazal</p>
+        <a href="ghazal.html">کوليو</a>
+      </div>
+
+      <!-- Geet -->
+      <div class="category-card">
+        <div class="category-icon">🎵</div>
+        <h3>گيت</h3>
+        <p>Geet</p>
+        <a href="geet.html">کوليو</a>
+      </div>
+
+      <!-- Nazam -->
+      <div class="category-card">
+        <div class="category-icon">📜</div>
+        <h3>نظم</h3>
+        <p>Nazam</p>
+        <a href="nazam.html">کوليو</a>
+      </div>
+
+      <!-- Bet -->
+      <div class="category-card">
+        <div class="category-icon">🌿</div>
+        <h3>بيت</h3>
+        <p>Bet</p>
+        <a href="bet.html">کوليو</a>
+      </div>
+
+      <!-- Waai -->
+      <div class="category-card">
+        <div class="category-icon">🎶</div>
+        <h3>واِئي</h3>
+        <p>Waai</p>
+        <a href="waai.html">کوليو</a>
+      </div>
+
+      <!-- Satrango -->
+      <div class="category-card">
+        <div class="category-icon">🌈</div>
+        <h3>سَترنگو</h3>
+        <p>Satrango</p>
+        <a href="satrango.html">کوليو</a>
+      </div>
+
+      <!-- Other -->
+      <div class="category-card">
+        <div class="category-icon">✨</div>
+        <h3>ٻي شاعري</h3>
+        <p>Other Poetry</p>
+        <a href="other.html">کوليو</a>
+      </div>
+
+      <!-- All Poetry -->
+      <div class="category-card">
+        <div class="category-icon">📚</div>
+        <h3>سڀ شاعري</h3>
+        <p>All Poetry</p>
+        <a href="poets.html">کوليو</a>
+      </div>
+
+    </section>
+
+    <section class="poets-section">
+
+      <h2>🪶 نوان شاعر</h2>
+
+      <p>
+        هتي نون شاعرن جي پنهنجي شاعري،
+        پنهنجا احساس ۽ پنهنجا لفظ محفوظ ٿيندا.
+      </p>
+
+      <a class="poets-button" href="poets.html">
+        نوان شاعر ڏسو
+      </a>
+
+    </section>
+
+  </main>
 
   <footer>
 
-    <h3>
-      اَحساسَن جو ويسُ — ڪَويتا
-    </h3>
+    <p>اَحساسَن جو ويسُ — ڪَويتا</p>
 
-    <p>
-      سنڌي شاعريءَ لاءِ هڪ خوبصورت جاءِ
-    </p>
+    <p>Poetry — The Language of Feelings</p>
 
-
-    <div class="footer-nav">
-
-      <a href="index.html">
-        🏠 گهر
-      </a>
-
-      <a href="categories.html">
-        📚 شاعري
-      </a>
-
-      <a href="poets.html">
-        ✒️ شاعر
-      </a>
-
-      <a href="poet.html">
-        ➕ نئون شاعر
-      </a>
-
-      <a href="write-poetry.html">
-        📝 شاعري لکو
-      </a>
-
-    </div>
+    <p>© 2026 ايجاد ديدار شھباز</p>
 
   </footer>
 
 </body>
+
 </html>
