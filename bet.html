@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -122,14 +123,6 @@
       margin-top: 8px;
     }
 
-    .poem-title {
-      text-align: center;
-      font-size: 21px;
-      color: #183b2b;
-      margin: 15px 0;
-      font-weight: bold;
-    }
-
     .poem {
       background: #f8efd9;
       border-right: 5px solid #c9a44c;
@@ -147,7 +140,6 @@
       margin-top: 15px;
     }
 
-    .edit-area input,
     .edit-area textarea {
       width: 100%;
       padding: 12px;
@@ -157,10 +149,7 @@
       font-family: Arial, sans-serif;
       font-size: 17px;
       background: #fffdf5;
-    }
-
-    .edit-area textarea {
-      min-height: 180px;
+      min-height: 220px;
       resize: vertical;
       line-height: 1.8;
     }
@@ -193,12 +182,26 @@
       display: none;
     }
 
+    .delete-btn {
+      background: #8b2e2e;
+      color: white;
+    }
+
     .message {
       text-align: center;
       color: #183b2b;
       font-weight: bold;
       margin-top: 12px;
       display: none;
+    }
+
+    .empty-message {
+      text-align: center;
+      background: #fff8e8;
+      border: 1px solid #d5b96b;
+      border-radius: 18px;
+      padding: 25px;
+      color: #5d5138;
     }
 
     footer {
@@ -211,6 +214,7 @@
     }
 
     @media (max-width: 600px) {
+
       header h1 {
         font-size: 23px;
       }
@@ -244,44 +248,44 @@
 
     <section class="intro">
       <div class="symbol">🌹</div>
+
       <h2>بيت — Bet</h2>
+
       <p>
         سنڌي شاعريءَ جو خوبصورت انداز،
         جتي لفظن ۾ احساس ۽ خيال سمايل هوندا آهن.
       </p>
     </section>
 
-    <section class="poetry-card">
+
+    <!-- =========================
+         بيت نمبر 1
+    ========================== -->
+
+    <section class="poetry-card" id="bet1">
 
       <div class="poet-info">
+
         <h3>🪶 ديدار علي</h3>
+
         <p>تخلص: شاهباز</p>
+
         <p>📍 Post Office Karam Khan Nizamani</p>
+
         <span class="category">بيت — Bet</span>
+
       </div>
 
-      <div class="poem-title">
-        منهنجو بيت
-      </div>
-
-      <div class="poem" id="poemText">
+      <div class="poem" id="poemText1">
 سنڌ جي مٽيءَ ۾،
 محبت جا رنگ هزار،
 دل ۾ جي احساس هجي،
 ته هر لفظ ٿئي پيار.
       </div>
 
-      <div class="edit-area" id="editArea">
+      <div class="edit-area" id="editArea1">
 
-        <input
-          type="text"
-          id="poemTitleInput"
-          value="منهنجو بيت"
-          placeholder="شاعري جو عنوان">
-
-        <textarea
-          id="poemInput"
-          placeholder="پنهنجو بيت هتي لکو...">سنڌ جي مٽيءَ ۾،
+        <textarea id="poemInput1">سنڌ جي مٽيءَ ۾،
 محبت جا رنگ هزار،
 دل ۾ جي احساس هجي،
 ته هر لفظ ٿئي پيار.</textarea>
@@ -289,57 +293,192 @@
       </div>
 
       <div class="buttons">
-        <button class="edit-btn" onclick="editPoetry()">✏️ Edit</button>
-        <button class="save-btn" id="saveBtn" onclick="savePoetry()">💾 Save</button>
+
+        <button
+          class="edit-btn"
+          onclick="editPoetry(1)">
+          ✏️ Edit
+        </button>
+
+        <button
+          class="save-btn"
+          id="saveBtn1"
+          onclick="savePoetry(1)">
+          💾 Save
+        </button>
+
+        <button
+          class="delete-btn"
+          onclick="deletePoetry(1)">
+          🗑️ Delete
+        </button>
+
       </div>
 
-      <div class="message" id="message">
+      <div
+        class="message"
+        id="message1">
         شاعري محفوظ ٿي وئي آهي. 🌹
       </div>
 
     </section>
 
+
+    <!-- =========================
+         بيت نمبر 2
+    ========================== -->
+
+    <section class="poetry-card" id="bet2">
+
+      <div class="poet-info">
+
+        <h3>🪶 ديدار علي</h3>
+
+        <p>تخلص: شاهباز</p>
+
+        <p>📍 Post Office Karam Khan Nizamani</p>
+
+        <span class="category">بيت — Bet</span>
+
+      </div>
+
+      <div class="poem" id="poemText2">
+کُليَل دل سان،
+ڌرتيءَ کي پيار ڪيان،
+سنڌ جي سونهن ڏسي،
+هر پل سرشار رهان.
+      </div>
+
+      <div class="edit-area" id="editArea2">
+
+        <textarea id="poemInput2">کُليَل دل سان،
+ڌرتيءَ کي پيار ڪيان،
+سنڌ جي سونهن ڏسي،
+هر پل سرشار رهان.</textarea>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          class="edit-btn"
+          onclick="editPoetry(2)">
+          ✏️ Edit
+        </button>
+
+        <button
+          class="save-btn"
+          id="saveBtn2"
+          onclick="savePoetry(2)">
+          💾 Save
+        </button>
+
+        <button
+          class="delete-btn"
+          onclick="deletePoetry(2)">
+          🗑️ Delete
+        </button>
+
+      </div>
+
+      <div
+        class="message"
+        id="message2">
+        شاعري محفوظ ٿي وئي آهي. 🌹
+      </div>
+
+    </section>
+
+
   </div>
 
+
   <footer>
+
     اَحساسَن جو ويسُ — ڪَويتا<br>
+
     Poetry — The Language of Feelings<br>
+
     © 2026 ايجاد ديدار شھباز
+
   </footer>
+
 
   <script>
 
-    function editPoetry() {
-      document.getElementById("editArea").style.display = "block";
-      document.getElementById("saveBtn").style.display = "inline-block";
-      document.querySelector(".edit-btn").style.display = "none";
-      document.getElementById("message").style.display = "none";
+    function editPoetry(id) {
+
+      document.getElementById(
+        "editArea" + id
+      ).style.display = "block";
+
+      document.getElementById(
+        "saveBtn" + id
+      ).style.display = "inline-block";
+
+      document.querySelector(
+        "#bet" + id + " .edit-btn"
+      ).style.display = "none";
+
+      document.getElementById(
+        "message" + id
+      ).style.display = "none";
     }
 
-    function savePoetry() {
 
-      const title =
-        document.getElementById("poemTitleInput").value.trim();
+    function savePoetry(id) {
 
       const poem =
-        document.getElementById("poemInput").value.trim();
+        document.getElementById(
+          "poemInput" + id
+        ).value.trim();
 
-      if (!title || !poem) {
-        alert("مهرباني ڪري عنوان ۽ شاعري مڪمل لکو.");
+      if (!poem) {
+
+        alert("مهرباني ڪري بيت مڪمل لکو.");
+
         return;
       }
 
-      document.querySelector(".poem-title").textContent = title;
-      document.getElementById("poemText").textContent = poem;
+      document.getElementById(
+        "poemText" + id
+      ).textContent = poem;
 
-      document.getElementById("editArea").style.display = "none";
-      document.getElementById("saveBtn").style.display = "none";
-      document.querySelector(".edit-btn").style.display = "inline-block";
+      document.getElementById(
+        "editArea" + id
+      ).style.display = "none";
 
-      document.getElementById("message").style.display = "block";
+      document.getElementById(
+        "saveBtn" + id
+      ).style.display = "none";
+
+      document.querySelector(
+        "#bet" + id + " .edit-btn"
+      ).style.display = "inline-block";
+
+      document.getElementById(
+        "message" + id
+      ).style.display = "block";
+    }
+
+
+    function deletePoetry(id) {
+
+      const confirmDelete =
+        confirm("ڇا توهان هي بيت حذف ڪرڻ چاهيو ٿا؟");
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      document.getElementById(
+        "bet" + id
+      ).remove();
+
     }
 
   </script>
 
 </body>
+
 </html>
