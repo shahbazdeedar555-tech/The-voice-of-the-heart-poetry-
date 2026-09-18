@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -5,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>شاعريءَ جا قسم — اَحساسَن جو ويسُ ڪَويتا</title>
+  <title>شاعر — اَحساسَن جو ويسُ ڪَويتا</title>
 
   <style>
     * {
@@ -67,44 +68,59 @@
       margin-bottom: 25px;
     }
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .category {
-      display: block;
-      text-decoration: none;
+    .poet-card {
       background: #fffaf0;
       border: 1px solid #d7bd76;
-      border-radius: 18px;
-      padding: 25px 15px;
+      border-radius: 20px;
+      padding: 25px 20px;
+      margin-bottom: 20px;
       text-align: center;
       box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+
+    .poet-icon {
+      font-size: 45px;
+      margin-bottom: 5px;
+    }
+
+    .poet-card h2 {
+      margin: 5px 0;
+      color: #173f32;
+      font-size: 25px;
+    }
+
+    .poet-card .takhallus {
+      color: #8b6a1d;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .poet-card .address {
+      color: #555;
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    .poetry-type {
+      color: #173f32;
+      font-weight: bold;
+      margin: 8px 0 15px;
+    }
+
+    .poetry-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #173f32;
+      color: #f3d27a;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: bold;
       transition: 0.2s;
     }
 
-    .category:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.10);
-    }
-
-    .icon {
-      font-size: 38px;
-      margin-bottom: 8px;
-    }
-
-    .category h2 {
-      margin: 0;
-      color: #173f32;
-      font-size: 23px;
-    }
-
-    .category p {
-      margin: 3px 0 0;
-      color: #8b6a1d;
-      font-size: 15px;
+    .poetry-btn:hover {
+      background: #245947;
+      transform: translateY(-2px);
     }
 
     footer {
@@ -121,10 +137,6 @@
 
     @media (max-width: 600px) {
 
-      .categories {
-        grid-template-columns: 1fr;
-      }
-
       header h1 {
         font-size: 24px;
       }
@@ -133,6 +145,9 @@
         font-size: 23px;
       }
 
+      .poet-card {
+        padding: 22px 15px;
+      }
     }
   </style>
 </head>
@@ -150,157 +165,50 @@
 
   <div class="container">
 
-    <a class="back" href="index.html">
-      ← هوم پيج ڏانهن واپس
+    <a class="back" href="categories.html">
+      ← شاعريءَ جي قسمن ڏانهن واپس
     </a>
 
 
     <div class="section-title">
-      🌹 شاعري جا قسم
+      🪶 غزل جا شاعر
     </div>
 
     <div class="section-subtitle">
-      Poetry Categories
+      Ghazal Poets
     </div>
 
 
-    <div class="categories">
+    <!-- Poet 1 -->
 
+    <div class="poet-card">
 
-      <!-- Ghazal -->
+      <div class="poet-icon">
+        🪶
+      </div>
 
-      <a class="category" href="poet.html">
+      <h2>
+        ديدار علي
+      </h2>
 
-        <div class="icon">
-          🌹
-        </div>
+      <div class="takhallus">
+        تخلص: شاهباز
+      </div>
 
-        <h2>
-          غزل
-        </h2>
+      <div class="address">
+        📍 Post Office Karam Khan Nizamani
+      </div>
 
-        <p>
-          Ghazal
-        </p>
+      <div class="poetry-type">
+        🌹 غزل — Ghazal
+      </div>
 
+      <a class="poetry-btn" href="deedar-ali.html">
+        📖 شاعري ڏسو
       </a>
-
-
-      <!-- Geet -->
-
-      <a class="category" href="geet.html">
-
-        <div class="icon">
-          🎵
-        </div>
-
-        <h2>
-          گيت
-        </h2>
-
-        <p>
-          Geet
-        </p>
-
-      </a>
-
-
-      <!-- Nazam -->
-
-      <a class="category" href="nazam.html">
-
-        <div class="icon">
-          📜
-        </div>
-
-        <h2>
-          نظم
-        </h2>
-
-        <p>
-          Nazam
-        </p>
-
-      </a>
-
-
-      <!-- Bet -->
-
-      <a class="category" href="bet.html">
-
-        <div class="icon">
-          🪶
-        </div>
-
-        <h2>
-          بيت
-        </h2>
-
-        <p>
-          Bet
-        </p>
-
-      </a>
-
-
-      <!-- Satrango -->
-
-      <a class="category" href="satrango.html">
-
-        <div class="icon">
-          🌈
-        </div>
-
-        <h2>
-          سترنگو
-        </h2>
-
-        <p>
-          Satrango
-        </p>
-
-      </a>
-
-
-      <!-- Waai -->
-
-      <a class="category" href="waai.html">
-
-        <div class="icon">
-          🎶
-        </div>
-
-        <h2>
-          وائي
-        </h2>
-
-        <p>
-          Waai
-        </p>
-
-      </a>
-
-
-      <!-- Other -->
-
-      <a class="category" href="other.html">
-
-        <div class="icon">
-          📖
-        </div>
-
-        <h2>
-          ٻيون
-        </h2>
-
-        <p>
-          Other
-        </p>
-
-      </a>
-
 
     </div>
+
 
   </div>
 
