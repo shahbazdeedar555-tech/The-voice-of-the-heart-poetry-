@@ -103,12 +103,37 @@
       text-align: right;
     }
 
+    /* Add New Button */
+
+    .add-poem-area {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .add-btn {
+      background: #173f32;
+      color: white;
+      border: 2px solid #c9a646;
+      border-radius: 25px;
+      padding: 11px 22px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .add-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Poetry Card */
+
     .poetry-card {
       background: #fffaf0;
       border: 1px solid #d7bd76;
       border-radius: 15px;
       padding: 20px;
       margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     }
 
     .poetry-card h3 {
@@ -139,15 +164,16 @@
 
     .buttons {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
       margin-top: 15px;
+      flex-wrap: wrap;
     }
 
     button {
       border: none;
       border-radius: 20px;
-      padding: 9px 18px;
+      padding: 9px 17px;
       font-size: 15px;
       cursor: pointer;
       font-weight: bold;
@@ -161,6 +187,11 @@
     .save-btn {
       background: #c9a646;
       color: #173f32;
+    }
+
+    .delete-btn {
+      background: #a83232;
+      color: white;
     }
 
     .save-btn:disabled {
@@ -230,76 +261,19 @@
       ✦ شاعري ✦
     </div>
 
-    <!-- غزل 1 -->
+    <!-- نئون غزل بٽڻ -->
 
-    <div class="poetry-card">
+    <div class="add-poem-area">
 
-      <h3>غزل</h3>
-      <div class="english">Ghazal</div>
-
-      <div
-        id="poem1"
-        class="poem-text"
-        contenteditable="false">
-هتي شاعر جي غزل لکبي.
-
-لفظن ۾ احساس،
-احساسن ۾ زندگي،
-۽ زندگيءَ ۾ ڪَويتا.
-      </div>
-
-      <div class="buttons">
-        <button
-          class="edit-btn"
-          onclick="editPoem('poem1','save1')">
-          ✏️ Edit
-        </button>
-
-        <button
-          id="save1"
-          class="save-btn"
-          onclick="savePoem('poem1','save1')"
-          disabled>
-          💾 Save
-        </button>
-      </div>
+      <button class="add-btn" onclick="addNewPoem()">
+        ＋ نئون غزل شامل ڪريو
+      </button>
 
     </div>
 
-    <!-- غزل 2 -->
+    <!-- هتي سڀ غزل ظاهر ٿيندا -->
 
-    <div class="poetry-card">
-
-      <h3>غزل — ٢</h3>
-      <div class="english">Ghazal</div>
-
-      <div
-        id="poem2"
-        class="poem-text"
-        contenteditable="false">
-هتي ٻي شاعري شامل ڪري سگهجي ٿي.
-
-دل جي ڳالهه جڏهن لفظن ۾ اچي،
-ته شاعري جنم وٺي ٿي.
-      </div>
-
-      <div class="buttons">
-        <button
-          class="edit-btn"
-          onclick="editPoem('poem2','save2')">
-          ✏️ Edit
-        </button>
-
-        <button
-          id="save2"
-          class="save-btn"
-          onclick="savePoem('poem2','save2')"
-          disabled>
-          💾 Save
-        </button>
-      </div>
-
-    </div>
+    <div id="poetryContainer"></div>
 
   </div>
 
@@ -311,54 +285,322 @@
 
   <script>
 
-    function editPoem(poemId, saveId) {
+    /* =========================
+       پراڻا غزل
+    ========================= */
 
-      const poem = document.getElementById(poemId);
-      const saveButton = document.getElementById(saveId);
+    const defaultPoems = [
+
+      {
+        id: "poem1",
+        title: "غزل",
+        text:
+`هتي شاعر جي غزل لکبي.
+
+لفظن ۾ احساس،
+احساسن ۾ زندگي،
+۽ زندگيءَ ۾ ڪَويتا.`
+      },
+
+      {
+        id: "poem2",
+        title: "غزل — ٢",
+        text:
+`هتي ٻي شاعري شامل ڪري سگهجي ٿي.
+
+دل جي ڳالهه جڏهن لفظن ۾ اچي،
+ته شاعري جنم وٺي ٿي.`
+      }
+
+    ];
+
+
+    /* =========================
+       سڀ غزل پڙهڻ
+    ========================= */
+
+    function getPoems() {
+
+      const saved = localStorage.getItem("my_poems");
+
+      if (saved) {
+
+        try {
+          return JSON.parse(saved);
+        }
+
+        catch (error) {
+          return defaultPoems;
+        }
+
+      }
+
+      return defaultPoems;
+
+    }
+
+
+    /* =========================
+       سڀ غزل محفوظ ڪرڻ
+    ========================= */
+
+    function saveAllPoems(poems) {
+
+      localStorage.setItem(
+        "my_poems",
+        JSON.stringify(poems)
+      );
+
+    }
+
+
+    /* =========================
+       غزل ڏيکارڻ
+    ========================= */
+
+    function renderPoems() {
+
+      const container =
+        document.getElementById("poetryContainer");
+
+      container.innerHTML = "";
+
+      const poems = getPoems();
+
+      poems.forEach(function(poem, index) {
+
+        const card =
+          document.createElement("div");
+
+        card.className = "poetry-card";
+
+        card.innerHTML = `
+
+          <h3>${escapeHTML(poem.title)}</h3>
+
+          <div class="english">
+            Ghazal
+          </div>
+
+          <div
+            id="${poem.id}"
+            class="poem-text"
+            contenteditable="false"
+          >${escapeHTML(poem.text)}</div>
+
+          <div class="buttons">
+
+            <button
+              class="edit-btn"
+              onclick="editPoem('${poem.id}')">
+              ✏️ Edit
+            </button>
+
+            <button
+              class="save-btn"
+              id="save-${poem.id}"
+              onclick="savePoem('${poem.id}')"
+              disabled>
+              💾 Save
+            </button>
+
+            <button
+              class="delete-btn"
+              onclick="deletePoem('${poem.id}')">
+              🗑️ Delete
+            </button>
+
+          </div>
+
+        `;
+
+        container.appendChild(card);
+
+      });
+
+    }
+
+
+    /* =========================
+       Edit
+    ========================= */
+
+    function editPoem(poemId) {
+
+      const poem =
+        document.getElementById(poemId);
+
+      const saveButton =
+        document.getElementById("save-" + poemId);
+
+      if (!poem) return;
 
       poem.contentEditable = "true";
+
       poem.classList.add("editing");
+
       poem.focus();
 
       saveButton.disabled = false;
+
     }
 
 
-    function savePoem(poemId, saveId) {
+    /* =========================
+       Save
+    ========================= */
 
-      const poem = document.getElementById(poemId);
-      const saveButton = document.getElementById(saveId);
+    function savePoem(poemId) {
 
-      localStorage.setItem(
-        "poetry_" + poemId,
-        poem.innerText
-      );
+      const poemElement =
+        document.getElementById(poemId);
 
-      poem.contentEditable = "false";
-      poem.classList.remove("editing");
+      if (!poemElement) return;
+
+      const poems = getPoems();
+
+      const poemIndex =
+        poems.findIndex(function(item) {
+          return item.id === poemId;
+        });
+
+      if (poemIndex === -1) return;
+
+      poems[poemIndex].text =
+        poemElement.innerText.trim();
+
+      saveAllPoems(poems);
+
+      poemElement.contentEditable = "false";
+
+      poemElement.classList.remove("editing");
+
+      const saveButton =
+        document.getElementById("save-" + poemId);
 
       saveButton.disabled = true;
 
-      alert("شاعري محفوظ ٿي وئي. ✓");
+      alert("غزل محفوظ ٿي وئي. ✓");
+
     }
 
 
-    function loadPoems() {
+    /* =========================
+       نئون غزل
+    ========================= */
 
-      const poem1 = localStorage.getItem("poetry_poem1");
-      const poem2 = localStorage.getItem("poetry_poem2");
+    function addNewPoem() {
 
-      if (poem1) {
-        document.getElementById("poem1").innerText = poem1;
-      }
+      const poems = getPoems();
 
-      if (poem2) {
-        document.getElementById("poem2").innerText = poem2;
-      }
+      const newId =
+        "poem_" + Date.now();
+
+      const newNumber =
+        poems.length + 1;
+
+      const newPoem = {
+
+        id: newId,
+
+        title:
+          "غزل — " + newNumber,
+
+        text:
+          "هتي نئون غزل لکو..."
+
+      };
+
+      poems.push(newPoem);
+
+      saveAllPoems(poems);
+
+      renderPoems();
+
+      /* نئون غزل پاڻ Edit موڊ ۾ کوليو */
+
+      setTimeout(function() {
+
+        editPoem(newId);
+
+        const poem =
+          document.getElementById(newId);
+
+        if (poem) {
+
+          poem.innerText = "";
+
+          poem.focus();
+
+        }
+
+      }, 100);
+
     }
 
 
-    loadPoems();
+    /* =========================
+       Delete
+    ========================= */
+
+    function deletePoem(poemId) {
+
+      const poems = getPoems();
+
+      const poem =
+        poems.find(function(item) {
+          return item.id === poemId;
+        });
+
+      if (!poem) return;
+
+      const confirmDelete =
+        confirm(
+          "ڇا توهان واقعي هي غزل Delete ڪرڻ چاهيو ٿا؟"
+        );
+
+      if (!confirmDelete) return;
+
+      const remainingPoems =
+        poems.filter(function(item) {
+          return item.id !== poemId;
+        });
+
+      saveAllPoems(remainingPoems);
+
+      renderPoems();
+
+      alert("غزل Delete ٿي وئي. ✓");
+
+    }
+
+
+    /* =========================
+       HTML محفوظ رکڻ
+    ========================= */
+
+    function escapeHTML(text) {
+
+      return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================
+       Page شروع ٿيڻ وقت
+    ========================= */
+
+    renderPoems();
 
   </script>
 
