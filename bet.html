@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>بيت — اَحساسَن جو ويسُ ڪَويتا</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4ead5;
+      color: #183b2b;
+    }
+
+    header {
+      background: #183b2b;
+      color: #f4d58d;
+      text-align: center;
+      padding: 25px 15px;
+      border-bottom: 4px solid #c9a44c;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: #fff4d6;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px 15px 100px;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .top-buttons a {
+      text-decoration: none;
+      background: #183b2b;
+      color: #f4d58d;
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: 1px solid #c9a44c;
+      font-weight: bold;
+    }
+
+    .intro {
+      text-align: center;
+      background: #fff8e8;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid #d5b96b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .intro .symbol {
+      font-size: 38px;
+    }
+
+    .intro h2 {
+      margin: 8px 0;
+      color: #183b2b;
+    }
+
+    .intro p {
+      line-height: 1.9;
+      margin-bottom: 0;
+    }
+
+    .poetry-card {
+      background: #fffdf5;
+      border: 2px solid #c9a44c;
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .poet-info {
+      text-align: center;
+      border-bottom: 1px solid #d8c78f;
+      padding-bottom: 15px;
+      margin-bottom: 18px;
+    }
+
+    .poet-info h3 {
+      margin: 5px 0;
+      font-size: 24px;
+      color: #183b2b;
+    }
+
+    .poet-info p {
+      margin: 6px 0;
+      color: #5d5138;
+    }
+
+    .category {
+      display: inline-block;
+      background: #183b2b;
+      color: #f4d58d;
+      padding: 6px 15px;
+      border-radius: 20px;
+      margin-top: 8px;
+    }
+
+    .poem-title {
+      text-align: center;
+      font-size: 21px;
+      color: #183b2b;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+
+    .poem {
+      background: #f8efd9;
+      border-right: 5px solid #c9a44c;
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 20px;
+      line-height: 2.2;
+      white-space: pre-line;
+      text-align: right;
+      min-height: 120px;
+    }
+
+    .edit-area {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .edit-area input,
+    .edit-area textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #c9a44c;
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      background: #fffdf5;
+    }
+
+    .edit-area textarea {
+      min-height: 180px;
+      resize: vertical;
+      line-height: 1.8;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 25px;
+      padding: 10px 22px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background: #183b2b;
+      color: #f4d58d;
+    }
+
+    .save-btn {
+      background: #c9a44c;
+      color: #183b2b;
+      display: none;
+    }
+
+    .message {
+      text-align: center;
+      color: #183b2b;
+      font-weight: bold;
+      margin-top: 12px;
+      display: none;
+    }
+
+    footer {
+      background: #183b2b;
+      color: #f4d58d;
+      text-align: center;
+      padding: 18px 10px;
+      border-top: 3px solid #c9a44c;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 23px;
+      }
+
+      .poem {
+        font-size: 18px;
+        line-height: 2;
+      }
+
+      .poetry-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
+    <p>Poetry — The Language of Feelings</p>
+  </header>
+
+  <div class="container">
+
+    <div class="top-buttons">
+      <a href="index.html">⌂ گهر</a>
+      <a href="categories.html">شاعري جا قسم</a>
+      <a href="poets.html">شاعر</a>
+    </div>
+
+    <section class="intro">
+      <div class="symbol">🌹</div>
+      <h2>بيت — Bet</h2>
+      <p>
+        سنڌي شاعريءَ جو خوبصورت انداز،
+        جتي لفظن ۾ احساس ۽ خيال سمايل هوندا آهن.
+      </p>
+    </section>
+
+    <section class="poetry-card">
+
+      <div class="poet-info">
+        <h3>🪶 ديدار علي</h3>
+        <p>تخلص: شاهباز</p>
+        <p>📍 Post Office Karam Khan Nizamani</p>
+        <span class="category">بيت — Bet</span>
+      </div>
+
+      <div class="poem-title">
+        منهنجو بيت
+      </div>
+
+      <div class="poem" id="poemText">
+سنڌ جي مٽيءَ ۾،
+محبت جا رنگ هزار،
+دل ۾ جي احساس هجي،
+ته هر لفظ ٿئي پيار.
+      </div>
+
+      <div class="edit-area" id="editArea">
+
+        <input
+          type="text"
+          id="poemTitleInput"
+          value="منهنجو بيت"
+          placeholder="شاعري جو عنوان">
+
+        <textarea
+          id="poemInput"
+          placeholder="پنهنجو بيت هتي لکو...">سنڌ جي مٽيءَ ۾،
+محبت جا رنگ هزار،
+دل ۾ جي احساس هجي،
+ته هر لفظ ٿئي پيار.</textarea>
+
+      </div>
+
+      <div class="buttons">
+        <button class="edit-btn" onclick="editPoetry()">✏️ Edit</button>
+        <button class="save-btn" id="saveBtn" onclick="savePoetry()">💾 Save</button>
+      </div>
+
+      <div class="message" id="message">
+        شاعري محفوظ ٿي وئي آهي. 🌹
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer>
+    اَحساسَن جو ويسُ — ڪَويتا<br>
+    Poetry — The Language of Feelings<br>
+    © 2026 ايجاد ديدار شھباز
+  </footer>
+
+  <script>
+
+    function editPoetry() {
+      document.getElementById("editArea").style.display = "block";
+      document.getElementById("saveBtn").style.display = "inline-block";
+      document.querySelector(".edit-btn").style.display = "none";
+      document.getElementById("message").style.display = "none";
+    }
+
+    function savePoetry() {
+
+      const title =
+        document.getElementById("poemTitleInput").value.trim();
+
+      const poem =
+        document.getElementById("poemInput").value.trim();
+
+      if (!title || !poem) {
+        alert("مهرباني ڪري عنوان ۽ شاعري مڪمل لکو.");
+        return;
+      }
+
+      document.querySelector(".poem-title").textContent = title;
+      document.getElementById("poemText").textContent = poem;
+
+      document.getElementById("editArea").style.display = "none";
+      document.getElementById("saveBtn").style.display = "none";
+      document.querySelector(".edit-btn").style.display = "inline-block";
+
+      document.getElementById("message").style.display = "block";
+    }
+
+  </script>
+
+</body>
+</html>
