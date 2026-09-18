@@ -15,22 +15,22 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fff8e7, #f8e8c8);
-      color: #4b2e1e;
+      font-family: Arial, "Noto Naskh Arabic", sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #f7e7c6, #fffdf5);
+      color: #4a2c20;
     }
 
     header {
-      background: linear-gradient(135deg, #7b1e1e, #a83232);
+      background: linear-gradient(135deg, #6d1b1b, #a94442);
       color: white;
       text-align: center;
-      padding: 25px 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 28px 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     header h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 32px;
     }
 
     header p {
@@ -38,65 +38,94 @@
       font-size: 17px;
     }
 
-    .home {
-      text-align: center;
-      margin: 20px 0;
+    nav {
+      margin-top: 18px;
     }
 
-    .home a {
+    nav a {
       display: inline-block;
-      text-decoration: none;
-      background: #7b1e1e;
+      margin: 5px;
+      padding: 9px 15px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.18);
       color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 16px;
+      text-decoration: none;
+      font-size: 15px;
     }
 
-    .home a:hover {
-      background: #4b1010;
+    nav a:hover {
+      background: white;
+      color: #6d1b1b;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
-      padding: 15px;
+      padding: 25px 15px 50px;
     }
 
-    .intro {
+    .add-poet {
       text-align: center;
-      background: rgba(255,255,255,0.8);
-      border: 2px solid #d6a85f;
-      border-radius: 18px;
-      padding: 20px;
       margin-bottom: 25px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
-    .intro h2 {
-      margin-top: 0;
-      color: #7b1e1e;
+    .add-poet a {
+      display: inline-block;
+      padding: 13px 25px;
+      background: linear-gradient(135deg, #8e2f2f, #c25b5b);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 18px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.18);
     }
 
-    .poets {
+    .add-poet a:hover {
+      transform: translateY(-2px);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 20px 0 25px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: #6d1b1b;
+      font-size: 28px;
+    }
+
+    .poets-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 22px;
     }
 
     .poet-card {
-      background: #fffdf7;
-      border: 2px solid #d6a85f;
-      border-radius: 18px;
-      padding: 22px 15px;
+      background: rgba(255,255,255,0.9);
+      border: 2px solid #e1b866;
+      border-radius: 20px;
+      padding: 22px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-      transition: 0.2s;
+      box-shadow: 0 8px 20px rgba(80,45,20,0.12);
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poet-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #8e2f2f, #e1b866, #8e2f2f);
     }
 
     .poet-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 7px 16px rgba(0,0,0,0.18);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(80,45,20,0.2);
     }
 
     .poet-icon {
@@ -104,55 +133,74 @@
       margin-bottom: 8px;
     }
 
-    .poet-card h3 {
-      color: #7b1e1e;
-      margin: 8px 0;
-      font-size: 23px;
+    .poet-name {
+      font-size: 25px;
+      font-weight: bold;
+      color: #6d1b1b;
+      margin-bottom: 5px;
     }
 
-    .poet-card p {
-      color: #76543d;
-      margin: 8px 0 15px;
+    .pen-name {
+      font-size: 17px;
+      color: #795548;
+      margin-bottom: 12px;
     }
 
-    .poet-card a {
+    .genre {
       display: inline-block;
-      background: #a83232;
+      padding: 7px 15px;
+      border-radius: 20px;
+      background: #f4dfaa;
+      color: #6d1b1b;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .address {
+      color: #665;
+      font-size: 15px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .poetry-link {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: #6d1b1b;
       color: white;
       text-decoration: none;
-      padding: 9px 18px;
-      border-radius: 22px;
+      transition: 0.3s;
     }
 
-    .poet-card a:hover {
-      background: #7b1e1e;
-    }
-
-    .add-poet {
-      margin-top: 25px;
-      text-align: center;
-    }
-
-    .add-poet a {
-      display: inline-block;
-      background: #d6a85f;
-      color: #4b2e1e;
-      text-decoration: none;
-      padding: 11px 25px;
-      border-radius: 25px;
-      font-weight: bold;
+    .poetry-link:hover {
+      background: #a94442;
     }
 
     footer {
-      margin-top: 35px;
-      background: #4b2e1e;
+      background: #4a211b;
       color: white;
       text-align: center;
-      padding: 18px;
+      padding: 22px 15px;
+      margin-top: 30px;
     }
 
     footer p {
       margin: 5px 0;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 26px;
+      }
+
+      .poet-name {
+        font-size: 22px;
+      }
+
+      .poets-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -162,38 +210,79 @@
   <header>
     <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
     <p>Poets — Poetry — The Language of Feelings</p>
+
+    <nav>
+      <a href="index.html">⌂ گهر</a>
+      <a href="categories.html">📖 شاعريءَ جا قسم</a>
+    </nav>
   </header>
 
-  <div class="home">
-    <a href="index.html">⌂ گهر</a>
-  </div>
-
-  <div class="container">
-
-    <div class="intro">
-      <h2>🌹 شاعرن جي دنيا</h2>
-      <p>
-        هتي مختلف شاعرن جي شاعري پڙهو،
-        ۽ لفظن ۾ سمايل احساسن کي محسوس ڪريو.
-      </p>
-    </div>
-
-    <div class="poets">
-
-      <div class="poet-card">
-        <div class="poet-icon">✍️</div>
-        <h3>ديدار علي</h3>
-        <p>ديدار علي جي شاعري</p>
-        <a href="poet.html">شاعري ڏسو</a>
-      </div>
-
-    </div>
+  <main class="container">
 
     <div class="add-poet">
-      <a href="new-poet.html">✍️ نئون شاعر شامل ڪريو</a>
+      <a href="new-poet.html">＋ نئون شاعر شامل ڪريو</a>
     </div>
 
-  </div>
+    <div class="section-title">
+      <h2>نوان شاعر</h2>
+    </div>
+
+    <section class="poets-grid">
+
+      <!-- Poet 1 -->
+      <article class="poet-card">
+        <div class="poet-icon">🪶</div>
+
+        <div class="poet-name">
+          deedar ali
+        </div>
+
+        <div class="pen-name">
+          تخلص: shahbaz
+        </div>
+
+        <div class="genre">
+          غزل — Ghazal
+        </div>
+
+        <div class="address">
+          📍 Post office karam khan Nizamani
+        </div>
+
+        <a class="poetry-link" href="ghazal.html">
+          📖 شاعري ڏسو
+        </a>
+      </article>
+
+
+      <!-- Poet 2 -->
+      <article class="poet-card">
+        <div class="poet-icon">🪶</div>
+
+        <div class="poet-name">
+          deedar ali
+        </div>
+
+        <div class="pen-name">
+          تخلص: shahbaz
+        </div>
+
+        <div class="genre">
+          غزل — Ghazal
+        </div>
+
+        <div class="address">
+          📍 Post office karam khan Nizamani
+        </div>
+
+        <a class="poetry-link" href="ghazal.html">
+          📖 شاعري ڏسو
+        </a>
+      </article>
+
+    </section>
+
+  </main>
 
   <footer>
     <p>اَحساسَن جو ويسُ — ڪَويتا</p>
@@ -201,4 +290,4 @@
   </footer>
 
 </body>
-<html>
+</html>
