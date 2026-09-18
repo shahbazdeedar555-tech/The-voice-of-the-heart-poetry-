@@ -118,7 +118,6 @@
       padding: 18px;
       margin-top: 18px;
       border-radius: 15px;
-      position: relative;
     }
 
     .poem-number {
@@ -126,32 +125,6 @@
       font-weight: bold;
       color: #7b1e1e;
       margin-bottom: 10px;
-    }
-
-    .remove-poem {
-      background: #a83232;
-      color: white;
-      border: none;
-      padding: 7px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-      font-family: inherit;
-    }
-
-    .add-poem {
-      display: block;
-      width: 100%;
-      margin-top: 18px;
-      padding: 13px;
-      border: 2px dashed #b8860b;
-      border-radius: 12px;
-      background: #fff8df;
-      color: #7b1e1e;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      font-family: inherit;
     }
 
     .photo-box {
@@ -292,53 +265,33 @@
 
   </div>
 
-  <!-- شاعري -->
+
+  <!-- پهرين شاعري -->
   <div class="card">
 
     <h2>📝 شاعري لکو — Writing Page</h2>
 
-    <div id="poemsContainer">
+    <div class="poem-box">
 
-      <div class="poem-box">
-
-        <div class="poem-number">
-          شاعري نمبر 1
-        </div>
-
-        <label>
-          شاعريءَ جو عنوان
-        </label>
-
-        <input
-          type="text"
-          class="poem-title"
-          placeholder="مثال: محبت"
-          required
-        >
-
-        <label>
-          شاعري
-        </label>
-
-        <textarea
-          class="poem-text"
-          placeholder="هتي شاعري لکو..."
-          required
-        ></textarea>
-
+      <div class="poem-number">
+        شاعري
       </div>
+
+      <label>
+        شاعري
+      </label>
+
+      <textarea
+        id="poemText"
+        class="poetry-text"
+        placeholder="هتي شاعري لکو..."
+        required
+      ></textarea>
 
     </div>
 
-    <button
-      type="button"
-      class="add-poem"
-      onclick="addPoem()"
-    >
-      ＋ ٻي شاعري شامل ڪريو
-    </button>
-
   </div>
+
 
   <!-- شاعر بابت معلومات -->
   <div class="card">
@@ -411,6 +364,7 @@
 
   </div>
 
+
   <!-- محفوظ ڪريو -->
   <div class="card">
 
@@ -432,13 +386,14 @@
     <div class="note">
       <strong>نوٽ:</strong>
       هي صفحو صرف نون شاعرن کي شامل ڪرڻ لاءِ آهي.
-      شيخ اياز ۽ شاهه لطيف جهڙن اڳ ۾ موجود شاعرن جي صفحن کي
-      هتان تبديل نه ڪيو ويندو.
+      شاعر جي معلومات هتي صرف هڪ ڀيرو ڀري محفوظ ڪئي ويندي.
+      ان کان پوءِ شاعر جي پنهنجي صفحي تان نئين شاعري شامل ڪري سگهبي.
     </div>
 
   </div>
 
 </div>
+
 
 <footer>
   © 2026 ڪَويتا — Poetry App
@@ -446,87 +401,6 @@
 
 
 <script>
-
-  let poemCount = 1;
-
-  // نئين شاعري شامل ڪرڻ
-  function addPoem() {
-
-    poemCount++;
-
-    const container = document.getElementById("poemsContainer");
-
-    const poemBox = document.createElement("div");
-
-    poemBox.className = "poem-box";
-
-    poemBox.innerHTML = `
-      <div class="poem-number">
-        شاعري نمبر ${poemCount}
-      </div>
-
-      <label>
-        شاعريءَ جو عنوان
-      </label>
-
-      <input
-        type="text"
-        class="poem-title"
-        placeholder="شاعريءَ جو عنوان"
-        required
-      >
-
-      <label>
-        شاعري
-      </label>
-
-      <textarea
-        class="poem-text"
-        placeholder="هتي شاعري لکو..."
-        required
-      ></textarea>
-
-      <button
-        type="button"
-        class="remove-poem"
-        onclick="removePoem(this)"
-      >
-        شاعري ختم ڪريو
-      </button>
-    `;
-
-    container.appendChild(poemBox);
-
-    updatePoemNumbers();
-  }
-
-
-  // شاعري ختم ڪرڻ
-  function removePoem(button) {
-
-    const poemBox = button.closest(".poem-box");
-
-    poemBox.remove();
-
-    updatePoemNumbers();
-  }
-
-
-  // شاعري نمبر ٻيهر ترتيب ڏيڻ
-  function updatePoemNumbers() {
-
-    const poems = document.querySelectorAll(".poem-box");
-
-    poems.forEach((poem, index) => {
-
-      poem.querySelector(".poem-number").textContent =
-        "شاعري نمبر " + (index + 1);
-
-    });
-
-    poemCount = poems.length;
-  }
-
 
   // تصوير جو preview
   document
@@ -560,6 +434,9 @@
     const poetryType =
       document.getElementById("poetryType").value;
 
+    const poemText =
+      document.getElementById("poemText").value.trim();
+
     const city =
       document.getElementById("city").value.trim();
 
@@ -592,6 +469,11 @@
       return;
     }
 
+    if (!poemText) {
+      alert("مهرباني ڪري شاعري لکو.");
+      return;
+    }
+
     if (!city) {
       alert("مهرباني ڪري شهر / ڳوٺ لکو.");
       return;
@@ -603,54 +485,13 @@
     }
 
 
-    // شاعري گڏ ڪرڻ
-    const poems = [];
-
-    const poemBoxes =
-      document.querySelectorAll(".poem-box");
-
-
-    for (let i = 0; i < poemBoxes.length; i++) {
-
-      const title =
-        poemBoxes[i]
-          .querySelector(".poem-title")
-          .value
-          .trim();
-
-      const text =
-        poemBoxes[i]
-          .querySelector(".poem-text")
-          .value
-          .trim();
-
-
-      if (!title) {
-        alert(
-          "شاعري نمبر " +
-          (i + 1) +
-          " جو عنوان لکو."
-        );
-        return;
+    // هڪ ئي شاعري محفوظ ٿيندي
+    const poems = [
+      {
+        number: 1,
+        text: poemText
       }
-
-
-      if (!text) {
-        alert(
-          "شاعري نمبر " +
-          (i + 1) +
-          " لکو."
-        );
-        return;
-      }
-
-
-      poems.push({
-        number: i + 1,
-        title: title,
-        text: text
-      });
-    }
+    ];
 
 
     // شاعر جو data
