@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>شاعر — اَحساسَن جو ويسُ ڪَويتا</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f5eedc;
+      color: #173f32;
+      line-height: 1.8;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #173f32;
+      color: #f3d27a;
+      text-align: center;
+      padding: 24px 15px;
+      border-bottom: 5px solid #c9a646;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      color: #f7f0dc;
+      font-size: 15px;
+      direction: ltr;
+    }
+
+    /* MAIN */
+
+    .book {
+      max-width: 850px;
+      margin: auto;
+      padding: 25px 18px 40px;
+    }
+
+    /* TOP BUTTONS */
+
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 25px;
+      font-size: 15px;
+      border: 1px solid #c9a646;
+    }
+
+    .back {
+      background: #173f32;
+      color: #f3d27a;
+    }
+
+    .add {
+      background: #c9a646;
+      color: #173f32;
+      font-weight: bold;
+    }
+
+    /* TITLE */
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .page-title h2 {
+      font-size: 25px;
+      color: #173f32;
+    }
+
+    .page-title p {
+      color: #777;
+      font-size: 15px;
+      direction: ltr;
+    }
+
+    .decor {
+      color: #c9a646;
+      font-size: 22px;
+      margin: 5px 0;
+    }
+
+    /* POET CARD */
+
+    .poet-card {
+      background: #fffaf0;
+      border: 2px solid #c9a646;
+      border-radius: 18px;
+      padding: 22px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+      position: relative;
+    }
+
+    .poet-card::before {
+      content: "✦";
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      color: #c9a646;
+      font-size: 22px;
+    }
+
+    .poet-card::after {
+      content: "✦";
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      color: #c9a646;
+      font-size: 22px;
+    }
+
+    .poet-symbol {
+      font-size: 45px;
+      margin-bottom: 4px;
+    }
+
+    .poet-name {
+      font-size: 26px;
+      font-weight: bold;
+      color: #173f32;
+    }
+
+    .pen-name {
+      color: #a27c1d;
+      font-size: 18px;
+    }
+
+    .poet-type {
+      margin-top: 7px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .location {
+      color: #666;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    /* POETRY BUTTON */
+
+    .view-btn {
+      display: inline-block;
+      margin-top: 13px;
+      padding: 8px 20px;
+      border-radius: 22px;
+      background: #173f32;
+      color: #f3d27a;
+      text-decoration: none;
+      border: 1px solid #c9a646;
+      font-size: 15px;
+    }
+
+    .view-btn:hover {
+      background: #245746;
+    }
+
+    /* EMPTY MESSAGE */
+
+    .empty {
+      text-align: center;
+      background: #fffaf0;
+      border: 1px dashed #c9a646;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 25px;
+      color: #666;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #173f32;
+      color: #f3d27a;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 3px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      .book {
+        padding: 20px 12px 35px;
+      }
+
+      .page-title h2 {
+        font-size: 23px;
+      }
+
+      .poet-name {
+        font-size: 24px;
+      }
+
+      .top-actions {
+        justify-content: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <header>
+
+    <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
+
+    <p>Poetry — The Language of Feelings</p>
+
+  </header>
+
+
+  <main class="book">
+
+
+    <!-- TOP ACTIONS -->
+
+    <div class="top-actions">
+
+      <a href="index.html" class="btn back">
+        ← هوم
+      </a>
+
+      <a href="add-poet.html" class="btn add">
+        ＋ نئون شاعر شامل ڪريو
+      </a>
+
+    </div>
+
+
+    <!-- PAGE TITLE -->
+
+    <section class="page-title">
+
+      <div class="decor">
+        ⌁ ─── ✦ ─── ⌁
+      </div>
+
+      <h2>
+        نوان شاعر
+      </h2>
+
+      <p>
+        New Poets
+      </p>
+
+    </section>
+
+
+    <!-- POET 1 -->
+
+    <section class="poet-card">
+
+      <div class="poet-symbol">
+        🪶
+      </div>
+
+      <div class="poet-name">
+        ديدار علي
+      </div>
+
+      <div class="pen-name">
+        تخلص: شاهباز
+      </div>
+
+      <div class="poet-type">
+        غزل — Ghazal
+      </div>
+
+      <div class="location">
+        📍 Post Office Karam Khan Nizamani
+      </div>
+
+      <a href="poet.html" class="view-btn">
+        📖 شاعري ڏسو
+      </a>
+
+    </section>
+
+
+    <!-- ADDITIONAL POET PLACEHOLDER -->
+
+    <div class="empty">
+
+      🪶
+
+      <br>
+
+      وڌيڪ شاعر جلد شامل ڪيا ويندا.
+
+      <br>
+
+      <span dir="ltr">
+        More poets will be added soon.
+      </span>
+
+    </div>
+
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      اَحساسَن جو ويسُ — ڪَويتا
+    </p>
+
+    <p>
+      Poetry — The Language of Feelings
+    </p>
+
+  </footer>
+
+
+</body>
+
+</html>
