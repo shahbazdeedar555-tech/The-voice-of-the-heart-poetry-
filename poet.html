@@ -6,71 +6,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>شاعر — اَحساسَن جو ويسُ ڪَويتا</title>
+  <title>ديدار علي — اَحساسَن جو ويسُ ڪَويتا</title>
 
   <style>
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: #f5eedc;
       color: #173f32;
-      line-height: 1.8;
+      line-height: 1.9;
     }
-
-    /* HEADER */
 
     header {
       background: #173f32;
       color: #f3d27a;
       text-align: center;
-      padding: 22px 15px;
-      border-bottom: 5px solid #c9a646;
+      padding: 25px 15px;
     }
 
     header h1 {
+      margin: 0;
       font-size: 28px;
-      margin-bottom: 4px;
     }
 
     header p {
-      color: #f7f0dc;
-      font-size: 15px;
-      direction: ltr;
+      margin: 5px 0 0;
+      color: #fff8df;
+      font-size: 16px;
     }
 
-    /* BOOK CONTAINER */
-
-    .book {
-      max-width: 850px;
-      margin: 25px auto;
-      padding: 20px;
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px 15px 40px;
     }
-
-    /* BACK BUTTON */
 
     .back {
       display: inline-block;
       text-decoration: none;
-      background: #173f32;
-      color: #f3d27a;
-      padding: 8px 18px;
-      border-radius: 25px;
+      color: #173f32;
+      background: #f3d27a;
+      padding: 8px 16px;
+      border-radius: 20px;
       margin-bottom: 20px;
-      border: 1px solid #c9a646;
-      font-size: 15px;
+      font-weight: bold;
     }
-
-    .back:hover {
-      background: #245746;
-    }
-
-    /* POET CARD */
 
     .poet-card {
       background: #fffaf0;
@@ -79,183 +63,141 @@
       padding: 25px 20px;
       text-align: center;
       box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      position: relative;
     }
 
-    .poet-card::before,
-    .poet-card::after {
-      content: "✦";
-      color: #c9a646;
-      font-size: 25px;
-      position: absolute;
-      top: 12px;
-    }
-
-    .poet-card::before {
-      right: 15px;
-    }
-
-    .poet-card::after {
-      left: 15px;
-    }
-
-    .poet-symbol {
-      font-size: 52px;
-      margin-bottom: 5px;
+    .poet-icon {
+      font-size: 45px;
     }
 
     .poet-name {
       font-size: 30px;
-      color: #173f32;
       font-weight: bold;
+      margin: 5px 0;
     }
 
     .pen-name {
-      color: #a27c1d;
-      font-size: 19px;
-      margin-top: 3px;
+      font-size: 18px;
+      color: #8b6a1d;
+      font-weight: bold;
     }
 
-    .location {
-      color: #555;
-      font-size: 15px;
-      margin-top: 8px;
-    }
-
+    .location,
     .category {
-      display: inline-block;
-      background: #173f32;
-      color: #f3d27a;
-      padding: 5px 18px;
-      border-radius: 20px;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    /* BIO */
-
-    .section {
-      margin-top: 25px;
+      margin-top: 8px;
+      font-size: 15px;
     }
 
     .section-title {
       text-align: center;
-      color: #173f32;
-      font-size: 23px;
-      margin-bottom: 12px;
-    }
-
-    .section-title span {
-      color: #c9a646;
+      color: #8b6a1d;
+      margin: 30px 0 15px;
+      font-size: 22px;
+      font-weight: bold;
     }
 
     .bio {
       background: #fffaf0;
       border-right: 5px solid #c9a646;
-      padding: 18px;
-      border-radius: 12px;
-      color: #444;
-      font-size: 16px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: right;
     }
 
-    /* POETRY */
-
-    .poem {
+    .poetry-card {
       background: #fffaf0;
-      border: 1px solid #d4bd78;
+      border: 1px solid #d7bd76;
       border-radius: 15px;
-      margin-bottom: 18px;
       padding: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
     }
 
-    .poem h3 {
+    .poetry-card h3 {
+      margin: 0;
       color: #173f32;
-      text-align: center;
-      font-size: 21px;
+      font-size: 22px;
+    }
+
+    .english {
+      color: #8b6a1d;
+      font-size: 15px;
       margin-bottom: 10px;
     }
 
-    .poem-type {
-      text-align: center;
-      color: #a27c1d;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
     .poem-text {
-      text-align: center;
       white-space: pre-line;
       font-size: 18px;
-      color: #333;
-      line-height: 2.2;
+      min-height: 80px;
+      padding: 10px;
+      border-radius: 8px;
     }
 
-    /* FOOTER */
+    .poem-text.editing {
+      border: 2px dashed #c9a646;
+      background: #fffdf7;
+      outline: none;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 20px;
+      padding: 9px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .edit-btn {
+      background: #173f32;
+      color: white;
+    }
+
+    .save-btn {
+      background: #c9a646;
+      color: #173f32;
+    }
+
+    .save-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
     footer {
-      margin-top: 35px;
       background: #173f32;
       color: #f3d27a;
       text-align: center;
       padding: 20px 10px;
-      font-size: 14px;
+      margin-top: 30px;
     }
 
     footer p {
-      margin: 3px;
+      margin: 3px 0;
     }
-
-    /* MOBILE */
-
-    @media (max-width: 600px) {
-
-      header h1 {
-        font-size: 24px;
-      }
-
-      .book {
-        padding: 12px;
-        margin-top: 15px;
-      }
-
-      .poet-name {
-        font-size: 26px;
-      }
-
-      .poem-text {
-        font-size: 17px;
-      }
-
-    }
-
   </style>
 </head>
-
 
 <body>
 
   <header>
-
     <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
-
     <p>Poetry — The Language of Feelings</p>
-
   </header>
 
-
-  <main class="book">
+  <div class="container">
 
     <a href="poets.html" class="back">
       ← شاعرن ڏانهن واپس
     </a>
 
+    <div class="poet-card">
 
-    <!-- POET PROFILE -->
-
-    <section class="poet-card">
-
-      <div class="poet-symbol">🪶</div>
+      <div class="poet-icon">🪶</div>
 
       <div class="poet-name">
         ديدار علي
@@ -273,93 +215,152 @@
         غزل — Ghazal
       </div>
 
-    </section>
+    </div>
 
+    <div class="section-title">
+      ✦ شاعر بابت ✦
+    </div>
 
-    <!-- BIO -->
+    <div class="bio">
+      ديدار علي، تخلص شاهباز، سنڌي ادب ۽ شاعري سان محبت رکندڙ شاعر آهي.
+      سندس شاعري احساسن، محبت، زندگي ۽ انساني جذبن جي ترجماني ڪري ٿي.
+    </div>
 
-    <section class="section">
+    <div class="section-title">
+      ✦ شاعري ✦
+    </div>
 
-      <h2 class="section-title">
-        ✦ شاعر بابت ✦
-      </h2>
+    <!-- غزل 1 -->
 
-      <div class="bio">
+    <div class="poetry-card">
 
-        ديدار علي، تخلص <strong>شاهباز</strong>،
-        سنڌي ادب ۽ شاعري سان محبت رکندڙ شاعر آهي.
-        سندس شاعري احساسن، محبت، زندگي ۽ انساني جذبن
-        جي ترجماني ڪري ٿي.
+      <h3>غزل</h3>
+      <div class="english">Ghazal</div>
 
-      </div>
-
-    </section>
-
-
-    <!-- POETRY -->
-
-    <section class="section">
-
-      <h2 class="section-title">
-        ✦ شاعري ✦
-      </h2>
-
-
-      <div class="poem">
-
-        <h3>غزل</h3>
-
-        <div class="poem-type">
-          Ghazal
-        </div>
-
-        <div class="poem-text">
-
+      <div
+        id="poem1"
+        class="poem-text"
+        contenteditable="false">
 هتي شاعر جي غزل لکبي.
 
 لفظن ۾ احساس،
 احساسن ۾ زندگي،
 ۽ زندگيءَ ۾ ڪَويتا.
-
-        </div>
-
       </div>
 
+      <div class="buttons">
+        <button
+          class="edit-btn"
+          onclick="editPoem('poem1','save1')">
+          ✏️ Edit
+        </button>
 
-      <div class="poem">
+        <button
+          id="save1"
+          class="save-btn"
+          onclick="savePoem('poem1','save1')"
+          disabled>
+          💾 Save
+        </button>
+      </div>
 
-        <h3>غزل — ٢</h3>
+    </div>
 
-        <div class="poem-type">
-          Ghazal
-        </div>
+    <!-- غزل 2 -->
 
-        <div class="poem-text">
+    <div class="poetry-card">
 
+      <h3>غزل — ٢</h3>
+      <div class="english">Ghazal</div>
+
+      <div
+        id="poem2"
+        class="poem-text"
+        contenteditable="false">
 هتي ٻي شاعري شامل ڪري سگهجي ٿي.
 
 دل جي ڳالهه جڏهن لفظن ۾ اچي،
 ته شاعري جنم وٺي ٿي.
-
-        </div>
-
       </div>
 
+      <div class="buttons">
+        <button
+          class="edit-btn"
+          onclick="editPoem('poem2','save2')">
+          ✏️ Edit
+        </button>
 
-    </section>
+        <button
+          id="save2"
+          class="save-btn"
+          onclick="savePoem('poem2','save2')"
+          disabled>
+          💾 Save
+        </button>
+      </div>
 
-  </main>
+    </div>
 
+  </div>
 
   <footer>
-
     <p>اَحساسَن جو ويسُ — ڪَويتا</p>
-
     <p>Poetry — The Language of Feelings</p>
-
   </footer>
 
 
-</body>
+  <script>
 
+    function editPoem(poemId, saveId) {
+
+      const poem = document.getElementById(poemId);
+      const saveButton = document.getElementById(saveId);
+
+      poem.contentEditable = "true";
+      poem.classList.add("editing");
+      poem.focus();
+
+      saveButton.disabled = false;
+    }
+
+
+    function savePoem(poemId, saveId) {
+
+      const poem = document.getElementById(poemId);
+      const saveButton = document.getElementById(saveId);
+
+      localStorage.setItem(
+        "poetry_" + poemId,
+        poem.innerText
+      );
+
+      poem.contentEditable = "false";
+      poem.classList.remove("editing");
+
+      saveButton.disabled = true;
+
+      alert("شاعري محفوظ ٿي وئي. ✓");
+    }
+
+
+    function loadPoems() {
+
+      const poem1 = localStorage.getItem("poetry_poem1");
+      const poem2 = localStorage.getItem("poetry_poem2");
+
+      if (poem1) {
+        document.getElementById("poem1").innerText = poem1;
+      }
+
+      if (poem2) {
+        document.getElementById("poem2").innerText = poem2;
+      }
+    }
+
+
+    loadPoems();
+
+  </script>
+
+</body>
 </html>
