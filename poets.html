@@ -15,137 +15,119 @@
 
     body {
       margin: 0;
-      font-family: Arial, Tahoma, sans-serif;
+      font-family: Arial, "Noto Naskh Arabic", sans-serif;
       background: linear-gradient(135deg, #fff8e7, #f5e6c8);
-      color: #3e2723;
+      color: #3b2414;
+      text-align: center;
     }
 
     header {
-      text-align: center;
-      padding: 25px 15px;
-      background: linear-gradient(135deg, #7b1e1e, #b8860b);
+      background: linear-gradient(135deg, #6b1f1f, #9b3d25);
       color: white;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+      padding: 25px 15px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     }
 
     header h1 {
-      margin: 0;
+      margin: 0 0 8px;
       font-size: 30px;
     }
 
     header p {
-      margin: 8px 0 0;
-      font-size: 16px;
+      margin: 0;
+      font-size: 17px;
     }
 
     nav {
-      text-align: center;
       padding: 15px 10px;
-      background: #fffdf7;
-      border-bottom: 1px solid #d8c49b;
     }
 
     nav a {
       display: inline-block;
       margin: 5px;
-      padding: 10px 16px;
-      border-radius: 25px;
+      padding: 10px 18px;
+      background: #fff;
+      color: #6b1f1f;
       text-decoration: none;
-      color: #7b1e1e;
-      background: #f8e9c5;
+      border-radius: 25px;
       font-weight: bold;
+      border: 1px solid #d8b46a;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     nav a:hover {
-      background: #e7c875;
+      background: #6b1f1f;
+      color: white;
     }
 
     .container {
+      width: 94%;
       max-width: 900px;
       margin: auto;
-      padding: 25px 15px;
+      padding-bottom: 30px;
     }
 
     .section-title {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      color: #7b1e1e;
-      font-size: 28px;
-    }
-
-    .section-title p {
-      margin-top: 8px;
-      color: #795548;
+      margin: 20px 0;
+      color: #6b1f1f;
+      font-size: 25px;
     }
 
     .poet-card {
-      background: rgba(255, 255, 255, 0.95);
-      border: 2px solid #d8b76a;
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(80, 50, 20, 0.12);
-      text-align: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid #d8b46a;
+      border-radius: 18px;
+      margin: 18px auto;
+      padding: 22px 18px;
+      max-width: 650px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
     }
 
     .poet-icon {
       font-size: 42px;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
 
     .poet-name {
       font-size: 25px;
       font-weight: bold;
-      color: #7b1e1e;
-      margin-bottom: 5px;
+      color: #6b1f1f;
+      margin: 5px 0;
     }
 
     .takhallus {
-      font-size: 17px;
-      color: #795548;
-      margin-bottom: 8px;
-    }
-
-    .category {
       font-size: 18px;
-      font-weight: bold;
-      color: #b8860b;
-      margin-bottom: 8px;
+      color: #76552f;
+      margin: 8px 0 15px;
     }
 
-    .location {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 16px;
+    .poetry-type {
+      font-size: 17px;
+      color: #444;
+      margin-bottom: 15px;
     }
 
-    .poetry-btn {
+    .poetry-button {
       display: inline-block;
-      padding: 12px 22px;
-      border-radius: 25px;
-      background: linear-gradient(135deg, #7b1e1e, #a52a2a);
+      background: linear-gradient(135deg, #6b1f1f, #9b3d25);
       color: white;
       text-decoration: none;
+      padding: 11px 25px;
+      border-radius: 25px;
       font-weight: bold;
-      transition: 0.3s;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
     }
 
-    .poetry-btn:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, #a52a2a, #7b1e1e);
+    .poetry-button:hover {
+      transform: scale(1.03);
     }
 
     footer {
-      margin-top: 30px;
-      padding: 20px;
-      text-align: center;
-      background: #4e342e;
+      background: #6b1f1f;
       color: white;
-      font-size: 14px;
+      padding: 18px 10px;
+      margin-top: 25px;
+      font-size: 15px;
     }
 
     @media (max-width: 600px) {
@@ -157,9 +139,8 @@
         font-size: 22px;
       }
 
-      nav a {
-        padding: 9px 12px;
-        font-size: 14px;
+      .poet-card {
+        padding: 18px 12px;
       }
     }
   </style>
@@ -179,69 +160,159 @@
 
   <main class="container">
 
-    <div class="section-title">
-      <h2>شاعر</h2>
-      <p>Poets — شاعريءَ جي دنيا جا آواز</p>
-    </div>
+    <h2 class="section-title">🪶 شاعر</h2>
 
     <!-- شاعر 1 -->
     <div class="poet-card">
-
       <div class="poet-icon">🪶</div>
 
       <div class="poet-name">
-        deedar ali
+        ديدار علي
       </div>
 
       <div class="takhallus">
-        تخلص: shahbaz
+        تخلص: شاهباز
       </div>
 
-      <div class="category">
+      <div class="poetry-type">
         غزل — Ghazal
       </div>
 
-      <div class="location">
-        📍 Post office karam khan Nizamani
-      </div>
-
-      <a class="poetry-btn" href="ghazal.html">
+      <a class="poetry-button" href="ghazal.html">
         📖 شاعري ڏسو
       </a>
-
     </div>
 
     <!-- شاعر 2 -->
     <div class="poet-card">
-
       <div class="poet-icon">🪶</div>
 
       <div class="poet-name">
-        deedar ali
+        ديدار علي
       </div>
 
       <div class="takhallus">
-        تخلص: shahbaz
+        تخلص: شاهباز
       </div>
 
-      <div class="category">
-        غزل — Ghazal
+      <div class="poetry-type">
+        نظم — Nazam
       </div>
 
-      <div class="location">
-        📍 Post office karam khan Nizamani
-      </div>
-
-      <a class="poetry-btn" href="ghazal.html">
+      <a class="poetry-button" href="nazam.html">
         📖 شاعري ڏسو
       </a>
+    </div>
 
+    <!-- شاعر 3 -->
+    <div class="poet-card">
+      <div class="poet-icon">🪶</div>
+
+      <div class="poet-name">
+        ديدار علي
+      </div>
+
+      <div class="takhallus">
+        تخلص: شاهباز
+      </div>
+
+      <div class="poetry-type">
+        گيت — Geet
+      </div>
+
+      <a class="poetry-button" href="geet.html">
+        📖 شاعري ڏسو
+      </a>
+    </div>
+
+    <!-- شاعر 4 -->
+    <div class="poet-card">
+      <div class="poet-icon">🪶</div>
+
+      <div class="poet-name">
+        ديدار علي
+      </div>
+
+      <div class="takhallus">
+        تخلص: شاهباز
+      </div>
+
+      <div class="poetry-type">
+        بيت — Bet
+      </div>
+
+      <a class="poetry-button" href="bet.html">
+        📖 شاعري ڏسو
+      </a>
+    </div>
+
+    <!-- شاعر 5 -->
+    <div class="poet-card">
+      <div class="poet-icon">🪶</div>
+
+      <div class="poet-name">
+        ديدار علي
+      </div>
+
+      <div class="takhallus">
+        تخلص: شاهباز
+      </div>
+
+      <div class="poetry-type">
+        وائي — Waai
+      </div>
+
+      <a class="poetry-button" href="waai.html">
+        📖 شاعري ڏسو
+      </a>
+    </div>
+
+    <!-- شاعر 6 -->
+    <div class="poet-card">
+      <div class="poet-icon">🪶</div>
+
+      <div class="poet-name">
+        ديدار علي
+      </div>
+
+      <div class="takhallus">
+        تخلص: شاهباز
+      </div>
+
+      <div class="poetry-type">
+        سترنگو — Satrango
+      </div>
+
+      <a class="poetry-button" href="satrango.html">
+        📖 شاعري ڏسو
+      </a>
+    </div>
+
+    <!-- شاعر 7 -->
+    <div class="poet-card">
+      <div class="poet-icon">🪶</div>
+
+      <div class="poet-name">
+        ديدار علي
+      </div>
+
+      <div class="takhallus">
+        تخلص: شاهباز
+      </div>
+
+      <div class="poetry-type">
+        ٻيون — Other
+      </div>
+
+      <a class="poetry-button" href="other.html">
+        📖 شاعري ڏسو
+      </a>
     </div>
 
   </main>
 
   <footer>
-    اَحساسَن جو ويسُ — ڪَويتا
+    © 2026 اَحساسَن جو ويسُ — ڪَويتا
     <br>
     Poetry — The Language of Feelings
   </footer>
