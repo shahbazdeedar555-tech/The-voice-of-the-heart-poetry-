@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -6,6 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>اَحساسَن جو ويسُ — ڪَويتا</title>
+
+  <!-- Offline App -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#183b2b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
   <style>
     * {
@@ -41,8 +48,7 @@
     .hero {
       text-align: center;
       padding: 35px 18px;
-      background:
-        linear-gradient(rgba(244,234,213,0.88), rgba(244,234,213,0.88));
+      background: #f4ead5;
       border-bottom: 1px solid #c9a44c;
     }
 
@@ -186,7 +192,19 @@
       margin: 5px 0;
     }
 
+    .offline-note {
+      margin: 20px auto 0;
+      max-width: 700px;
+      background: #e8dcc0;
+      border: 1px solid #c9a44c;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
+
       header h1 {
         font-size: 24px;
       }
@@ -257,7 +275,6 @@
 
     <section class="categories">
 
-      <!-- Ghazal -->
       <div class="category-card">
         <div class="category-icon">🌹</div>
         <h3>غزل</h3>
@@ -265,7 +282,6 @@
         <a href="ghazal.html">کوليو</a>
       </div>
 
-      <!-- Geet -->
       <div class="category-card">
         <div class="category-icon">🎵</div>
         <h3>گيت</h3>
@@ -273,7 +289,6 @@
         <a href="geet.html">کوليو</a>
       </div>
 
-      <!-- Nazam -->
       <div class="category-card">
         <div class="category-icon">📜</div>
         <h3>نظم</h3>
@@ -281,7 +296,6 @@
         <a href="nazam.html">کوليو</a>
       </div>
 
-      <!-- Bet -->
       <div class="category-card">
         <div class="category-icon">🌿</div>
         <h3>بيت</h3>
@@ -289,7 +303,6 @@
         <a href="bet.html">کوليو</a>
       </div>
 
-      <!-- Waai -->
       <div class="category-card">
         <div class="category-icon">🎶</div>
         <h3>واِئي</h3>
@@ -297,7 +310,6 @@
         <a href="waai.html">کوليو</a>
       </div>
 
-      <!-- Satrango -->
       <div class="category-card">
         <div class="category-icon">🌈</div>
         <h3>سَترنگو</h3>
@@ -305,7 +317,6 @@
         <a href="satrango.html">کوليو</a>
       </div>
 
-      <!-- Other -->
       <div class="category-card">
         <div class="category-icon">✨</div>
         <h3>ٻي شاعري</h3>
@@ -313,7 +324,6 @@
         <a href="other.html">کوليو</a>
       </div>
 
-      <!-- All Poetry -->
       <div class="category-card">
         <div class="category-icon">📚</div>
         <h3>سڀ شاعري</h3>
@@ -336,6 +346,11 @@
         نوان شاعر ڏسو
       </a>
 
+      <div class="offline-note">
+        📱 هي ايپ آف لائين شاعري پڙهڻ لاءِ تيار ڪئي پئي وڃي.
+        انٽرنيٽ کان سواءِ به شاعري تائين رسائي حاصل ڪريو.
+      </div>
+
     </section>
 
   </main>
@@ -349,6 +364,18 @@
     <p>© 2026 ايجاد ديدار شھباز</p>
 
   </footer>
+
+  <script>
+    // Offline App Service Worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+          .catch(function (error) {
+            console.log("Offline service unavailable:", error);
+          });
+      });
+    }
+  </script>
 
 </body>
 
