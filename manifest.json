@@ -1,0 +1,11 @@
+{
+  "name": "اَحساسَن جو ويسُ — ڪَويتا",
+  "short_name": "ڪَويتا",
+  "description": "Poetry — The Language of Feelings",
+  "lang": "sd",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4ead5",
+  "theme_color": "#183b2b"
+}
