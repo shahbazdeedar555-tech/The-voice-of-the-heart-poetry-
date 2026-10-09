@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -5,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>نئون شاعر شامل ڪريو — اَحساسَن جو ويسُ ڪَويتا</title>
+  <title>شاعري لکو — اَحساسَن جو ويسُ ڪَويتا</title>
 
   <style>
     * {
@@ -113,7 +114,6 @@
     }
 
     input,
-    select,
     textarea {
       width: 100%;
       padding: 12px;
@@ -122,33 +122,13 @@
       background: #fffdf6;
       color: #183b2b;
       font-family: Arial, sans-serif;
-      font-size: 16px;
+      font-size: 17px;
     }
 
     textarea {
-      min-height: 130px;
+      min-height: 280px;
       resize: vertical;
-      line-height: 1.8;
-    }
-
-    .photo-preview {
-      width: 110px;
-      height: 110px;
-      margin: 10px auto;
-      border-radius: 50%;
-      border: 2px solid #c9a44c;
-      background: #e8d7b5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      font-size: 45px;
-    }
-
-    .photo-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      line-height: 2;
     }
 
     .poem-box {
@@ -175,31 +155,19 @@
       font-weight: bold;
     }
 
-    .add-poem {
-      display: block;
-      margin: 10px auto 25px;
-      background: #183b2b;
-      color: #f4d58d;
-      border: 1px solid #c9a44c;
-      padding: 11px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
+    .add-poem,
     .save-button {
       display: block;
       width: 100%;
       background: #183b2b;
       color: #f4d58d;
       border: 1px solid #c9a44c;
-      padding: 14px;
-      border-radius: 9px;
+      padding: 13px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .message {
@@ -212,6 +180,59 @@
       border-radius: 10px;
       font-weight: bold;
       line-height: 1.8;
+    }
+
+    .saved-poem {
+      background: #fffdf6;
+      border: 1px solid #c9a44c;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .saved-poem h3 {
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .saved-text {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 2;
+      font-size: 18px;
+    }
+
+    .saved-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .saved-actions button {
+      flex: 1;
+      min-width: 110px;
+      padding: 10px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .edit-button {
+      background: #b98242;
+      color: white;
+    }
+
+    .delete-button {
+      background: #8b1e1e;
+      color: white;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 18px;
     }
 
     footer {
@@ -241,478 +262,365 @@
 <body>
 
   <header>
-
     <h1>اَحساسَن جو ويسُ — ڪَويتا</h1>
-
     <p>Poetry — The Language of Feelings</p>
-
   </header>
 
-
   <div class="top-buttons">
-
     <a href="index.html">⌂ گهر</a>
-
     <a href="categories.html">📖 شاعريءَ جا قسم</a>
-
     <a href="poets.html">🪶 شاعر</a>
-
   </div>
-
 
   <main class="container">
 
     <section class="page-title">
-
-      <div class="icon">🪶</div>
-
-      <h2>نئون شاعر شامل ڪريو</h2>
-
-      <p>Add New Poet</p>
-
+      <div class="icon">✍️</div>
+      <h2>پنهنجي شاعري لکو</h2>
+      <p>Write Your Poetry</p>
     </section>
-
 
     <section class="form-card">
 
-      <h2 class="section-heading">
-        ✦ شاعر جي معلومات ✦
-      </h2>
-
-
-      <!-- Poet Name -->
-
-      <div class="field">
-
-        <label for="poetName">
-          شاعر جو نالو
-        </label>
-
-        <input
-          type="text"
-          id="poetName"
-          placeholder="مثال: ديدار علي">
-
-      </div>
-
-
-      <!-- Pen Name -->
-
-      <div class="field">
-
-        <label for="penName">
-          تخلص
-        </label>
-
-        <input
-          type="text"
-          id="penName"
-          placeholder="مثال: شاهباز">
-
-      </div>
-
-
-      <!-- Poetry Type -->
-
-      <div class="field">
-
-        <label for="poetryType">
-          شاعري جو قسم
-        </label>
-
-        <select id="poetryType">
-
-          <option value="">شاعري جو قسم چونڊيو</option>
-
-          <option value="غزل — Ghazal">
-            غزل — Ghazal
-          </option>
-
-          <option value="گيت — Geet">
-            گيت — Geet
-          </option>
-
-          <option value="نظم — Nazam">
-            نظم — Nazam
-          </option>
-
-          <option value="بيت — Bet">
-            بيت — Bet
-          </option>
-
-          <option value="واِئي — Waai">
-            واِئي — Waai
-          </option>
-
-          <option value="سَترنگو — Satrango">
-            سَترنگو — Satrango
-          </option>
-
-          <option value="ٻي شاعري — Other Poetry">
-            ٻي شاعري — Other Poetry
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <!-- City / Village -->
-
-      <div class="field">
-
-        <label for="location">
-          شهر / ڳوٺ
-        </label>
-
-        <input
-          type="text"
-          id="location"
-          placeholder="مثال: Post Office Karam Khan Nizamani">
-
-      </div>
-
-
-      <!-- Introduction -->
-
-      <div class="field">
-
-        <label for="intro">
-          مختصر تعارف
-          <span class="optional">(اختياري)</span>
-        </label>
-
-        <textarea
-          id="intro"
-          placeholder="شاعر بابت مختصر تعارف"></textarea>
-
-      </div>
-
-
-      <!-- Date of Birth -->
-
-      <div class="field">
-
-        <label for="birthDate">
-          ڄم جي تاريخ / سال
-          <span class="optional">(اختياري)</span>
-        </label>
-
-        <input
-          type="text"
-          id="birthDate"
-          placeholder="مثال: 1981">
-
-      </div>
-
-
-      <!-- Social -->
-
-      <div class="field">
-
-        <label for="social">
-          Facebook / Social Link
-          <span class="optional">(اختياري)</span>
-        </label>
-
-        <input
-          type="url"
-          id="social"
-          placeholder="https://facebook.com/...">
-
-      </div>
-
-
-      <!-- Photo -->
-
-      <div class="field">
-
-        <label>
-          شاعر جي تصوير
-        </label>
-
-        <div class="photo-preview" id="photoPreview">
-          🪶
-        </div>
-
-        <input
-          type="file"
-          id="photo"
-          accept="image/*">
-
-      </div>
-
-
-      <h2 class="section-heading">
-        ✦ شاعري لکو ✦
-      </h2>
-
+      <h2 class="section-heading">✦ شاعري لکو ✦</h2>
 
       <div id="poemsContainer">
 
-        <!-- First Poem -->
-
         <div class="poem-box">
-
           <h3>📖 شاعري 1</h3>
 
           <div class="field">
-
-            <label>
-              شاعري جو عنوان
-            </label>
-
+            <label>عنوان <span class="optional">(اختياري)</span></label>
             <input
               type="text"
               class="poemTitle"
-              placeholder="مثال: منهنجو احساس">
-
+              placeholder="شاعري جو عنوان">
           </div>
 
           <div class="field">
-
-            <label>
-              شاعري
-            </label>
-
+            <label>شاعري</label>
             <textarea
               class="poemText"
-              placeholder="پنهنجي شاعري هتي لکو"></textarea>
-
+              placeholder="پنهنجي شاعري هتي لکو..."></textarea>
           </div>
-
         </div>
 
       </div>
-
 
       <button
         type="button"
         class="add-poem"
         onclick="addPoem()">
-
         ＋ ٻي شاعري شامل ڪريو
-
       </button>
-
 
       <button
         type="button"
         class="save-button"
-        onclick="savePoet()">
-
-        💾 شاعر ۽ شاعري محفوظ ڪريو
-
+        onclick="savePoetry()">
+        💾 شاعري محفوظ ڪريو
       </button>
 
+      <div class="message" id="message"></div>
 
-      <div
-        class="message"
-        id="message">
+    </section>
 
-        🌹 شاعر ۽ شاعري محفوظ ٿي وئي آهي.
-
-        <br>
-
-        هاڻي توهان شاعرن جي صفحي ڏانهن وڃي سگهو ٿا.
-
-        <br><br>
-
-        <a
-          href="poets.html"
-          style="color:#183b2b;font-weight:bold;">
-          🪶 شاعرن ڏانهن وڃو
-        </a>
-
-      </div>
-
+    <section class="form-card" style="margin-top:22px;">
+      <h2 class="section-heading">📚 محفوظ ٿيل شاعري</h2>
+      <div id="savedPoems"></div>
     </section>
 
   </main>
 
-
   <footer>
-
     <p>اَحساسَن جو ويسُ — ڪَويتا</p>
-
     <p>Poetry — The Language of Feelings</p>
-
     <p>© 2026 ايجاد ديدار شھباز</p>
-
   </footer>
 
-
   <script>
-
     let poemNumber = 1;
+    let editingId = null;
 
+    const STORAGE_KEY = "independentPoetry";
+
+    function getPoetry() {
+      try {
+        const data = JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || "[]"
+        );
+
+        return Array.isArray(data) ? data : [];
+      } catch (error) {
+        return [];
+      }
+    }
 
     function addPoem() {
-
       poemNumber++;
 
       const container =
         document.getElementById("poemsContainer");
 
-      const poemBox =
-        document.createElement("div");
-
+      const poemBox = document.createElement("div");
       poemBox.className = "poem-box";
 
-      poemBox.innerHTML = `
+      const heading = document.createElement("h3");
+      heading.textContent = "📖 شاعري " + poemNumber;
+      poemBox.appendChild(heading);
 
-        <h3>📖 شاعري ${poemNumber}</h3>
+      const titleField = document.createElement("div");
+      titleField.className = "field";
 
-        <div class="field">
+      const titleLabel = document.createElement("label");
+      titleLabel.textContent = "عنوان (اختياري)";
 
-          <label>
-            شاعري جو عنوان
-          </label>
+      const titleInput = document.createElement("input");
+      titleInput.type = "text";
+      titleInput.className = "poemTitle";
+      titleInput.placeholder = "شاعري جو عنوان";
 
-          <input
-            type="text"
-            class="poemTitle"
-            placeholder="شاعري جو عنوان">
+      titleField.appendChild(titleLabel);
+      titleField.appendChild(titleInput);
+      poemBox.appendChild(titleField);
 
-        </div>
+      const textField = document.createElement("div");
+      textField.className = "field";
 
-        <div class="field">
+      const textLabel = document.createElement("label");
+      textLabel.textContent = "شاعري";
 
-          <label>
-            شاعري
-          </label>
+      const textArea = document.createElement("textarea");
+      textArea.className = "poemText";
+      textArea.placeholder = "پنهنجي شاعري هتي لکو...";
 
-          <textarea
-            class="poemText"
-            placeholder="پنهنجي شاعري هتي لکو"></textarea>
+      textField.appendChild(textLabel);
+      textField.appendChild(textArea);
+      poemBox.appendChild(textField);
 
-        </div>
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "remove-button";
+      removeButton.textContent = "✕ هي خانو ختم ڪريو";
+      removeButton.onclick = function() {
+        poemBox.remove();
+        renumberPoems();
+      };
 
-        <button
-          type="button"
-          class="remove-button"
-          onclick="removePoem(this)">
-
-          ✕ هي شاعري ختم ڪريو
-
-        </button>
-
-      `;
-
+      poemBox.appendChild(removeButton);
       container.appendChild(poemBox);
-
     }
 
+    function renumberPoems() {
+      const boxes = document.querySelectorAll(
+        "#poemsContainer .poem-box"
+      );
 
-    function removePoem(button) {
+      poemNumber = boxes.length;
 
-      button.parentElement.remove();
-
+      boxes.forEach(function(box, index) {
+        box.querySelector("h3").textContent =
+          "📖 شاعري " + (index + 1);
+      });
     }
 
+    function savePoetry() {
+      const boxes = document.querySelectorAll(
+        "#poemsContainer .poem-box"
+      );
 
-    document
-      .getElementById("photo")
-      .addEventListener("change", function () {
+      const newPoems = [];
 
-        const file = this.files[0];
+      boxes.forEach(function(box) {
+        const title = box.querySelector(".poemTitle")
+          .value.trim();
 
-        if (!file) return;
+        const text = box.querySelector(".poemText")
+          .value.trim();
 
-        const reader = new FileReader();
+        if (text !== "") {
+          newPoems.push({
+            title: title,
+            text: text,
+            savedAt: new Date().toISOString()
+          });
+        }
+      });
 
-        reader.onload = function (event) {
+      if (newPoems.length === 0) {
+        alert("مهرباني ڪري پهرين پنهنجي شاعري لکو.");
+        return;
+      }
 
-          document
-            .getElementById("photoPreview")
-            .innerHTML =
-            `<img src="${event.target.result}" alt="Poet Photo">`;
+      let poetry = getPoetry();
 
+      if (editingId !== null) {
+        const index = poetry.findIndex(function(item) {
+          return item.id === editingId;
+        });
+
+        if (index !== -1) {
+          poetry.splice(index, 1);
+        }
+      }
+
+      newPoems.forEach(function(poem) {
+        poem.id =
+          Date.now().toString() +
+          Math.random().toString(36).slice(2);
+
+        poetry.unshift(poem);
+      });
+
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(poetry)
+        );
+      } catch (error) {
+        alert(
+          "شاعري محفوظ نه ٿي سگهي. مهرباني ڪري برائوزر جي خالي جاءِ چيڪ ڪريو."
+        );
+        return;
+      }
+
+      clearForm();
+      displaySavedPoems();
+
+      const message = document.getElementById("message");
+      message.textContent =
+        "🌹 توهان جي شاعري ڪاميابيءَ سان محفوظ ٿي وئي آهي.";
+      message.style.display = "block";
+    }
+
+    function displaySavedPoems() {
+      const container =
+        document.getElementById("savedPoems");
+
+      const poetry = getPoetry();
+
+      container.innerHTML = "";
+
+      if (poetry.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "اڃا تائين ڪا شاعري محفوظ ناهي.";
+        container.appendChild(empty);
+        return;
+      }
+
+      poetry.forEach(function(poem) {
+        const item = document.createElement("div");
+        item.className = "saved-poem";
+
+        const heading = document.createElement("h3");
+        heading.textContent = poem.title || "شاعري";
+
+        const text = document.createElement("div");
+        text.className = "saved-text";
+        text.textContent = poem.text || "";
+
+        const actions = document.createElement("div");
+        actions.className = "saved-actions";
+
+        const editButton = document.createElement("button");
+        editButton.className = "edit-button";
+        editButton.textContent = "✏️ Edit";
+        editButton.onclick = function() {
+          editPoetry(poem.id);
         };
 
-        reader.readAsDataURL(file);
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.textContent = "🗑️ Delete";
+        deleteButton.onclick = function() {
+          deletePoetry(poem.id);
+        };
 
+        actions.appendChild(editButton);
+        actions.appendChild(deleteButton);
+
+        item.appendChild(heading);
+        item.appendChild(text);
+        item.appendChild(actions);
+
+        container.appendChild(item);
       });
-
-
-    function savePoet() {
-
-      const poetName =
-        document.getElementById("poetName").value.trim();
-
-      const penName =
-        document.getElementById("penName").value.trim();
-
-      const poetryType =
-        document.getElementById("poetryType").value;
-
-      const location =
-        document.getElementById("location").value.trim();
-
-
-      if (
-        poetName === "" ||
-        penName === "" ||
-        poetryType === "" ||
-        location === ""
-      ) {
-
-        alert(
-          "مهرباني ڪري شاعر جو نالو، تخلص، شاعري جو قسم ۽ شهر / ڳوٺ مڪمل لکو."
-        );
-
-        return;
-
-      }
-
-
-      const poems =
-        document.querySelectorAll(".poem-box");
-
-
-      let hasPoetry = false;
-
-
-      poems.forEach(function (poem) {
-
-        const title =
-          poem.querySelector(".poemTitle").value.trim();
-
-        const text =
-          poem.querySelector(".poemText").value.trim();
-
-        if (title !== "" && text !== "") {
-
-          hasPoetry = true;
-
-        }
-
-      });
-
-
-      if (!hasPoetry) {
-
-        alert(
-          "مهرباني ڪري گهٽ ۾ گهٽ هڪ شاعري جو عنوان ۽ شاعري لکو."
-        );
-
-        return;
-
-      }
-
-
-      document.getElementById("message").style.display =
-        "block";
-
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-      });
-
     }
 
+    function editPoetry(id) {
+      const poetry = getPoetry();
+
+      const poem = poetry.find(function(item) {
+        return item.id === id;
+      });
+
+      if (!poem) return;
+
+      editingId = id;
+
+      const container =
+        document.getElementById("poemsContainer");
+
+      container.innerHTML = "";
+
+      poemNumber = 0;
+      addPoem();
+
+      container.querySelector(".poemTitle").value =
+        poem.title || "";
+
+      container.querySelector(".poemText").value =
+        poem.text || "";
+
+      document.querySelector(".save-button").textContent =
+        "💾 تبديليون محفوظ ڪريو";
+
+      document.getElementById("message").style.display =
+        "none";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function deletePoetry(id) {
+      if (!confirm("ڇا توهان هي شاعري ختم ڪرڻ چاهيو ٿا؟")) {
+        return;
+      }
+
+      const poetry = getPoetry().filter(function(item) {
+        return item.id !== id;
+      });
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(poetry)
+      );
+
+      if (editingId === id) {
+        clearForm();
+      }
+
+      displaySavedPoems();
+    }
+
+    function clearForm() {
+      document.getElementById("poemsContainer").innerHTML = "";
+      editingId = null;
+      poemNumber = 0;
+      addPoem();
+
+      document.querySelector(".save-button").textContent =
+        "💾 شاعري محفوظ ڪريو";
+
+      document.getElementById("message").style.display =
+        "none";
+    }
+
+    displaySavedPoems();
   </script>
 
 </body>
-
 </html>
