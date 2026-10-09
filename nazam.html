@@ -123,11 +123,6 @@
       margin-top: 0;
     }
 
-    .poet-name {
-      color: #8b4513;
-      font-weight: bold;
-    }
-
     .poem-text {
       white-space: pre-wrap;
       line-height: 2;
@@ -187,7 +182,6 @@
 <body>
 
   <header>
-
     <h1>📜 نظم</h1>
 
     <div class="subtitle">
@@ -199,60 +193,28 @@
         ← Homepage ڏانهن واپس
       </a>
     </div>
-
   </header>
 
-
   <main class="container">
-
-    <!-- نئين نظم لکڻ -->
 
     <section class="card">
 
       <h2>✍️ نئين نظم لکو</h2>
 
-      <label for="poetName">
-        شاعر جو نالو
-      </label>
-
-      <input
-        type="text"
-        id="poetName"
-        placeholder="مثال: ديدار علي"
-      >
-
-
-      <label for="penName">
-        تخلص
-      </label>
-
-      <input
-        type="text"
-        id="penName"
-        placeholder="مثال: شاهباز"
-      >
-
-
-      <label for="poemTitle">
-        نظم جو عنوان
-      </label>
+      <label for="poemTitle">نظم جو عنوان (اختياري)</label>
 
       <input
         type="text"
         id="poemTitle"
-        placeholder="نظم جو عنوان لکو"
+        placeholder="نظم جو عنوان لکو، جيڪڏهن چاهيو"
       >
 
-
-      <label for="poemText">
-        نظم
-      </label>
+      <label for="poemText">پنهنجي نظم لکو</label>
 
       <textarea
         id="poemText"
         placeholder="هتي پنهنجي نظم لکو..."
       ></textarea>
-
 
       <button
         class="save-btn"
@@ -263,9 +225,6 @@
 
     </section>
 
-
-    <!-- محفوظ ٿيل نظم -->
-
     <section class="card">
 
       <h2>📖 محفوظ ٿيل نظم</h2>
@@ -275,7 +234,6 @@
     </section>
 
   </main>
-
 
   <footer>
 
@@ -291,251 +249,180 @@
 
   </footer>
 
-
   <script>
 
     let editingIndex = -1;
 
-
     function getPoetry() {
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem("nazamPoetry") || "[]"
+        );
 
-      return JSON.parse(
-        localStorage.getItem("nazamPoetry") || "[]"
-      );
-
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
     }
-
 
     function savePoetry() {
 
-      const poetName =
-        document.getElementById("poetName").value.trim();
+      const poemTitle = document
+        .getElementById("poemTitle")
+        .value.trim();
 
-      const penName =
-        document.getElementById("penName").value.trim();
+      const poemText = document
+        .getElementById("poemText")
+        .value.trim();
 
-      const poemTitle =
-        document.getElementById("poemTitle").value.trim();
-
-      const poemText =
-        document.getElementById("poemText").value.trim();
-
-
-      if (!poetName || !poemText) {
-
-        alert("مهرباني ڪري شاعر جو نالو ۽ نظم ضرور لکو.");
-
+      if (!poemText) {
+        alert("مهرباني ڪري پهرين پنهنجي نظم لکو.");
         return;
-
       }
 
+      const poetry = getPoetry();
 
-      let poetry = getPoetry();
-
+      const oldPoem =
+        editingIndex !== -1 ? poetry[editingIndex] : null;
 
       const poem = {
-
-        poetName: poetName,
-
-        penName: penName,
-
+        ...(oldPoem || {}),
+        poetName: "",
+        penName: "",
         title: poemTitle || "بغير عنوان جي نظم",
-
         text: poemText
-
       };
 
-
       if (editingIndex === -1) {
-
         poetry.push(poem);
-
       } else {
-
         poetry[editingIndex] = poem;
-
-        editingIndex = -1;
-
       }
-
 
       localStorage.setItem(
         "nazamPoetry",
         JSON.stringify(poetry)
       );
 
-
       clearForm();
-
       displayPoetry();
-
     }
-
 
     function displayPoetry() {
 
-      const list =
-        document.getElementById("poetryList");
-
+      const list = document.getElementById("poetryList");
       const poetry = getPoetry();
 
+      list.replaceChildren();
 
       if (poetry.length === 0) {
-
-        list.innerHTML =
-          '<div class="empty">اڃا تائين ڪا نظم محفوظ ناهي.</div>';
-
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "اڃا تائين ڪا نظم محفوظ ناهي.";
+        list.appendChild(empty);
         return;
-
       }
-
-
-      list.innerHTML = "";
-
 
       poetry.forEach(function(poem, index) {
 
-        const item =
-          document.createElement("div");
-
+        const item = document.createElement("div");
         item.className = "poetry-item";
 
+        const title = document.createElement("h3");
+        title.textContent = poem.title || "بغير عنوان جي نظم";
+        item.appendChild(title);
 
-        item.innerHTML = `
+        const text = document.createElement("div");
+        text.className = "poem-text";
+        text.textContent = poem.text || "";
+        item.appendChild(text);
 
-          <h3>${escapeHTML(poem.title)}</h3>
+        const actions = document.createElement("div");
+        actions.className = "actions";
 
-          <div class="poet-name">
+        const editButton = document.createElement("button");
+        editButton.className = "edit-btn";
+        editButton.textContent = "✏️ Edit";
+        editButton.onclick = function() {
+          editPoetry(index);
+        };
 
-            شاعر:
-            ${escapeHTML(poem.poetName)}
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-btn";
+        deleteButton.textContent = "🗑️ Delete";
+        deleteButton.onclick = function() {
+          deletePoetry(index);
+        };
 
-            ${
-              poem.penName
-              ? " — تخلص: " + escapeHTML(poem.penName)
-              : ""
-            }
-
-          </div>
-
-          <div class="poem-text">
-            ${escapeHTML(poem.text)}
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="edit-btn"
-              onclick="editPoetry(${index})"
-            >
-              ✏️ Edit
-            </button>
-
-            <button
-              class="delete-btn"
-              onclick="deletePoetry(${index})"
-            >
-              🗑️ Delete
-            </button>
-
-          </div>
-
-        `;
-
+        actions.appendChild(editButton);
+        actions.appendChild(deleteButton);
+        item.appendChild(actions);
 
         list.appendChild(item);
-
       });
-
     }
-
 
     function editPoetry(index) {
 
       const poetry = getPoetry();
-
       const poem = poetry[index];
 
-
-      document.getElementById("poetName").value =
-        poem.poetName;
-
-      document.getElementById("penName").value =
-        poem.penName;
+      if (!poem) return;
 
       document.getElementById("poemTitle").value =
-        poem.title;
+        poem.title === "بغير عنوان جي نظم" ? "" : (poem.title || "");
 
       document.getElementById("poemText").value =
-        poem.text;
-
+        poem.text || "";
 
       editingIndex = index;
 
+      document.querySelector(".save-btn").textContent =
+        "💾 تبديليون محفوظ ڪريو";
 
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
-
     }
-
 
     function deletePoetry(index) {
 
-      if (
-        !confirm("ڇا توهان واقعي هي نظم Delete ڪرڻ چاهيو ٿا؟")
-      ) {
-
+      if (!confirm("ڇا توهان واقعي هي نظم Delete ڪرڻ چاهيو ٿا؟")) {
         return;
-
       }
 
-
       const poetry = getPoetry();
-
       poetry.splice(index, 1);
-
 
       localStorage.setItem(
         "nazamPoetry",
         JSON.stringify(poetry)
       );
 
+      if (editingIndex === index) {
+        clearForm();
+      } else if (editingIndex > index) {
+        editingIndex--;
+      }
 
       displayPoetry();
-
     }
-
 
     function clearForm() {
 
-      document.getElementById("poetName").value = "";
-
-      document.getElementById("penName").value = "";
-
       document.getElementById("poemTitle").value = "";
-
       document.getElementById("poemText").value = "";
 
+      document.querySelector(".save-btn").textContent =
+        "💾 نظم محفوظ ڪريو";
+
+      editingIndex = -1;
     }
-
-
-    function escapeHTML(text) {
-
-      const div = document.createElement("div");
-
-      div.textContent = text;
-
-      return div.innerHTML;
-
-    }
-
 
     displayPoetry();
 
   </script>
 
 </body>
-
 </html>
