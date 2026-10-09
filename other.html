@@ -68,28 +68,17 @@
       text-align: center;
     }
 
-    label {
-      display: block;
-      margin-top: 14px;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #6d3b27;
-    }
-
-    input,
     textarea {
+      display: block;
       width: 100%;
-      padding: 13px;
+      min-height: 320px;
+      padding: 15px;
       border: 1px solid #c9a46a;
       border-radius: 12px;
       font-family: Arial, sans-serif;
-      font-size: 17px;
-      background: #fffdf8;
-    }
-
-    textarea {
-      min-height: 280px;
+      font-size: 18px;
       line-height: 2;
+      background: #fffdf8;
       resize: vertical;
     }
 
@@ -124,14 +113,9 @@
       text-align: center;
     }
 
-    .poet-name {
-      color: #8b4513;
-      font-weight: bold;
-      line-height: 1.8;
-    }
-
     .poem-text {
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
       line-height: 2;
       font-size: 18px;
       margin-top: 15px;
@@ -189,7 +173,6 @@
 <body>
 
   <header>
-
     <h1>📝 ٻيون</h1>
 
     <div class="subtitle">
@@ -201,54 +184,17 @@
         ← Homepage ڏانهن واپس
       </a>
     </div>
-
   </header>
-
 
   <main class="container">
 
     <section class="card">
-
-      <h2>✍️ نئين شاعري لکو</h2>
-
-      <label for="poetName">
-        نالو
-      </label>
-
-      <input
-        type="text"
-        id="poetName"
-        placeholder="شاعر جو نالو"
-      >
-
-      <label for="penName">
-        تخلص
-      </label>
-
-      <input
-        type="text"
-        id="penName"
-        placeholder="تخلص"
-      >
-
-      <label for="category">
-        صنف
-      </label>
-
-      <input
-        type="text"
-        id="category"
-        value="ٻيون"
-        readonly
-      >
-
-      <label for="poemText">
-        شاعري
-      </label>
+      <h2>✍️ سڌو پنهنجي شاعري لکو</h2>
 
       <textarea
         id="poemText"
         placeholder="هتي پنهنجي شاعري لکو..."
+        aria-label="پنهنجي شاعري لکو"
       ></textarea>
 
       <button
@@ -257,23 +203,16 @@
       >
         💾 شاعري محفوظ ڪريو
       </button>
-
     </section>
 
-
     <section class="card">
-
       <h2>📖 محفوظ ٿيل شاعري</h2>
-
       <div id="poetryList"></div>
-
     </section>
 
   </main>
 
-
   <footer>
-
     <div>
       <a href="index.html">🏠 گهر</a>
       <a href="categories.html">📚 صنفون</a>
@@ -283,262 +222,175 @@
     <p>
       اَحساسَن جو ويسُ — ڪَويتا
     </p>
-
   </footer>
 
-
   <script>
-
     let editingIndex = -1;
 
-
     function getPoetry() {
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem("otherPoetry") || "[]"
+        );
 
-      return JSON.parse(
-        localStorage.getItem("otherPoetry") || "[]"
-      );
-
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
     }
 
-
     function savePoetry() {
-
-      const poetName =
-        document.getElementById("poetName").value.trim();
-
-      const penName =
-        document.getElementById("penName").value.trim();
-
-      const category =
-        document.getElementById("category").value.trim();
-
       const poemText =
         document.getElementById("poemText").value.trim();
 
-
-      if (!poetName || !poemText) {
-
-        alert("مهرباني ڪري نالو ۽ شاعري ضرور لکو.");
-
+      if (!poemText) {
+        alert("مهرباني ڪري پهرين پنهنجي شاعري لکو.");
         return;
-
       }
-
-
-      let poetry = getPoetry();
-
-
-      const poem = {
-
-        poetName: poetName,
-
-        penName: penName,
-
-        category: category,
-
-        text: poemText
-
-      };
-
-
-      if (editingIndex === -1) {
-
-        poetry.push(poem);
-
-      } else {
-
-        poetry[editingIndex] = poem;
-
-        editingIndex = -1;
-
-      }
-
-
-      localStorage.setItem(
-        "otherPoetry",
-        JSON.stringify(poetry)
-      );
-
-
-      clearForm();
-
-      displayPoetry();
-
-    }
-
-
-    function displayPoetry() {
-
-      const list =
-        document.getElementById("poetryList");
 
       const poetry = getPoetry();
 
+      if (editingIndex === -1) {
+        poetry.push({
+          poetName: "",
+          penName: "",
+          category: "ٻيون",
+          text: poemText
+        });
+      } else {
+        const oldPoem = poetry[editingIndex] || {};
 
-      if (poetry.length === 0) {
+        poetry[editingIndex] = {
+          ...oldPoem,
+          poetName: oldPoem.poetName || "",
+          penName: oldPoem.penName || "",
+          category: "ٻيون",
+          text: poemText
+        };
 
-        list.innerHTML =
-          '<div class="empty">اڃا تائين ڪا شاعري محفوظ ناهي.</div>';
-
-        return;
-
+        editingIndex = -1;
       }
 
+      try {
+        localStorage.setItem(
+          "otherPoetry",
+          JSON.stringify(poetry)
+        );
+      } catch (error) {
+        alert("شاعري محفوظ نه ٿي سگهي. مهرباني ڪري ٻيهر ڪوشش ڪريو.");
+        return;
+      }
+
+      clearForm();
+      displayPoetry();
+
+      alert("توهان جي شاعري محفوظ ٿي وئي.");
+    }
+
+    function displayPoetry() {
+      const list = document.getElementById("poetryList");
+      const poetry = getPoetry();
 
       list.innerHTML = "";
 
+      if (poetry.length === 0) {
+        list.innerHTML =
+          '<div class="empty">اڃا تائين ڪا شاعري محفوظ ناهي.</div>';
+        return;
+      }
 
       poetry.forEach(function(poem, index) {
-
-        const item =
-          document.createElement("div");
-
+        const item = document.createElement("div");
         item.className = "poetry-item";
 
+        const heading = document.createElement("h3");
+        heading.textContent = "📝 ٻيون";
 
-        item.innerHTML = `
+        const text = document.createElement("div");
+        text.className = "poem-text";
+        text.textContent = poem.text || "";
 
-          <h3>
-            📝 ٻيون
-          </h3>
+        const actions = document.createElement("div");
+        actions.className = "actions";
 
-          <div class="poet-name">
+        const editButton = document.createElement("button");
+        editButton.className = "edit-btn";
+        editButton.textContent = "✏️ Edit";
+        editButton.onclick = function() {
+          editPoetry(index);
+        };
 
-            نالو:
-            ${escapeHTML(poem.poetName)}
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-btn";
+        deleteButton.textContent = "🗑️ Delete";
+        deleteButton.onclick = function() {
+          deletePoetry(index);
+        };
 
-            ${
-              poem.penName
-              ? "<br>تخلص: " + escapeHTML(poem.penName)
-              : ""
-            }
+        actions.appendChild(editButton);
+        actions.appendChild(deleteButton);
 
-            <br>
-
-            صنف:
-            ${escapeHTML(poem.category)}
-
-          </div>
-
-          <div class="poem-text">
-            ${escapeHTML(poem.text)}
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="edit-btn"
-              onclick="editPoetry(${index})"
-            >
-              ✏️ Edit
-            </button>
-
-            <button
-              class="delete-btn"
-              onclick="deletePoetry(${index})"
-            >
-              🗑️ Delete
-            </button>
-
-          </div>
-
-        `;
-
+        item.appendChild(heading);
+        item.appendChild(text);
+        item.appendChild(actions);
 
         list.appendChild(item);
-
       });
-
     }
 
-
     function editPoetry(index) {
-
       const poetry = getPoetry();
-
       const poem = poetry[index];
 
-
-      document.getElementById("poetName").value =
-        poem.poetName;
-
-      document.getElementById("penName").value =
-        poem.penName;
-
-      document.getElementById("category").value =
-        poem.category;
+      if (!poem) return;
 
       document.getElementById("poemText").value =
-        poem.text;
-
+        poem.text || "";
 
       editingIndex = index;
 
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+      document.querySelector(".card").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
       });
 
+      document.getElementById("poemText").focus();
     }
-
 
     function deletePoetry(index) {
-
-      if (
-        !confirm("ڇا توهان واقعي هي شاعري Delete ڪرڻ چاهيو ٿا؟")
-      ) {
-
+      if (!confirm("ڇا توهان واقعي هي شاعري ختم ڪرڻ چاهيو ٿا؟")) {
         return;
-
       }
 
-
       const poetry = getPoetry();
-
       poetry.splice(index, 1);
 
+      try {
+        localStorage.setItem(
+          "otherPoetry",
+          JSON.stringify(poetry)
+        );
+      } catch (error) {
+        alert("شاعري ختم ڪرڻ ۾ مسئلو پيش آيو.");
+        return;
+      }
 
-      localStorage.setItem(
-        "otherPoetry",
-        JSON.stringify(poetry)
-      );
-
+      if (editingIndex === index) {
+        clearForm();
+      } else if (editingIndex > index) {
+        editingIndex--;
+      }
 
       displayPoetry();
-
     }
-
 
     function clearForm() {
-
-      document.getElementById("poetName").value = "";
-
-      document.getElementById("penName").value = "";
-
-      document.getElementById("category").value = "ٻيون";
-
       document.getElementById("poemText").value = "";
-
+      editingIndex = -1;
     }
-
-
-    function escapeHTML(text) {
-
-      const div =
-        document.createElement("div");
-
-      div.textContent = text;
-
-      return div.innerHTML;
-
-    }
-
 
     displayPoetry();
-
   </script>
 
 </body>
-
 </html>
