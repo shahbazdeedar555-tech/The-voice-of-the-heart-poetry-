@@ -1,4 +1,11 @@
-const CACHE_NAME = "kavita-offline-v1";
+
+// ======================================================
+// 🌹 اَحساسَن جو ويسُ — ڪَويتا
+// OFFLINE SERVICE WORKER
+// VERSION 2 — NETWORK FIRST
+// ======================================================
+
+const CACHE_NAME = "kavita-offline-v2";
 
 const APP_FILES = [
   "./",
@@ -17,57 +24,105 @@ const APP_FILES = [
   "./category.html"
 ];
 
+// ======================================================
+// INSTALL
+// ======================================================
+
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(APP_FILES))
+      .then(cache => {
+        return Promise.all(
+          APP_FILES.map(file =>
+            cache.add(file).catch(error => {
+              console.log("Cache skipped:", file, error);
+            })
+          )
+        );
+      })
       .then(() => self.skipWaiting())
   );
 });
 
+// ======================================================
+// ACTIVATE — DELETE OLD CACHE
+// ======================================================
+
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+    caches.keys()
+      .then(keys =>
+        Promise.all(
+          keys
+            .filter(key =>
+              key.startsWith("kavita-offline-") &&
+              key !== CACHE_NAME
+            )
+            .map(key => caches.delete(key))
+        )
       )
-    ).then(() => self.clients.claim())
+      .then(() => self.clients.claim())
   );
 });
 
+// ======================================================
+// FETCH — NETWORK FIRST, CACHE FALLBACK
+// ======================================================
+
 self.addEventListener("fetch", event => {
+  const request = event.request;
+
+  if (request.method !== "GET") {
+    return;
+  }
+
+  const url = new URL(request.url);
+
+  // Only handle this website's own files.
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
+    fetch(request)
+      .then(response => {
+        if (response && response.ok && response.type === "basic") {
+          const copy = response.clone();
 
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(request, copy))
+            .catch(error => {
+              console.log("Cache update failed:", error);
+            });
+        }
 
-      return fetch(event.request)
-        .then(networkResponse => {
+        return response;
+      })
+      .catch(async () => {
+        const cached = await caches.match(request);
 
-          if (
-            !networkResponse ||
-            networkResponse.status !== 200 ||
-            networkResponse.type !== "basic"
-          ) {
-            return networkResponse;
+        if (cached) {
+          return cached;
+        }
+
+        // Offline homepage fallback.
+        if (request.mode === "navigate") {
+          const homepage = await caches.match("./index.html");
+
+          if (homepage) {
+            return homepage;
           }
+        }
 
-          const responseToCache = networkResponse.clone();
-
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
-
-          return networkResponse;
-        })
-        .catch(() => {
-          return caches.match("./index.html");
-        });
-
-    })
+        return new Response(
+          "هي صفحو آف لائين موجود ناهي. مهرباني ڪري انٽرنيٽ سان ٻيهر کوليو.",
+          {
+            status: 503,
+            headers: {
+              "Content-Type": "text/plain; charset=utf-8"
+            }
+          }
+        );
+      })
   );
 });
