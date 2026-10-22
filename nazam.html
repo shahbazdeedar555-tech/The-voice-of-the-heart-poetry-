@@ -265,49 +265,76 @@
       }
     }
 
-    function savePoetry() {
 
-      const poemTitle = document
-        .getElementById("poemTitle")
-        .value.trim();
 
-      const poemText = document
-        .getElementById("poemText")
-        .value.trim();
+function normalizePoemText(text) {
+  return (text || "")
+    .normalize("NFC")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-      if (!poemText) {
-        alert("مهرباني ڪري پهرين پنهنجي نظم لکو.");
-        return;
-      }
+function savePoetry() {
+  const poemTitle = document
+    .getElementById("poemTitle")
+    .value.trim();
 
-      const poetry = getPoetry();
+  const poemText = document
+    .getElementById("poemText")
+    .value.trim();
 
-      const oldPoem =
-        editingIndex !== -1 ? poetry[editingIndex] : null;
+  if (!poemText) {
+    alert("مهرباني ڪري پهرين پنهنجي نظم لکو.");
+    return;
+  }
 
-      const poem = {
-        ...(oldPoem || {}),
-        poetName: "",
-        penName: "",
-        title: poemTitle || "بغير عنوان جي نظم",
-        text: poemText
-      };
+  const poetry = getPoetry();
+  const normalizedText = normalizePoemText(poemText);
 
-      if (editingIndex === -1) {
-        poetry.push(poem);
-      } else {
-        poetry[editingIndex] = poem;
-      }
+  // Check duplicate poems, excluding the poem being edited.
+  const duplicateIndex = poetry.findIndex(function(poem, index) {
+    return index !== editingIndex &&
+      normalizePoemText(poem.text) === normalizedText;
+  });
 
-      localStorage.setItem(
-        "nazamPoetry",
-        JSON.stringify(poetry)
-      );
+  if (duplicateIndex !== -1) {
+    alert(
+      "⚠️ هي نظم اڳ ۾ محفوظ ٿيل آهي!\n" +
+      "عنوان: " +
+      (poetry[duplicateIndex].title || "بغير عنوان جي نظم")
+    );
+    return;
+  }
 
-      clearForm();
-      displayPoetry();
-    }
+  const oldPoem =
+    editingIndex !== -1 ? poetry[editingIndex] : null;
 
+  const poem = {
+    ...(oldPoem || {}),
+    poetName: "",
+    penName: "",
+    title: poemTitle || "بغير عنوان جي نظم",
+    text: poemText
+  };
+
+  if (editingIndex === -1) {
+    poetry.push(poem);
+  } else {
+    poetry[editingIndex] = poem;
+  }
+
+  localStorage.setItem(
+    "nazamPoetry",
+    JSON.stringify(poetry)
+  );
+
+  clearForm();
+  displayPoetry();
+
+  alert("✅ نظم ڪاميابيءَ سان محفوظ ٿي وئي.");
+}
+
+    
     function displayPoetry() {
 
       const list = document.getElementById("poetryList");
