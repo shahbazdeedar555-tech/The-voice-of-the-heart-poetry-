@@ -356,8 +356,12 @@ function savePoetry() {
         item.className = "poetry-item";
 
         const title = document.createElement("h3");
-        title.textContent = poem.title || "بغير عنوان جي نظم";
-        item.appendChild(title);
+
+title.textContent =
+  (index + 1) + ". " +
+  (poem.title || "بغير عنوان جي نظم");
+
+item.appendChild(title);
 
         const text = document.createElement("div");
         text.className = "poem-text";
