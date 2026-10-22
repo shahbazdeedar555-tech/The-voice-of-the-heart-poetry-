@@ -265,49 +265,73 @@
       }
     }
 
-    function savePoetry() {
+   
 
-      const poemTitle = document
-        .getElementById("poemTitle")
-        .value.trim();
+function normalizePoem(text) {
+  return (text || "")
+    .normalize("NFC")
+    .toLocaleLowerCase()
+    .replace(/[\s\p{P}\p{S}]/gu, "");
+}
 
-      const poemText = document
-        .getElementById("poemText")
-        .value.trim();
+function savePoetry() {
+  const poemTitle = document
+    .getElementById("poemTitle")
+    .value.trim();
 
-      if (!poemText) {
-        alert("مهرباني ڪري پهرين پنهنجي غزل لکو.");
-        return;
-      }
+  const poemText = document
+    .getElementById("poemText")
+    .value.trim();
 
-      const poetry = getPoetry();
+  if (!poemText) {
+    alert("مهرباني ڪري پهرين پنهنجي غزل لکو.");
+    return;
+  }
 
-      const oldPoem =
-        editingIndex !== -1 ? poetry[editingIndex] : null;
+  const poetry = getPoetry();
+  const normalizedText = normalizePoem(poemText);
 
-      const poem = {
-        ...(oldPoem || {}),
-        poetName: "",
-        penName: "",
-        title: poemTitle || "بغير عنوان جي غزل",
-        text: poemText
-      };
+  // ساڳي غزل اڳ ۾ موجود آهي يا نه؟
+  const duplicateIndex = poetry.findIndex(function(item, index) {
+    return index !== editingIndex &&
+      normalizePoem(item.text) === normalizedText;
+  });
 
-      if (editingIndex === -1) {
-        poetry.push(poem);
-      } else {
-        poetry[editingIndex] = poem;
-        editingIndex = -1;
-      }
+  if (duplicateIndex !== -1) {
+    alert(
+      "⚠️ هي غزل اڳ ۾ محفوظ ٿيل آهي.\n" +
+      "فهرست ۾ نمبر: " + (duplicateIndex + 1) +
+      "\nٻيهر محفوظ نه ڪئي وئي."
+    );
+    return;
+  }
 
-      localStorage.setItem(
-        "ghazalPoetry",
-        JSON.stringify(poetry)
-      );
+  const oldPoem =
+    editingIndex !== -1 ? poetry[editingIndex] : null;
 
-      clearForm();
-      displayPoetry();
-    }
+  const poem = {
+    ...(oldPoem || {}),
+    poetName: "",
+    penName: "",
+    title: poemTitle || "بغير عنوان جي غزل",
+    text: poemText
+  };
+
+  if (editingIndex === -1) {
+    poetry.push(poem);
+  } else {
+    poetry[editingIndex] = poem;
+  }
+
+  localStorage.setItem(
+    "ghazalPoetry",
+    JSON.stringify(poetry)
+  );
+
+  clearForm();
+  displayPoetry();
+}
+
 
     function displayPoetry() {
 
@@ -330,7 +354,9 @@
         item.className = "poetry-item";
 
         const title = document.createElement("h3");
-        title.textContent = poem.title || "بغير عنوان جي غزل";
+title.textContent =
+  (index + 1) + ". " +
+  (poem.title || "بغير عنوان جي غزل");
         item.appendChild(title);
 
         const text = document.createElement("div");
