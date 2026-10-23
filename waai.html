@@ -322,6 +322,14 @@ function findDuplicate(poemText) {
 
     const duplicate = findDuplicate(poemText);
 
+if (duplicate) {
+  alert(
+    "⚠️ هي وائي اڳ ۾ محفوظ ٿيل آهي!\n" +
+    "صنف: " + duplicate.category
+  );
+  return;
+}
+
     if (duplicate) {
       alert(
         "⚠️ هي ڪلام اڳ ۾ محفوظ ٿيل آهي.\n" +
