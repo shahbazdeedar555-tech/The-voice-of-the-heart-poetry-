@@ -238,172 +238,279 @@
 
   </footer>
 
-  <script>
 
-    let editingIndex = -1;
+<script>
+  let editingIndex = -1;
 
-    function getPoetry() {
+  function getPoetry() {
+    try {
+      const saved = JSON.parse(
+        localStorage.getItem("satrangoPoetry") || "[]"
+      );
+
+      return Array.isArray(saved) ? saved : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function normalizePoem(text) {
+    return String(text || "")
+      .normalize("NFC")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+
+  function findDuplicate(poemText) {
+    const target = normalizePoem(poemText);
+
+    if (!target) return null;
+
+    const categoryNames = {
+      betPoetry: "بيت",
+      ghazalPoetry: "غزل",
+      geetPoetry: "گيت",
+      nazamPoetry: "نظم",
+      satrangoPoetry: "سترنگو",
+      waaiPoetry: "وائي",
+      otherPoetry: "ٻي شاعري",
+      poetry: "شاعري"
+    };
+
+    for (let k = 0; k < localStorage.length; k++) {
+      const key = localStorage.key(k);
+
+      if (!key) continue;
+
       try {
-        const saved = JSON.parse(
-          localStorage.getItem("satrangoPoetry") || "[]"
-        );
+        const data = JSON.parse(localStorage.getItem(key));
 
-        return Array.isArray(saved) ? saved : [];
+        if (!Array.isArray(data)) continue;
+
+        for (let i = 0; i < data.length; i++) {
+          const poem = data[i];
+
+          if (!poem || typeof poem.text !== "string") {
+            continue;
+          }
+
+          // Do not flag the poem currently being edited.
+          if (
+            key === "satrangoPoetry" &&
+            i === editingIndex
+          ) {
+            continue;
+          }
+
+          if (normalizePoem(poem.text) === target) {
+            return {
+              category: categoryNames[key] ||
+                poem.category || "ٻي صنف",
+              number: i + 1
+            };
+          }
+        }
       } catch (error) {
-        return [];
+        // Ignore unrelated storage entries.
       }
     }
 
-    function savePoetry() {
+    return null;
+  }
 
-      const poemText = document
-        .getElementById("poemText")
-        .value.trim();
+  function savePoetry() {
+    const poemText = document
+      .getElementById("poemText")
+      .value.trim();
 
-      if (!poemText) {
-        alert("مهرباني ڪري پهرين پنهنجو سترنگو لکو.");
-        return;
-      }
+    if (!poemText) {
+      alert("مهرباني ڪري پهرين پنهنجو سترنگو لکو.");
+      return;
+    }
 
-      const poetry = getPoetry();
+    const duplicate = findDuplicate(poemText);
 
-      const oldPoem =
-        editingIndex !== -1 ? poetry[editingIndex] : null;
+    if (duplicate) {
+      alert(
+        "⚠️ هي شاعري اڳ ۾ محفوظ ٿيل آهي!\n\n" +
+        "صنف: " + duplicate.category + "\n" +
+        "محفوظ ٿيل نمبر: " + duplicate.number +
+        "\n\nساڳيو متن ٻيهر محفوظ نه ڪيو ويو."
+      );
+      return;
+    }
 
-      const poem = {
-        ...(oldPoem || {}),
-        poetName: "",
-        penName: "",
-        category: "سترنگو",
-        text: poemText
+    const poetry = getPoetry();
+
+    const oldPoem =
+      editingIndex !== -1 ? poetry[editingIndex] : null;
+
+    if (editingIndex !== -1 && !oldPoem) {
+      alert("سترنگو نه مليو. مهرباني ڪري ٻيهر ڪوشش ڪريو.");
+      clearForm();
+      return;
+    }
+
+    const poem = {
+      ...(oldPoem || {}),
+      poetName: oldPoem?.poetName || "",
+      penName: oldPoem?.penName || "",
+      category: "سترنگو",
+      text: poemText
+    };
+
+    if (editingIndex === -1) {
+      poetry.push(poem);
+    } else {
+      poetry[editingIndex] = poem;
+    }
+
+    try {
+      localStorage.setItem(
+        "satrangoPoetry",
+        JSON.stringify(poetry)
+      );
+    } catch (error) {
+      alert("سترنگو محفوظ نه ٿي سگهيو. ٻيهر ڪوشش ڪريو.");
+      return;
+    }
+
+    clearForm();
+    displayPoetry();
+
+    alert("✅ سترنگو ڪاميابيءَ سان محفوظ ٿي ويو.");
+  }
+
+  function displayPoetry() {
+    const list = document.getElementById("poetryList");
+    const poetry = getPoetry();
+
+    list.replaceChildren();
+
+    const count = document.createElement("div");
+    count.className = "empty";
+    count.textContent =
+      "🌈 ڪل محفوظ ٿيل سترنگا: " + poetry.length;
+
+    list.appendChild(count);
+
+    if (poetry.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "اڃا تائين ڪو سترنگو محفوظ ناهي.";
+      list.appendChild(empty);
+      return;
+    }
+
+    poetry.forEach(function(poem, index) {
+      const item = document.createElement("div");
+      item.className = "poetry-item";
+
+      const number = document.createElement("h3");
+      number.textContent = "سترنگو نمبر " + (index + 1);
+
+      const title = document.createElement("h3");
+      title.textContent = "🌈 سترنگو";
+
+      const text = document.createElement("div");
+      text.className = "poem-text";
+      text.textContent = poem.text || "";
+
+      const actions = document.createElement("div");
+      actions.className = "actions";
+
+      const editButton = document.createElement("button");
+      editButton.className = "edit-btn";
+      editButton.textContent = "✏️ Edit";
+      editButton.onclick = function() {
+        editPoetry(index);
       };
 
-      if (editingIndex === -1) {
-        poetry.push(poem);
-      } else {
-        poetry[editingIndex] = poem;
-      }
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "delete-btn";
+      deleteButton.textContent = "🗑️ Delete";
+      deleteButton.onclick = function() {
+        deletePoetry(index);
+      };
 
+      actions.appendChild(editButton);
+      actions.appendChild(deleteButton);
+
+      item.appendChild(number);
+      item.appendChild(title);
+      item.appendChild(text);
+      item.appendChild(actions);
+
+      list.appendChild(item);
+    });
+  }
+
+  function editPoetry(index) {
+    const poetry = getPoetry();
+    const poem = poetry[index];
+
+    if (!poem) return;
+
+    document.getElementById("poemText").value =
+      poem.text || "";
+
+    editingIndex = index;
+
+    document.querySelector(".save-btn").textContent =
+      "💾 تبديليون محفوظ ڪريو";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+    document.getElementById("poemText").focus();
+  }
+
+  function deletePoetry(index) {
+    if (!confirm("ڇا توهان واقعي هي سترنگو ختم ڪرڻ چاهيو ٿا؟")) {
+      return;
+    }
+
+    const poetry = getPoetry();
+
+    if (index < 0 || index >= poetry.length) return;
+
+    poetry.splice(index, 1);
+
+    try {
       localStorage.setItem(
         "satrangoPoetry",
         JSON.stringify(poetry)
       );
+    } catch (error) {
+      alert("سترنگو ختم ڪرڻ ۾ مسئلو پيش آيو.");
+      return;
+    }
 
+    if (editingIndex === index) {
       clearForm();
-      displayPoetry();
-    }
-
-    function displayPoetry() {
-
-      const list = document.getElementById("poetryList");
-      const poetry = getPoetry();
-
-      list.replaceChildren();
-
-      if (poetry.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "empty";
-        empty.textContent = "اڃا تائين ڪو سترنگو محفوظ ناهي.";
-        list.appendChild(empty);
-        return;
-      }
-
-      poetry.forEach(function(poem, index) {
-
-        const item = document.createElement("div");
-        item.className = "poetry-item";
-
-        const title = document.createElement("h3");
-        title.textContent = "🌈 سترنگو";
-        item.appendChild(title);
-
-        const text = document.createElement("div");
-        text.className = "poem-text";
-        text.textContent = poem.text || "";
-        item.appendChild(text);
-
-        const actions = document.createElement("div");
-        actions.className = "actions";
-
-        const editButton = document.createElement("button");
-        editButton.className = "edit-btn";
-        editButton.textContent = "✏️ Edit";
-        editButton.onclick = function() {
-          editPoetry(index);
-        };
-
-        const deleteButton = document.createElement("button");
-        deleteButton.className = "delete-btn";
-        deleteButton.textContent = "🗑️ Delete";
-        deleteButton.onclick = function() {
-          deletePoetry(index);
-        };
-
-        actions.appendChild(editButton);
-        actions.appendChild(deleteButton);
-        item.appendChild(actions);
-
-        list.appendChild(item);
-      });
-    }
-
-    function editPoetry(index) {
-
-      const poetry = getPoetry();
-      const poem = poetry[index];
-
-      if (!poem) return;
-
-      document.getElementById("poemText").value =
-        poem.text || "";
-
-      editingIndex = index;
-
-      document.querySelector(".save-btn").textContent =
-        "💾 تبديليون محفوظ ڪريو";
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-    function deletePoetry(index) {
-
-      if (!confirm("ڇا توهان واقعي هي سترنگو Delete ڪرڻ چاهيو ٿا؟")) {
-        return;
-      }
-
-      const poetry = getPoetry();
-      poetry.splice(index, 1);
-
-      localStorage.setItem(
-        "satrangoPoetry",
-        JSON.stringify(poetry)
-      );
-
-      if (editingIndex === index) {
-        clearForm();
-      } else if (editingIndex > index) {
-        editingIndex--;
-      }
-
-      displayPoetry();
-    }
-
-    function clearForm() {
-
-      document.getElementById("poemText").value = "";
-
-      document.querySelector(".save-btn").textContent =
-        "💾 سترنگو محفوظ ڪريو";
-
-      editingIndex = -1;
+    } else if (editingIndex > index) {
+      editingIndex--;
     }
 
     displayPoetry();
+    alert("سترنگو ختم ڪيو ويو.");
+  }
 
-  </script>
+  function clearForm() {
+    document.getElementById("poemText").value = "";
+
+    document.querySelector(".save-btn").textContent =
+      "💾 سترنگو محفوظ ڪريو";
+
+    editingIndex = -1;
+  }
+
+  displayPoetry();
+</script>
+
 
 </body>
 </html>
