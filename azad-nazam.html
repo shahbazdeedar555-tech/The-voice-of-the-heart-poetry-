@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>آزاد نظم — اَحساسَن جو ويسُ ڪَويتا</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #f8e8c8, #fffdf5);
+      color: #4b2e1f;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 15px 15px;
+    }
+
+    h1 {
+      color: #7b1e1e;
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #6d4c41;
+      font-size: 18px;
+    }
+
+    .back {
+      display: inline-block;
+      margin: 15px auto;
+      padding: 10px 20px;
+      background: #7b1e1e;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #d7b889;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(80, 40, 10, 0.12);
+    }
+
+    .card h2 {
+      color: #7b1e1e;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #6d3b27;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #c9a46a;
+      border-radius: 12px;
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      background: #fffdf8;
+    }
+
+    textarea {
+      min-height: 280px;
+      line-height: 2;
+      resize: vertical;
+    }
+
+    .save-btn {
+      display: block;
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      background: #7b1e1e;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .save-btn:hover { background: #9b2929; }
+
+    .poetry-item {
+      background: #fffdf5;
+      border: 1px solid #d7b889;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 18px;
+    }
+
+    .poetry-item h3 {
+      color: #7b1e1e;
+      margin-top: 0;
+    }
+
+    .poem-text {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 2;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .edit-btn { background: #b98242; color: white; }
+    .delete-btn { background: #8b1e1e; color: white; }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 20px;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 20px;
+      text-align: center;
+      background: #6d3b27;
+      color: white;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🖋️ آزاد نظم</h1>
+    <div class="subtitle">
+      Azad Nazam — اَحساسَن جو ويسُ ڪَويتا
+    </div>
+    <div>
+      <a href="index.html" class="back">← Homepage ڏانهن واپس</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>✍️ نئون آزاد نظم لکو</h2>
+
+      <label for="poemTitle">نظم جو عنوان (اختياري)</label>
+      <input type="text" id="poemTitle"
+        placeholder="آزاد نظم جو عنوان لکو">
+
+      <label for="poemText">پنهنجو آزاد نظم لکو</label>
+      <textarea id="poemText"
+        placeholder="هتي پنهنجو آزاد نظم لکو..."></textarea>
+
+      <button class="save-btn" onclick="savePoetry()">
+        💾 آزاد نظم محفوظ ڪريو
+      </button>
+    </section>
+
+    <section class="card">
+      <h2>📖 محفوظ ٿيل آزاد نظم</h2>
+      <div id="poetryList"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>
+      <a href="index.html">🏠 گهر</a>
+      <a href="categories.html">📚 صنفون</a>
+      <a href="poets.html">✒️ شاعر</a>
+    </div>
+    <p>اَحساسَن جو ويسُ — ڪَويتا</p>
+  </footer>
+
+  <script>
+    let editingIndex = -1;
+
+    function getPoetry() {
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem("azadNazamPoetry") || "[]"
+        );
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function normalizePoem(text) {
+      return (text || "")
+        .normalize("NFC")
+        .toLocaleLowerCase()
+        .replace(/[\s\p{P}\p{S}]/gu, "");
+    }
+
+    function savePoetry() {
+      const poemTitle = document
+        .getElementById("poemTitle").value.trim();
+
+      const poemText = document
+        .getElementById("poemText").value.trim();
+
+      if (!poemText) {
+        alert("مهرباني ڪري پهرين پنهنجو آزاد نظم لکو.");
+        return;
+      }
+
+      const poetry = getPoetry();
+      const normalizedText = normalizePoem(poemText);
+
+      if (!normalizedText) {
+        alert("مهرباني ڪري نظم ۾ اکر به لکو.");
+        return;
+      }
+
+      const duplicateIndex = poetry.findIndex(
+        function(item, index) {
+          return index !== editingIndex &&
+            normalizePoem(item.text) === normalizedText;
+        }
+      );
+
+      if (duplicateIndex !== -1) {
+        alert(
+          "⚠️ هي آزاد نظم اڳ ۾ محفوظ ٿيل آهي.\n" +
+          "فهرست ۾ نمبر: " + (duplicateIndex + 1) +
+          "\nٻيهر محفوظ نه ڪيو ويو."
+        );
+        return;
+      }
+
+      const oldPoem =
+        editingIndex !== -1 ? poetry[editingIndex] : null;
+
+      const poem = {
+        ...(oldPoem || {}),
+        poetName: "",
+        penName: "",
+        title: poemTitle || "بغير عنوان جو آزاد نظم",
+        text: poemText
+      };
+
+      if (editingIndex === -1) {
+        poetry.push(poem);
+      } else {
+        poetry[editingIndex] = poem;
+      }
+
+      try {
+        localStorage.setItem(
+          "azadNazamPoetry",
+          JSON.stringify(poetry)
+        );
+
+        clearForm();
+        displayPoetry();
+        alert("✅ آزاد نظم ڪاميابيءَ سان محفوظ ٿي ويو!");
+      } catch (error) {
+        alert(
+          "❌ نظم محفوظ نه ٿي سگهيو. " +
+          "برائوزر جي اسٽوريج چيڪ ڪريو."
+        );
+      }
+    }
+
+    function displayPoetry() {
+      const list = document.getElementById("poetryList");
+      const poetry = getPoetry();
+
+      list.replaceChildren();
+
+      if (poetry.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "اڃا تائين ڪو آزاد نظم محفوظ ناهي.";
+        list.appendChild(empty);
+        return;
+      }
+
+      poetry.forEach(function(poem, index) {
+        const item = document.createElement("div");
+        item.className = "poetry-item";
+
+        const title = document.createElement("h3");
+        title.textContent =
+          (index + 1) + ". " +
+          (poem.title || "بغير عنوان جو آزاد نظم");
+        item.appendChild(title);
+
+        const text = document.createElement("div");
+        text.className = "poem-text";
+        text.textContent = poem.text || "";
+        item.appendChild(text);
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const editButton = document.createElement("button");
+        editButton.className = "edit-btn";
+        editButton.textContent = "✏️ تبديلي";
+        editButton.onclick = function() {
+          editPoetry(index);
+        };
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-btn";
+        deleteButton.textContent = "🗑️ حذف";
+        deleteButton.onclick = function() {
+          deletePoetry(index);
+        };
+
+        actions.appendChild(editButton);
+        actions.appendChild(deleteButton);
+        item.appendChild(actions);
+        list.appendChild(item);
+      });
+    }
+
+    function editPoetry(index) {
+      const poetry = getPoetry();
+      const poem = poetry[index];
+
+      if (!poem) return;
+
+      document.getElementById("poemTitle").value =
+        poem.title === "بغير عنوان جو آزاد نظم"
+          ? "" : (poem.title || "");
+
+      document.getElementById("poemText").value =
+        poem.text || "";
+
+      editingIndex = index;
+
+      document.querySelector(".save-btn").textContent =
+        "💾 تبديليون محفوظ ڪريو";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function deletePoetry(index) {
+      if (!confirm(
+        "ڇا توهان واقعي هي آزاد نظم حذف ڪرڻ چاهيو ٿا؟"
+      )) {
+        return;
+      }
+
+      const poetry = getPoetry();
+      poetry.splice(index, 1);
+
+      try {
+        localStorage.setItem(
+          "azadNazamPoetry",
+          JSON.stringify(poetry)
+        );
+
+        if (editingIndex === index) {
+          editingIndex = -1;
+          clearForm();
+        } else if (editingIndex > index) {
+          editingIndex--;
+        }
+
+        displayPoetry();
+        alert("✅ آزاد نظم حذف ڪيو ويو.");
+      } catch (error) {
+        alert("❌ نظم حذف نه ٿي سگهيو.");
+      }
+    }
+
+    function clearForm() {
+      document.getElementById("poemTitle").value = "";
+      document.getElementById("poemText").value = "";
+
+      document.querySelector(".save-btn").textContent =
+        "💾 آزاد نظم محفوظ ڪريو";
+
+      editingIndex = -1;
+    }
+
+    displayPoetry();
+  </script>
+
+</body>
+</html>
