@@ -253,54 +253,63 @@
       .toLowerCase();
   }
 
-  function findDuplicate(poemText) {
-    const target = normalizePoem(poemText);
 
-    if (!target) return null;
+function findDuplicate(poemText) {
+  const target = normalizePoem(poemText);
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+  if (!target) return null;
 
-      if (!key) continue;
+  // پهرين موجوده وائيون چيڪ ڪريو.
+  const currentPoetry = getPoetry();
 
-      try {
-        const data = JSON.parse(
-          localStorage.getItem(key) || "null"
-        );
+  for (let i = 0; i < currentPoetry.length; i++) {
+    if (i === editingIndex) continue;
 
-        if (!Array.isArray(data)) continue;
-
-        for (let j = 0; j < data.length; j++) {
-          const poem = data[j];
-
-          if (!poem || typeof poem !== "object") {
-            continue;
-          }
-
-          if (
-            key === STORAGE_KEY &&
-            j === editingIndex
-          ) {
-            continue;
-          }
-
-          if (normalizePoem(poem.text) === target) {
-            return {
-              category:
-                CATEGORY_NAMES[key] ||
-                poem.category ||
-                "ٻي صنف",
-              sameCategory: key === STORAGE_KEY
-            };
-          }
-        }
-      } catch (error) {
-        // غير شاعري واري localStorage ڊيٽا کي ڇڏي ڏيو.
-      }
+    if (
+      normalizePoem(currentPoetry[i]?.text) === target
+    ) {
+      return {
+        category: "وائي",
+        sameCategory: true
+      };
     }
-
-    return null;
   }
+
+  // پوءِ ٻين صنفن جي محفوظ ڪيل ڪلام کي چيڪ ڪريو.
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+
+    if (!key || key === STORAGE_KEY) continue;
+
+    try {
+      const data = JSON.parse(
+        localStorage.getItem(key) || "null"
+      );
+
+      if (!Array.isArray(data)) continue;
+
+      for (const poem of data) {
+        if (
+          poem &&
+          typeof poem === "object" &&
+          normalizePoem(poem.text) === target
+        ) {
+          return {
+            category:
+              CATEGORY_NAMES[key] ||
+              poem.category ||
+              "ٻي صنف",
+            sameCategory: false
+          };
+        }
+      }
+    } catch (error) {
+      // ٻين قسمن جي ڊيٽا کي ڇڏي ڏيو.
+    }
+  }
+
+  return null;
+}
 
   function savePoetry() {
     const input = document.getElementById("poemText");
