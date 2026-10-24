@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#183b2b">
+
+  <title>نثري نظم — اَحساسَن جو ويسُ ڪَويتا</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      background: #f4ead5;
+      color: #183b2b;
+      line-height: 1.9;
+    }
+
+    header {
+      text-align: center;
+      background: #183b2b;
+      color: #f4ead5;
+      padding: 22px 14px;
+      border-radius: 16px;
+      border-bottom: 5px solid #c9a44c;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 27px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .links {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .links a,
+    button {
+      display: inline-block;
+      background: #183b2b;
+      color: #fff;
+      border: 1px solid #c9a44c;
+      border-radius: 9px;
+      padding: 10px 16px;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 760px;
+      margin: auto;
+    }
+
+    .panel {
+      background: #fffaf0;
+      border: 1px solid #d8c79f;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px #183b2b12;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #183b2b;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 12px 0 5px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 18px;
+      color: #183b2b;
+      background: #fff;
+      border: 1px solid #b9a777;
+      border-radius: 8px;
+      outline-color: #c9a44c;
+    }
+
+    textarea {
+      min-height: 190px;
+      resize: vertical;
+      line-height: 2;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .delete {
+      background: #7b2828;
+    }
+
+    .cancel {
+      background: #655a45;
+    }
+
+    .poem-card {
+      background: #fffaf0;
+      border: 1px solid #d8c79f;
+      border-right: 5px solid #c9a44c;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .poem-card h3 {
+      margin: 0 0 10px;
+      white-space: pre-wrap;
+    }
+
+    .poem-text {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 19px;
+      line-height: 2.1;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 18px;
+      color: #655a45;
+    }
+
+    footer {
+      text-align: center;
+      margin: 24px 0 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>📝 نثري نظم</h1>
+  <p>اَحساسَن جو ويسُ — ڪَويتا</p>
+  <p>لفظن ۾ احساس، احساسن ۾ زندگي</p>
+</header>
+
+<nav class="links">
+  <a href="index.html">🏠 مکيه صفحو</a>
+  <a href="other.html">🌸 ٻيون شاعري</a>
+</nav>
+
+<main>
+  <section class="panel">
+    <h2>✍️ پنهنجو نثري نظم لکو</h2>
+
+    <label for="poemTitle">نظم جو عنوان</label>
+    <input
+      id="poemTitle"
+      type="text"
+      placeholder="نظم جو عنوان لکو..."
+      maxlength="200"
+    >
+
+    <label for="poemText">نثري نظم</label>
+    <textarea
+      id="poemText"
+      placeholder="پنهنجو نثري نظم هتي لکو..."
+    ></textarea>
+
+    <div class="buttons">
+      <button id="saveBtn" type="button">💾 نظم محفوظ ڪريو</button>
+      <button id="cancelBtn" class="cancel" type="button" hidden>
+        رد ڪريو
+      </button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>📚 محفوظ ڪيل نثري نظم</h2>
+    <p id="count">نظمن جو تعداد: 0</p>
+    <div id="poemList"></div>
+  </section>
+</main>
+
+<footer>
+  <p>اَحساسَن جو ويسُ — ڪَويتا</p>
+  <p>ايجاد: ديدار شھباز</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = "ahsasan_jo_wes_prose_nazm_v1";
+
+  const titleInput = document.getElementById("poemTitle");
+  const textInput = document.getElementById("poemText");
+  const saveBtn = document.getElementById("saveBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const poemList = document.getElementById("poemList");
+  const count = document.getElementById("count");
+
+  let poems = [];
+  let editingId = null;
+
+  function normalize(value) {
+    return value
+      .normalize("NFC")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function loadPoems() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const parsed = saved ? JSON.parse(saved) : [];
+
+      if (!Array.isArray(parsed)) {
+        throw new Error("Invalid saved data");
+      }
+
+      poems = parsed;
+      renderPoems();
+    } catch (error) {
+      poems = [];
+      alert(
+        "محفوظ ڪيل ڊيٽا پڙهڻ ۾ مسئلو ٿيو. پراڻي ڊيٽا کي محفوظ رکڻ لاءِ ان کي پاڻمرادو ختم نه ڪيو ويو آهي."
+      );
+      poemList.textContent = "ڊيٽا پڙهي نه سگهي. مهرباني ڪري برائوزر جي اسٽوريج چيڪ ڪريو.";
+    }
+  }
+
+  function persistPoems() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(poems));
+      return true;
+    } catch (error) {
+      alert("نظم محفوظ نه ٿي سگهيو. فون ۾ اسٽوريج جي جاءِ چيڪ ڪريو.");
+      return false;
+    }
+  }
+
+  function resetForm() {
+    titleInput.value = "";
+    textInput.value = "";
+    editingId = null;
+    saveBtn.textContent = "💾 نظم محفوظ ڪريو";
+    cancelBtn.hidden = true;
+  }
+
+  function renderPoems() {
+    poemList.replaceChildren();
+    count.textContent = "نظمن جو تعداد: " + poems.length;
+
+    if (poems.length === 0) {
+      const empty = document.createElement("p");
+      empty.className = "empty";
+      empty.textContent = "اڃا ڪو نثري نظم محفوظ نه ڪيو ويو آهي.";
+      poemList.appendChild(empty);
+      return;
+    }
+
+    [...poems].reverse().forEach(function(poem) {
+      const card = document.createElement("article");
+      card.className = "poem-card";
+
+      const heading = document.createElement("h3");
+      heading.textContent = poem.title || "بغير عنوان جي نظم";
+
+      const content = document.createElement("div");
+      content.className = "poem-text";
+      content.textContent = poem.text;
+
+      const buttons = document.createElement("div");
+      buttons.className = "buttons";
+
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.textContent = "✏️ ترميم";
+      editBtn.addEventListener("click", function() {
+        titleInput.value = poem.title;
+        textInput.value = poem.text;
+        editingId = poem.id;
+        saveBtn.textContent = "💾 تبديليون محفوظ ڪريو";
+        cancelBtn.hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.type = "button";
+      deleteBtn.className = "delete";
+      deleteBtn.textContent = "🗑️ ختم ڪريو";
+      deleteBtn.addEventListener("click", function() {
+        if (!confirm("ڇا اوهان هي نثري نظم ختم ڪرڻ چاهيو ٿا؟")) {
+          return;
+        }
+
+        const oldPoems = poems;
+        poems = poems.filter(function(item) {
+          return item.id !== poem.id;
+        });
+
+        if (persistPoems()) {
+          renderPoems();
+          if (editingId === poem.id) {
+            resetForm();
+          }
+        } else {
+          poems = oldPoems;
+        }
+      });
+
+      buttons.append(editBtn, deleteBtn);
+      card.append(heading, content, buttons);
+      poemList.appendChild(card);
+    });
+  }
+
+  saveBtn.addEventListener("click", function() {
+    const title = titleInput.value.trim();
+    const text = textInput.value.trim();
+
+    if (!text) {
+      alert("مهرباني ڪري پهرين پنهنجو نثري نظم لکو.");
+      textInput.focus();
+      return;
+    }
+
+    const normalizedText = normalize(text);
+
+    const duplicate = poems.some(function(poem) {
+      return poem.id !== editingId &&
+        normalize(poem.text) === normalizedText;
+    });
+
+    if (duplicate) {
+      alert("هي نثري نظم هن صفحي ۾ اڳ ئي محفوظ ٿيل آهي.");
+      return;
+    }
+
+    const oldPoems = poems.map(function(poem) {
+      return { ...poem };
+    });
+
+    if (editingId !== null) {
+      poems = poems.map(function(poem) {
+        if (poem.id === editingId) {
+          return {
+            ...poem,
+            title: title,
+            text: text
+          };
+        }
+        return poem;
+      });
+    } else {
+      poems.push({
+        id: Date.now().toString() + Math.random().toString(36).slice(2),
+        title: title,
+        text: text
+      });
+    }
+
+    if (persistPoems()) {
+      renderPoems();
+      resetForm();
+      alert("نثري نظم ڪاميابيءَ سان محفوظ ٿي ويو.");
+    } else {
+      poems = oldPoems;
+    }
+  });
+
+  cancelBtn.addEventListener("click", resetForm);
+
+  loadPoems();
+</script>
+
+</body>
+</html>
