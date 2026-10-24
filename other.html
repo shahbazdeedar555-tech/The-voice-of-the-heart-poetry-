@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="sd" dir="rtl">
 
@@ -68,6 +69,42 @@
       text-align: center;
     }
 
+    .count-box {
+      background: #f8ead2;
+      border: 1px solid #d7b889;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 19px;
+      color: #7b1e1e;
+      font-weight: bold;
+    }
+
+    .notice {
+      display: none;
+      padding: 13px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      text-align: center;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .notice.success {
+      display: block;
+      background: #e5f5e8;
+      color: #205b2b;
+      border: 1px solid #8bc797;
+    }
+
+    .notice.warning {
+      display: block;
+      background: #fff0d7;
+      color: #7b1e1e;
+      border: 1px solid #dfb36d;
+    }
+
     textarea {
       display: block;
       width: 100%;
@@ -97,6 +134,19 @@
 
     .save-btn:hover {
       background: #9b2929;
+    }
+
+    .cancel-btn {
+      display: none;
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid #7b1e1e;
+      border-radius: 25px;
+      background: #fffdf8;
+      color: #7b1e1e;
+      font-size: 17px;
+      cursor: pointer;
     }
 
     .poetry-item {
@@ -188,8 +238,20 @@
 
   <main class="container">
 
+    <div class="count-box" aria-live="polite">
+      📚 ڪل محفوظ ٿيل شاعري:
+      <span id="poetryCount">0</span>
+    </div>
+
     <section class="card">
       <h2>✍️ سڌو پنهنجي شاعري لکو</h2>
+
+      <div
+        id="notice"
+        class="notice"
+        role="status"
+        aria-live="polite"
+      ></div>
 
       <textarea
         id="poemText"
@@ -199,9 +261,18 @@
 
       <button
         class="save-btn"
+        id="saveButton"
         onclick="savePoetry()"
       >
         💾 شاعري محفوظ ڪريو
+      </button>
+
+      <button
+        class="cancel-btn"
+        id="cancelButton"
+        onclick="cancelEdit()"
+      >
+        ✖️ ايڊٽ ڪرڻ منسوخ ڪريو
       </button>
     </section>
 
@@ -219,9 +290,7 @@
       <a href="poets.html">✒️ شاعر</a>
     </div>
 
-    <p>
-      اَحساسَن جو ويسُ — ڪَويتا
-    </p>
+    <p>اَحساسَن جو ويسُ — ڪَويتا</p>
   </footer>
 
   <script>
@@ -239,16 +308,69 @@
       }
     }
 
+    // Normalize spaces and line breaks for duplicate checking.
+    // The original poem text is never changed by this function.
+    function normalizePoem(text) {
+      return String(text || "")
+        .normalize("NFC")
+        .replace(/\s+/gu, " ")
+        .trim();
+    }
+
+    function showNotice(message, type) {
+      const notice = document.getElementById("notice");
+
+      notice.textContent = message;
+      notice.className = "notice " + type;
+
+      notice.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+
+    function updateCount() {
+      const poetry = getPoetry();
+
+      document.getElementById("poetryCount").textContent =
+        poetry.length;
+    }
+
     function savePoetry() {
       const poemText =
         document.getElementById("poemText").value.trim();
 
       if (!poemText) {
-        alert("مهرباني ڪري پهرين پنهنجي شاعري لکو.");
+        showNotice(
+          "مهرباني ڪري پهرين پنهنجي شاعري لکو.",
+          "warning"
+        );
         return;
       }
 
       const poetry = getPoetry();
+      const normalized = normalizePoem(poemText);
+
+      // Check for an identical poem, excluding the poem
+      // currently being edited.
+      const duplicateIndex = poetry.findIndex(
+        function(poem, index) {
+          if (index === editingIndex) return false;
+
+          return normalizePoem(poem.text) === normalized;
+        }
+      );
+
+      if (duplicateIndex !== -1) {
+        showNotice(
+          "⚠️ هيءَ شاعري اڳ ۾ محفوظ ٿيل آهي. " +
+          "نقل ٻيهر محفوظ نه ڪئي وئي. " +
+          "اڳيون رڪارڊ نمبر: " + (duplicateIndex + 1),
+          "warning"
+        );
+
+        return;
+      }
 
       if (editingIndex === -1) {
         poetry.push({
@@ -258,17 +380,24 @@
           text: poemText
         });
       } else {
-        const oldPoem = poetry[editingIndex] || {};
+        const oldPoem = poetry[editingIndex];
+
+        if (!oldPoem) {
+          editingIndex = -1;
+
+          showNotice(
+            "محفوظ ٿيل رڪارڊ نه مليو. ٻيهر ڪوشش ڪريو.",
+            "warning"
+          );
+
+          return;
+        }
 
         poetry[editingIndex] = {
           ...oldPoem,
-          poetName: oldPoem.poetName || "",
-          penName: oldPoem.penName || "",
           category: "ٻيون",
           text: poemText
         };
-
-        editingIndex = -1;
       }
 
       try {
@@ -277,14 +406,25 @@
           JSON.stringify(poetry)
         );
       } catch (error) {
-        alert("شاعري محفوظ نه ٿي سگهي. مهرباني ڪري ٻيهر ڪوشش ڪريو.");
+        showNotice(
+          "شاعري محفوظ نه ٿي سگهي. پنهنجي برائوزر جي اسٽوريج چيڪ ڪريو.",
+          "warning"
+        );
+
         return;
       }
+
+      const wasEditing = editingIndex !== -1;
 
       clearForm();
       displayPoetry();
 
-      alert("توهان جي شاعري محفوظ ٿي وئي.");
+      showNotice(
+        wasEditing
+          ? "✅ توهان جي شاعريءَ ۾ تبديلي محفوظ ٿي وئي."
+          : "✅ نئين شاعري محفوظ ٿي وئي.",
+        "success"
+      );
     }
 
     function displayPoetry() {
@@ -293,9 +433,16 @@
 
       list.innerHTML = "";
 
+      updateCount();
+
       if (poetry.length === 0) {
-        list.innerHTML =
-          '<div class="empty">اڃا تائين ڪا شاعري محفوظ ناهي.</div>';
+        const empty = document.createElement("div");
+
+        empty.className = "empty";
+        empty.textContent =
+          "اڃا تائين ڪا شاعري محفوظ ناهي.";
+
+        list.appendChild(empty);
         return;
       }
 
@@ -304,7 +451,7 @@
         item.className = "poetry-item";
 
         const heading = document.createElement("h3");
-        heading.textContent = "📝 ٻيون";
+        heading.textContent = "📝 ٻيون — نمبر " + (index + 1);
 
         const text = document.createElement("div");
         text.className = "poem-text";
@@ -315,14 +462,14 @@
 
         const editButton = document.createElement("button");
         editButton.className = "edit-btn";
-        editButton.textContent = "✏️ Edit";
+        editButton.textContent = "✏️ ايڊٽ ڪريو";
         editButton.onclick = function() {
           editPoetry(index);
         };
 
         const deleteButton = document.createElement("button");
         deleteButton.className = "delete-btn";
-        deleteButton.textContent = "🗑️ Delete";
+        deleteButton.textContent = "🗑️ ختم ڪريو";
         deleteButton.onclick = function() {
           deletePoetry(index);
         };
@@ -349,6 +496,14 @@
 
       editingIndex = index;
 
+      document.getElementById("saveButton").textContent =
+        "💾 تبديليون محفوظ ڪريو";
+
+      document.getElementById("cancelButton").style.display =
+        "block";
+
+      document.getElementById("notice").className = "notice";
+
       document.querySelector(".card").scrollIntoView({
         behavior: "smooth",
         block: "start"
@@ -357,12 +512,28 @@
       document.getElementById("poemText").focus();
     }
 
+    function cancelEdit() {
+      clearForm();
+
+      document.getElementById("notice").className = "notice";
+
+      showNotice(
+        "ايڊٽ ڪرڻ منسوخ ڪيو ويو.",
+        "success"
+      );
+    }
+
     function deletePoetry(index) {
-      if (!confirm("ڇا توهان واقعي هي شاعري ختم ڪرڻ چاهيو ٿا؟")) {
+      if (!confirm(
+        "ڇا توهان واقعي هي شاعري ختم ڪرڻ چاهيو ٿا؟"
+      )) {
         return;
       }
 
       const poetry = getPoetry();
+
+      if (!poetry[index]) return;
+
       poetry.splice(index, 1);
 
       try {
@@ -371,7 +542,10 @@
           JSON.stringify(poetry)
         );
       } catch (error) {
-        alert("شاعري ختم ڪرڻ ۾ مسئلو پيش آيو.");
+        showNotice(
+          "شاعري ختم ڪرڻ ۾ مسئلو پيش آيو.",
+          "warning"
+        );
         return;
       }
 
@@ -382,11 +556,23 @@
       }
 
       displayPoetry();
+
+      showNotice(
+        "🗑️ شاعري ختم ڪئي وئي. موجوده تعداد: " +
+        poetry.length,
+        "success"
+      );
     }
 
     function clearForm() {
       document.getElementById("poemText").value = "";
       editingIndex = -1;
+
+      document.getElementById("saveButton").textContent =
+        "💾 شاعري محفوظ ڪريو";
+
+      document.getElementById("cancelButton").style.display =
+        "none";
     }
 
     displayPoetry();
