@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#183b2b">
+  <meta name="description" content="هائيڪو شاعري — اَحساسَن جو ويسُ">
+  <title>هائيڪو — اَحساسَن جو ويسُ ڪَويتا</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4ead5;
+      color: #183b2b;
+    }
+
+    header {
+      background: #183b2b;
+      color: #f4d58d;
+      text-align: center;
+      padding: 22px 12px;
+      border-bottom: 4px solid #c9a44c;
+    }
+
+    header h1 { margin: 0 0 8px; font-size: 27px; }
+    header p { margin: 0; color: #fff4d6; }
+
+    .back, button {
+      display: inline-block;
+      padding: 11px 20px;
+      border: 1px solid #c9a44c;
+      border-radius: 24px;
+      background: #183b2b;
+      color: #f4d58d;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back { margin-top: 15px; }
+
+    main {
+      max-width: 750px;
+      margin: auto;
+      padding: 22px 15px 35px;
+    }
+
+    .panel {
+      background: #fffaf0;
+      border: 2px solid #c9a44c;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(24,59,43,.10);
+    }
+
+    h2 { text-align: center; }
+    label { display: block; margin: 14px 0 7px; font-weight: bold; }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bba46d;
+      border-radius: 9px;
+      background: #fff;
+      color: #183b2b;
+      font: inherit;
+      font-size: 17px;
+    }
+
+    textarea { min-height: 130px; resize: vertical; line-height: 1.9; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .poem {
+      border-top: 1px solid #d8c58e;
+      padding-top: 15px;
+      margin-top: 15px;
+      line-height: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .poem h3 { margin: 0; }
+    .poem-text { white-space: pre-wrap; font-size: 19px; }
+
+    .delete { background: #7b2828; border-color: #7b2828; color: white; }
+    .edit { background: #326247; }
+
+    .note { line-height: 1.9; text-align: center; }
+
+    footer {
+      background: #183b2b;
+      color: #f4d58d;
+      text-align: center;
+      padding: 20px 10px;
+      border-top: 4px solid #c9a44c;
+      line-height: 1.9;
+    }
+
+    footer a { color: #fff4d6; text-decoration: none; }
+
+    @media (max-width: 400px) {
+      header h1 { font-size: 22px; }
+      .panel { padding: 13px; }
+      .actions button { flex: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🌸 هائيڪو شاعري</h1>
+    <p>اَحساسَن جو ويسُ — ڪَويتا</p>
+    <a class="back" href="other.html">↩ ٻين صنفن ڏانهن واپس</a>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>✍️ پنهنجو هائيڪو لکو</h2>
+      <p class="note">پنهنجي شاعريءَ جو عنوان ۽ هائيڪو هتي لکو. محفوظ ڪيل شاعري هن ئي برائوزر ۾ رهندي.</p>
+
+      <label for="title">عنوان</label>
+      <input id="title" type="text" placeholder="هائيڪو جو عنوان">
+
+      <label for="poemText">هائيڪو</label>
+      <textarea id="poemText" placeholder="پنهنجو هائيڪو هتي لکو..."></textarea>
+
+      <div class="actions">
+        <button type="button" id="saveBtn">💾 محفوظ ڪريو</button>
+        <button type="button" id="clearBtn">صاف ڪريو</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>📚 محفوظ ڪيل هائيڪو</h2>
+      <div id="poemList"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>اَحساسَن جو ويسُ — ڪَويتا</p>
+    <p>© 2026 ايجاد ديدار شھباز</p>
+    <a href="index.html">🏠 هوم پيج</a>
+  </footer>
+
+  <script>
+    const STORAGE_KEY = "ahsasan_jo_wes_haiku_v1";
+    const titleInput = document.getElementById("title");
+    const poemInput = document.getElementById("poemText");
+    const list = document.getElementById("poemList");
+    const saveBtn = document.getElementById("saveBtn");
+
+    let poems = [];
+    let editingId = null;
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      poems = saved ? JSON.parse(saved) : [];
+      if (!Array.isArray(poems)) poems = [];
+    } catch (error) {
+      poems = [];
+    }
+
+    function normalize(text) {
+      return text.normalize("NFC").replace(/\s+/g, " ").trim();
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(poems));
+        return true;
+      } catch (error) {
+        alert("محفوظ نه ٿي سگهيو. برائوزر جي اسٽوريج چيڪ ڪريو.");
+        return false;
+      }
+    }
+
+    function render() {
+      list.replaceChildren();
+
+      if (!poems.length) {
+        const empty = document.createElement("p");
+        empty.className = "note";
+        empty.textContent = "اڃا ڪو هائيڪو محفوظ ٿيل ناهي.";
+        list.appendChild(empty);
+        return;
+      }
+
+      [...poems].reverse().forEach(poem => {
+        const card = document.createElement("article");
+        card.className = "poem";
+
+        const heading = document.createElement("h3");
+        heading.textContent = poem.title || "بنا عنوان هائيڪو";
+
+        const content = document.createElement("p");
+        content.className = "poem-text";
+        content.textContent = poem.text;
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const edit = document.createElement("button");
+        edit.className = "edit";
+        edit.textContent = "✏️ ترميم";
+        edit.addEventListener("click", () => {
+          titleInput.value = poem.title;
+          poemInput.value = poem.text;
+          editingId = poem.id;
+          saveBtn.textContent = "💾 تبديليون محفوظ ڪريو";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        const remove = document.createElement("button");
+        remove.className = "delete";
+        remove.textContent = "🗑️ ختم ڪريو";
+        remove.addEventListener("click", () => {
+          if (!confirm("ڇا هي هائيڪو ختم ڪرڻ چاهيو ٿا؟")) return;
+          poems = poems.filter(item => item.id !== poem.id);
+          if (persist()) render();
+        });
+
+        actions.append(edit, remove);
+        card.append(heading, content, actions);
+        list.appendChild(card);
+      });
+    }
+
+    saveBtn.addEventListener("click", () => {
+      const title = titleInput.value.trim();
+      const text = poemInput.value.trim();
+
+      if (!text) {
+        alert("مهرباني ڪري پهرين هائيڪو لکو.");
+        poemInput.focus();
+        return;
+      }
+
+      const normalized = normalize(text);
+      const duplicate = poems.some(item =>
+        item.id !== editingId && normalize(item.text) === normalized
+      );
+
+      if (duplicate) {
+        alert("هي هائيڪو اڳ ۾ محفوظ ٿيل آهي.");
+        return;
+      }
+
+      if (editingId !== null) {
+        poems = poems.map(item =>
+          item.id === editingId ? { ...item, title, text } : item
+        );
+      } else {
+        poems.push({ id: Date.now().toString(), title, text });
+      }
+
+      if (!persist()) return;
+
+      titleInput.value = "";
+      poemInput.value = "";
+      editingId = null;
+      saveBtn.textContent = "💾 محفوظ ڪريو";
+      render();
+      alert("هائيڪو محفوظ ٿي ويو.");
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      titleInput.value = "";
+      poemInput.value = "";
+      editingId = null;
+      saveBtn.textContent = "💾 محفوظ ڪريو";
+    });
+
+    render();
+  </script>
+</body>
+</html>
